@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Configuration;
+using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Ors.Core.Components;
+using Ors.Core.Data;
 using Ors.Core.Exceptions;
 using Ors.Core.Logging;
 using Ors.Core.Serialization;
@@ -13,14 +16,21 @@ namespace Senluo.UI.Mvc
     [FilterError]
     public class BaseController : Controller
     {
-        protected IModelService Service { get { return ObjectContainer.Resolve<IModelService>(); } }
+        protected readonly IModelService Service = ObjectContainer.Resolve<IModelService>();
+
+        protected virtual string UserKey
+        {
+            get { return "UserID"; }
+        }
+
         protected void Log(object obj, LogLevel level = LogLevel.Info, Exception ex = null)
         {
             try
             {
                 var logger = ObjectContainer.Resolve<ILogger>();
                 logger.Log(level, obj, ex);
-            }catch{}
+            }
+            catch { }
         }
         public BaseController()
         {
@@ -29,25 +39,25 @@ namespace Senluo.UI.Mvc
         protected bool DoAuth;
         protected int UserID
         {
-            get { return (int)Session["UserID"]; }
+            get { return (int)Session[UserKey]; }
         }
-
+        protected virtual string LoginUrl { get { return "/login"; } }
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            var userObj = Session["UserID"];
+            var userObj = Session[UserKey];
             if (DoAuth)
             {
                 if (userObj == null)
                 {
                     if (filterContext.HttpContext.Request.IsAjaxRequest())
                     {
-                        filterContext.Result = new JsonResult { Data = new { success = false, msg = "logged out", code = (int)RuleViolatedType.NotAuthenticated}, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                        filterContext.Result = new JsonResult { Data = new { success = false, msg = "logged out", code = (int)RuleViolatedType.NotAuthenticated }, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
                     }
                     else
                     {
                         filterContext.Result = Request.RawUrl == "/"
-                                                   ? new RedirectResult("/login")
-                                                   : new RedirectResult("/login?url=" +
+                                                   ? new RedirectResult(LoginUrl)
+                                                   : new RedirectResult(LoginUrl + "?url=" +
                                                                         HttpUtility.UrlEncode(Request.RawUrl));
 
                     }
@@ -72,8 +82,45 @@ namespace Senluo.UI.Mvc
 
             var json = ObjectContainer.Resolve<IJsonSerializer>();
             var content = json.Serialize(data);
-            
+
             return Content(content);
+        }
+    }
+
+    public class BaseController<TModel, TQuery> : BaseController
+        where TModel : class, IModel, new()
+        where TQuery : IQuery<TModel>
+    {
+        public virtual ActionResult Index(TQuery query)
+        {
+            var svc = Service;
+            var models = svc.Select(query);
+            return Serialize(new {success = true, items = models, count = query.Count});
+        }
+
+        [AcceptVerbs(HttpVerbs.Post | HttpVerbs.Put | HttpVerbs.Delete)]
+        public virtual ActionResult Index(TModel[] items)
+        {
+            var svc = Service;
+            if (items == null || !items.Any()) return new HttpStatusCodeResult((int)HttpStatusCode.BadRequest);
+
+            var verb = Request.HttpMethod;
+            switch (verb)
+            {
+                case "POST":
+                    svc.Create(items);
+                    return Serialize(new {success = true, items = items});
+                case "PUT":
+                    svc.Update(items);
+                    break;
+                case "DELETE":
+                    svc.Delete(items);
+                    break;
+                default:
+                    return new HttpStatusCodeResult((int)HttpStatusCode.MethodNotAllowed);
+            }
+
+            return Serialize(new { success = true });
         }
     }
 }
