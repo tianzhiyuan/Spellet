@@ -7,28 +7,41 @@ using AutoMapper;
 using Ors.Core;
 using Ors.Core.Components;
 using Ors.Core.Data;
+using Ors.Core.Utilities;
 
 namespace Ors.Framework.Data
 {
     [Component(LifeStyle.Singleton)]
     public class PartialFiller : IAssemblyInitializer
     {
-        
-        public static void Fill<TModel, TQuery>(TModel model)
+        /// <summary>
+        /// 提供类似部分更新的功能。
+        /// 更新/删除时常常需要填充模型，注意必须提供ID值
+        /// </summary>
+        /// <param name="model">被填充的模型</param>
+        /// <returns>当前数据库中的对象拷贝</returns>
+        public static TModel Fill<TModel, TQuery>(TModel model)
             where TModel:class, IModel
             where TQuery:IQuery<TModel>,new()
         {
-            if (model == null || model.ID == null) return;
+            if (model == null || model.ID == null) return model;
             var query = new TQuery() {ID = model.ID};
             var svc = ObjectContainer.Resolve<IModelService>();
             var current = svc.FirstOrDefault(query);
             AutoMapper.Mapper.Map(current, model);
+            return current;
         }
-        public static void Fill<TModel, TQuery>(TModel[] models)
+        /// <summary>
+        /// 提供类似部分更新的功能。
+        /// 更新/删除时常常需要填充模型，注意必须提供ID值
+        /// </summary>
+        /// <param name="models">被填充的模型</param>
+        /// <returns>当前数据库中的对象拷贝</returns>
+        public static TModel[]  Fill<TModel, TQuery>(TModel[] models)
             where TModel : class, IModel
             where TQuery : IQuery<TModel>, new()
         {
-            if (models == null || !models.Any()) return;
+            if (models == null || !models.Any()) return new TModel[0];
             var query = new TQuery() {IDList = models.Select(o => o.ID).OfType<int>().ToArray()};
             var svc = ObjectContainer.Resolve<IModelService>();
             var origins = svc.Select(query);
@@ -37,6 +50,7 @@ namespace Ors.Framework.Data
                 var origin = origins.FirstOrDefault(o => o.ID == model.ID);
                 AutoMapper.Mapper.Map(origin, model);
             }
+            return origins.ToArray();
         }
 
         void CreateMap<TModel>()
@@ -54,7 +68,7 @@ namespace Ors.Framework.Data
             {
                 try
                 {
-                    foreach (var type in assembly.GetTypes().Where(typeof (IModel).IsAssignableFrom))
+                    foreach (var type in assembly.GetTypes().Where(TypeUtils.IsModel))
                     {
                         var method =
                             new Action(this.CreateMap<AbstractModel>).Method.GetGenericMethodDefinition()

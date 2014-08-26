@@ -16,6 +16,8 @@ namespace Ors.Framework.Data
         void Delete<TModle>(params TModle[] models) where TModle : class, IModel, new();
         void Create<TModel>(params TModel[] models) where TModel : class, IModel, new();
 
+        
+
         event EventHandler<DataServiceEventArgs> BeforeUpdate;
         event EventHandler<DataServiceEventArgs> AfterUpdate;
         event EventHandler<DataServiceEventArgs> BeforeDelete;

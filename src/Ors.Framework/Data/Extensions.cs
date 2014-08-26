@@ -48,5 +48,13 @@ namespace Ors.Framework.Data
         {
             return svc.GetCount(query) > 0;
         }
+
+        public static void Patch<TModel, TQuery>(this IModelService svc, params TModel[] models)
+            where TModel : class, IModel, new()
+            where TQuery : IQuery<TModel>, new()
+        {
+            PartialFiller.Fill<TModel, TQuery>(models);
+            svc.Update(models);
+        }
     }
 }

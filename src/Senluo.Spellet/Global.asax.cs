@@ -25,13 +25,14 @@ namespace Senluo.Spellet
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
-
+            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
             Configuration.Instance
                          .UseAutofac()
                          .RegisterCommon()
                          .UseDataService("Senluo.Spellet.EF.EFDbContext, Senluo.Spellet", "Voca")
                          .UseYoudaoParser()
-                         .UseLog4Net();
+                         .UseLog4Net()
+                         .InitializeAssemblies(assemblies);
         }
 
     }

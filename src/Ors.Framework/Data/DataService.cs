@@ -8,6 +8,8 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
+using Ors.Core;
 using Ors.Core.Components;
 using Ors.Core.Utilities;
 using Ors.Framework.Complilation;
@@ -15,7 +17,6 @@ using Ors.Core.Data;
 
 namespace Ors.Framework.Data
 {
-    [Component(LifeStyle.Singleton)]
     public class DataService : IModelService
     {
 
@@ -78,6 +79,8 @@ namespace Ors.Framework.Data
                 AfterCreate.Invoke(this, new DataServiceEventArgs() { Items = models });
             }
         }
+
+        
 
         public event EventHandler<DataServiceEventArgs> BeforeUpdate;
         public event EventHandler<DataServiceEventArgs> AfterUpdate;
@@ -189,7 +192,16 @@ namespace Ors.Framework.Data
             return db;
         }
 
-
+        void CreateMap<TModel>()
+        {
+            Mapper.Configuration.AllowNullCollections = true;
+            Mapper.CreateMap<TModel, TModel>().ForAllMembers(config =>
+                config.Condition(context =>
+                    context.DestinationValue == null
+                )
+            );
+        }
+        
         #region IModelService Members
 
         IEnumerable<TModel> IModelService.Select<TModel>(IQuery<TModel> query)
