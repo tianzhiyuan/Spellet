@@ -15,8 +15,6 @@ namespace Senluo.Spellet.Areas.Admin.Controllers
 
         public ActionResult Index()
         {
-            var svc = Service;
-            var entry = svc.Select(new EntryQuery() {Take = 1}).FirstOrDefault();
             return View();
         }
 

@@ -155,6 +155,54 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Content\Css\g.css" />
+    <Content Include="Content\Image\head.png" />
+    <Content Include="Content\Image\admin.ico" />
+    <Content Include="Content\Library\jquery\jquery-2.1.1.js" />
+    <Content Include="Content\Library\jquery\jquery-2.1.1.min.js" />
+    <Content Include="Content\Library\jquery\jquery-widget.js" />
+    <Content Include="Content\Library\metro-bootstrap\css\metro-bootstrap-responsive.css" />
+    <Content Include="Content\Library\metro-bootstrap\css\metro-bootstrap.css" />
+    <Content Include="Content\Library\metro-bootstrap\js\metro-accordion.js" />
+    <Content Include="Content\Library\metro-bootstrap\js\metro-button-set.js" />
+    <Content Include="Content\Library\metro-bootstrap\js\metro-calendar.js" />
+    <Content Include="Content\Library\metro-bootstrap\js\metro-carousel.js" />
+    <Content Include="Content\Library\metro-bootstrap\js\metro-core.js" />
+    <Content Include="Content\Library\metro-bootstrap\js\metro-countdown.js" />
+    <Content Include="Content\Library\metro-bootstrap\js\metro-date-format.js" />
+    <Content Include="Content\Library\metro-bootstrap\js\metro-datepicker.js" />
+    <Content Include="Content\Library\metro-bootstrap\js\metro-dialog.js" />
+    <Content Include="Content\Library\metro-bootstrap\js\metro-drag-tile.js" />
+    <Content Include="Content\Library\metro-bootstrap\js\metro-dropdown.js" />
+    <Content Include="Content\Library\metro-bootstrap\js\metro-fluentmenu.js" />
+    <Content Include="Content\Library\metro-bootstrap\js\metro-global.js" />
+    <Content Include="Content\Library\metro-bootstrap\js\metro-hint.js" />
+    <Content Include="Content\Library\metro-bootstrap\js\metro-initiator.js" />
+    <Content Include="Content\Library\metro-bootstrap\js\metro-input-control.js" />
+    <Content Include="Content\Library\metro-bootstrap\js\metro-listview.js" />
+    <Content Include="Content\Library\metro-bootstrap\js\metro-live-tile.js" />
+    <Content Include="Content\Library\metro-bootstrap\js\metro-loader.js" />
+    <Content Include="Content\Library\metro-bootstrap\js\metro-locale.js" />
+    <Content Include="Content\Library\metro-bootstrap\js\metro-notify.js" />
+    <Content Include="Content\Library\metro-bootstrap\js\metro-panel.js" />
+    <Content Include="Content\Library\metro-bootstrap\js\metro-plugin-template.js" />
+    <Content Include="Content\Library\metro-bootstrap\js\metro-progressbar.js" />
+    <Content Include="Content\Library\metro-bootstrap\js\metro-pull.js" />
+    <Content Include="Content\Library\metro-bootstrap\js\metro-rating.js" />
+    <Content Include="Content\Library\metro-bootstrap\js\metro-scroll.js" />
+    <Content Include="Content\Library\metro-bootstrap\js\metro-slider.js" />
+    <Content Include="Content\Library\metro-bootstrap\js\metro-stepper.js" />
+    <Content Include="Content\Library\metro-bootstrap\js\metro-streamer.js" />
+    <Content Include="Content\Library\metro-bootstrap\js\metro-tab-control.js" />
+    <Content Include="Content\Library\metro-bootstrap\js\metro-table.js" />
+    <Content Include="Content\Library\metro-bootstrap\js\metro-tile-transform.js" />
+    <Content Include="Content\Library\metro-bootstrap\js\metro-times.js" />
+    <Content Include="Content\Library\metro-bootstrap\js\metro-touch-handler.js" />
+    <Content Include="Content\Library\metro-bootstrap\js\metro-treeview.js" />
+    <Content Include="Content\Library\metro-bootstrap\js\metro-wizard.js" />
+    <Content Include="Content\Library\metro-bootstrap\min\iconFont.min.css" />
+    <Content Include="Content\Library\metro-bootstrap\min\metro-bootstrap-responsive.min.css" />
+    <Content Include="Content\Library\metro-bootstrap\min\metro-bootstrap.min.css" />
+    <Content Include="Content\Library\metro-bootstrap\min\metro.min.js" />
     <Content Include="Content\Scripts\common.js" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
@@ -169,7 +217,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Areas\Student\Models\" />
     <Folder Include="Areas\Student\Views\Shared\" />
   </ItemGroup>
@@ -216,6 +263,27 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Library\metro-bootstrap\js\README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Library\metro-bootstrap\fonts\iconFont.dev.svg" />
+    <Content Include="Content\Library\metro-bootstrap\fonts\iconFont.eot" />
+    <Content Include="Content\Library\metro-bootstrap\fonts\iconFont.json" />
+    <Content Include="Content\Library\metro-bootstrap\fonts\iconFont.svg" />
+    <Content Include="Content\Library\metro-bootstrap\fonts\iconFont.ttf" />
+    <Content Include="Content\Library\metro-bootstrap\fonts\iconFont.woff" />
+    <Content Include="Content\Library\metro-bootstrap\fonts\metroSysIcons.svg" />
+    <Content Include="Content\Library\metro-bootstrap\fonts\metroSysIcons.ttf" />
+    <Content Include="Content\Library\metro-bootstrap\fonts\metroSysIcons.woff" />
+    <Content Include="Content\Library\metro-bootstrap\fonts\OpenSans-Bold.woff" />
+    <Content Include="Content\Library\metro-bootstrap\fonts\OpenSans-Light.woff" />
+    <Content Include="Content\Library\metro-bootstrap\fonts\OpenSans.woff" />
+    <Content Include="Content\Library\metro-bootstrap\fonts\PTSerif-Caption.woff" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
