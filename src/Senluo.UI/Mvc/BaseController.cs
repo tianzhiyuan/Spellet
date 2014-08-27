@@ -22,7 +22,10 @@ namespace Senluo.UI.Mvc
         {
             get { return "UserID"; }
         }
-
+        protected virtual void LogOut()
+        {
+            Session[UserKey] = null;
+        }
         protected void Log(object obj, LogLevel level = LogLevel.Info, Exception ex = null)
         {
             try

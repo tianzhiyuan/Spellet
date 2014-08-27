@@ -129,6 +129,8 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\AdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
+    <Compile Include="Areas\Admin\Controllers\LogoutController.cs" />
     <Compile Include="Areas\Student\Controllers\HomeController.cs" />
     <Compile Include="Areas\Student\StudentAreaRegistration.cs" />
     <Compile Include="Areas\Student\StudentController.cs" />
@@ -158,8 +160,10 @@
     <Content Include="Content\Image\head.png" />
     <Content Include="Content\Image\admin.ico" />
     <Content Include="Content\Library\jquery\jquery-2.1.1.js" />
-    <Content Include="Content\Library\jquery\jquery-2.1.1.min.js" />
+    <Content Include="Content\Library\jquery\jquery-2.0.1.min.js" />
     <Content Include="Content\Library\jquery\jquery-widget.js" />
+    <Content Include="Content\Library\jquery\jquery.validate.min.js" />
+    <Content Include="Content\Library\jquery\messages_zh.min.js" />
     <Content Include="Content\Library\metro-bootstrap\css\metro-bootstrap-responsive.css" />
     <Content Include="Content\Library\metro-bootstrap\css\metro-bootstrap.css" />
     <Content Include="Content\Library\metro-bootstrap\js\metro-accordion.js" />
@@ -199,10 +203,12 @@
     <Content Include="Content\Library\metro-bootstrap\js\metro-touch-handler.js" />
     <Content Include="Content\Library\metro-bootstrap\js\metro-treeview.js" />
     <Content Include="Content\Library\metro-bootstrap\js\metro-wizard.js" />
+    <Content Include="Content\Library\metro-bootstrap\load-metro.js" />
     <Content Include="Content\Library\metro-bootstrap\min\iconFont.min.css" />
     <Content Include="Content\Library\metro-bootstrap\min\metro-bootstrap-responsive.min.css" />
     <Content Include="Content\Library\metro-bootstrap\min\metro-bootstrap.min.css" />
     <Content Include="Content\Library\metro-bootstrap\min\metro.min.js" />
+    <Content Include="Content\Scripts\Admin\master.js" />
     <Content Include="Content\Scripts\common.js" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
@@ -219,6 +225,7 @@
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Student\Models\" />
     <Folder Include="Areas\Student\Views\Shared\" />
+    <Folder Include="Content\Scripts\Student\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -284,6 +291,12 @@
     <Content Include="Content\Library\metro-bootstrap\fonts\OpenSans-Light.woff" />
     <Content Include="Content\Library\metro-bootstrap\fonts\OpenSans.woff" />
     <Content Include="Content\Library\metro-bootstrap\fonts\PTSerif-Caption.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Shared\_Master.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Login\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

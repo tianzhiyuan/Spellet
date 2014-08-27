@@ -1,0 +1,63 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section css
+{
+    <link rel="stylesheet" href="~/Content/Css/g.css"/>
+    @RenderSection("Css", false)
+}
+@section script
+{
+    <script type="text/javascript" src="~/Content/Library/jquery/jquery.validate.min.js"></script>
+}
+<script type="text/javascript" src="~/Content/Scripts/Admin/master.js"></script>
+<div class="navigation-bar fixed-top light shadow">
+    <div class="navigation-bar-content container">
+        <a href="/admin/home" class="element"><span class="icon-grid-view fg-blue on-left-more"></span>Spellet</a>
+        <span class="element-divider"></span>
+        <a class="pull-menu" href="#"></a>
+        <ul class="element-menu" style="">
+            <li>
+                <a class="element" href="#">学生管理</a>
+            </li>
+            <li>
+                <a class="element" href="#">词库管理</a>
+
+            </li>
+            <li><span class="element-divider"></span></li>
+            <li>
+                <a href="#" class="element">课程管理</a>
+
+            </li>
+            <li>
+                <a class="dropdown-toggle" href="#">试题管理</a>
+                <ul class="dropdown-menu light" data-role="dropdown">
+                    <li><a href="#">试题维护</a></li>
+                    <li><a href="#">成绩查看</a></li>
+                </ul>
+            </li>
+
+        </ul>
+
+        <div class="no-tablet-portrait no-phone">
+            <div class="element place-right">
+                <a class="dropdown-toggle" href="#">
+                    <span class="icon-cog"></span>
+                </a>
+                <ul class="dropdown-menu place-right" data-role="dropdown">
+                    <li><a href="/admin/logout"><span class="icon-exit on-left-more"></span>注销</a></li>
+
+                </ul>
+            </div>
+            <span class="element-divider place-right"></span>
+            <a class="element place-right" href="#" title="修改密码" id="ModifyPwd"><span class="icon-locked-2"></span></a>
+            <span class="element-divider place-right"></span>
+            <button class="element image-button image-left place-right" title="欢迎您, Administrator">
+                Administrator
+                <img src="~/Content/Image/head.png">
+            </button>
+
+        </div>
+    </div>
+</div>
+@RenderBody()

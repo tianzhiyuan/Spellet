@@ -24,6 +24,7 @@
     -moz-border-radius-bottomright: 2px;
     -webkit-border-bottom-right-radius: 2px;
     color: #fff;
+    margin: 2px 2px 2px 0;
 }
 
 .msg_tips.success .inner {

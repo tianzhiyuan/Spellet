@@ -1,13 +1,13 @@
 ﻿(function ($) {
-    var template = '<div class="msg_tips" style="display: none;"> <div class="inner"></div></div>';
     
+    var template = '<div class="msg_tips" style="display: none;"> <div class="inner shadow"></div></div>';
     var message = function (content, timeout) {
         if (!content) return;
         var msgDiv = $(template).appendTo('body');
         msgDiv.show();
         $('div', msgDiv).html(content);
         msgDiv.removeClass().addClass('msg_tips success');
-        if (!timeout) timeout = 4000;
+        if (!timeout) timeout = 3000;
         setTimeout(function () { msgDiv.fadeOut('normal', function () { msgDiv.remove(); }) }, timeout);
     };
     var error = function (content, timeout) {
@@ -16,9 +16,11 @@
         msgDiv.show();
         $('div', msgDiv).html(content);
         msgDiv.removeClass().addClass('msg_tips error');
-        if (!timeout) timeout = 5000;
+        if (!timeout) timeout = 4000;
         setTimeout(function () { msgDiv.fadeOut('normal', function () { msgDiv.remove(); }) }, timeout);
     };
+    
+    
     //获取一个表单的数据
     var getValues = function () {
         var me = this;
@@ -109,7 +111,7 @@
         //弹出一个层显示错误
         error: error
     });
-
+    
     $.fn.extend({
         //将当前DOM模态
         mask: mask,
@@ -118,4 +120,7 @@
         //获取一个表单的json数据
         getValues: getValues
     });
+
 })(jQuery)
+
+METRO_AUTO_REINIT = true;
