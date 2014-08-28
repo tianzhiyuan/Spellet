@@ -6,8 +6,12 @@ using System.Web.Mvc;
 
 namespace Senluo.Spellet.Areas.Admin.Controllers
 {
-    public class LoginController : Controller
+    public class LoginController : AdminController
     {
+        public LoginController()
+        {
+            this.DoAuth = false;
+        }
         //
         // GET: /Admin/Login/
 
@@ -15,6 +19,10 @@ namespace Senluo.Spellet.Areas.Admin.Controllers
         {
             return View();
         }
-
+        [HttpPost]
+        public ActionResult Index(FormCollection form)
+        {
+            return Serialize(new {success = true});
+        }
     }
 }

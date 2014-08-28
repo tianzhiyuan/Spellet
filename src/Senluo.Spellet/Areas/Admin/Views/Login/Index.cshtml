@@ -4,3 +4,59 @@
     ViewBag.Title = "登录";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+@section css
+{
+    <link rel="stylesheet" href="~/Content/Css/Admin/login.css" />
+}
+@section script
+{
+    <script type="text/javascript" src="~/Content/Scripts/Admin/login.js"></script>
+}
+<div class="login-wrapper bg-taupe">
+    <h2 class="text-center ">
+
+        <strong>Spellet 后台登录</strong>
+        <!-- Logo (221px width) -->
+        @*<img id="logo" src="resources/images/logo.png" alt="Simpla Admin logo" />*@
+    </h2>
+    <!-- End #logn-top -->
+    <div class="notice-wrapper">
+        <div class="notice marker-on-right bg-white">
+            
+        </div>
+    </div>
+    <div class="login-content">
+
+        <form>
+
+            <div class="notification information png_bg">
+                <div>
+                </div>
+            </div>
+
+
+            <label>Username:</label>
+            <div class="input-control text shadow" data-role="input-control">
+                <input name="username" placeholder="username" type="text" autocomplete="off" />
+                <button class="btn-clear"></button>
+            </div>
+
+
+            <label>Password:</label>
+            <div class="input-control password shadow " data-role="input-control">
+                <input type="password" placeholder="password" name="password"/>
+            </div>
+
+
+
+            <div class="clear"></div>
+            <p>
+                <input class="button primary bg-hover-black" type="button" name="submitBtn" value="Sign In" />
+            </p>
+
+        </form>
+    </div>
+    <!-- End #login-content -->
+
+</div>
+<!-- End #login-wrapper -->
