@@ -26,6 +26,10 @@ namespace Senluo.UI.Mvc
         {
             Session[UserKey] = null;
         }
+        protected virtual void LogIn(object logObj)
+        {
+            Session[UserKey] = logObj;
+        }
         protected void Log(object obj, LogLevel level = LogLevel.Info, Exception ex = null)
         {
             try

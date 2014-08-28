@@ -12,6 +12,9 @@
 {
     <script type="text/javascript" src="~/Content/Scripts/Admin/login.js"></script>
 }
+<script type="text/javascript">
+    var url = "@ViewBag.Url";
+</script>
 <div class="login-wrapper bg-taupe">
     <h2 class="text-center ">
 
@@ -37,21 +40,21 @@
 
             <label>Username:</label>
             <div class="input-control text shadow" data-role="input-control">
-                <input name="username" placeholder="username" type="text" autocomplete="off" />
+                <input name="username" placeholder="username" type="text" autocomplete="off" autofocus="autofocus" tabindex="1" />
                 <button class="btn-clear"></button>
             </div>
 
 
             <label>Password:</label>
             <div class="input-control password shadow " data-role="input-control">
-                <input type="password" placeholder="password" name="password"/>
+                <input type="password" placeholder="password" name="password" tabindex="2"/>
             </div>
 
 
 
             <div class="clear"></div>
             <p>
-                <input class="button primary bg-hover-black" type="button" name="submitBtn" value="Sign In" />
+                <input class="button primary bg-hover-black" type="button" name="submitBtn" value="Sign In" tabindex="3"/>
             </p>
 
         </form>
