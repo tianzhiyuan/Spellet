@@ -38,3 +38,7 @@
     border: 1px solid #AC7D5F;
     border-top-width: 0;
 }
+header {
+    height: 50px;
+    position: relative;
+}

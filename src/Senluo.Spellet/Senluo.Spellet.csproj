@@ -132,6 +132,7 @@
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
     <Compile Include="Areas\Admin\Controllers\LogoutController.cs" />
+    <Compile Include="Areas\Admin\Controllers\StudentController.cs" />
     <Compile Include="Areas\Student\Controllers\HomeController.cs" />
     <Compile Include="Areas\Student\StudentAreaRegistration.cs" />
     <Compile Include="Areas\Student\StudentController.cs" />
@@ -161,9 +162,12 @@
     <Content Include="Content\Css\g.css" />
     <Content Include="Content\Image\head.png" />
     <Content Include="Content\Image\admin.ico" />
+    <Content Include="Content\Image\loading.gif" />
     <Content Include="Content\Library\jquery\jquery-2.1.1.js" />
     <Content Include="Content\Library\jquery\jquery-2.0.1.min.js" />
     <Content Include="Content\Library\jquery\jquery-widget.js" />
+    <Content Include="Content\Library\jquery\jquery.dataTables.js" />
+    <Content Include="Content\Library\jquery\jquery.dataTables.min.js" />
     <Content Include="Content\Library\jquery\jquery.validate.min.js" />
     <Content Include="Content\Library\jquery\messages_zh.min.js" />
     <Content Include="Content\Library\metro-bootstrap\css\metro-bootstrap-responsive.css" />
@@ -212,7 +216,9 @@
     <Content Include="Content\Library\metro-bootstrap\min\metro.min.js" />
     <Content Include="Content\Scripts\Admin\login.js" />
     <Content Include="Content\Scripts\Admin\master.js" />
+    <Content Include="Content\Scripts\Admin\student.js" />
     <Content Include="Content\Scripts\common.js" />
+    <Content Include="Content\Scripts\datatable.js" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -300,6 +306,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Views\Login\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Student\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Student\Modify.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

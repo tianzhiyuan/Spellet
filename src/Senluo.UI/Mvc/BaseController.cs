@@ -98,7 +98,7 @@ namespace Senluo.UI.Mvc
         where TModel : class, IModel, new()
         where TQuery : IQuery<TModel>
     {
-        public virtual ActionResult Index(TQuery query)
+        public virtual ActionResult List(TQuery query)
         {
             var svc = Service;
             var models = svc.Select(query);
@@ -106,22 +106,22 @@ namespace Senluo.UI.Mvc
         }
 
         [AcceptVerbs(HttpVerbs.Post | HttpVerbs.Put | HttpVerbs.Delete)]
-        public virtual ActionResult Index(TModel[] items)
+        public virtual ActionResult Index(TModel item)
         {
             var svc = Service;
-            if (items == null || !items.Any()) return new HttpStatusCodeResult((int)HttpStatusCode.BadRequest);
+            if (item == null) return new HttpStatusCodeResult((int)HttpStatusCode.BadRequest);
 
             var verb = Request.HttpMethod;
             switch (verb)
             {
                 case "POST":
-                    svc.Create(items);
-                    return Serialize(new {success = true, items = items});
+                    svc.Create(item);
+                    return Serialize(new {success = true, item = item});
                 case "PUT":
-                    svc.Update(items);
+                    svc.Update(item);
                     break;
                 case "DELETE":
-                    svc.Delete(items);
+                    svc.Delete(item);
                     break;
                 default:
                     return new HttpStatusCodeResult((int)HttpStatusCode.MethodNotAllowed);

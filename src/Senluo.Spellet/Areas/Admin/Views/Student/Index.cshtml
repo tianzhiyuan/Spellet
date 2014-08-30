@@ -1,0 +1,16 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "学生管理";
+    Layout = "~/Areas/Admin/Views/Shared/_Master.cshtml";
+}
+@section Script
+{
+    <script type="text/javascript" src="~/Content/Scripts/datatable.js"></script>
+}
+<script type="text/javascript" src="~/Content/Scripts/Admin/student.js"></script>
+
+<div id="StudentTable">
+    
+    <a class="button bg-white bd-olive large" href="/admin/student/modify" type="button"><i class="icon-plus-2 on-left-more"></i>新增</a>
+</div>

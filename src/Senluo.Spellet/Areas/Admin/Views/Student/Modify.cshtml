@@ -1,0 +1,73 @@
+﻿@model Senluo.Spellet.Models.Student
+
+@{
+    ViewBag.Title = Model.ID == null ? "新增学生信息" : "修改学生信息";
+
+    Layout = "~/Areas/Admin/Views/Shared/_Master.cshtml";
+}
+@section Script
+{
+    <script type="text/javascript">
+        $(function() {
+            $('button[name=submitBtn]').on('click', function () {
+                var data = $('form').getValues();
+                if (!data.StudentID) {
+                    $.error('学号不能为空');
+                    return;
+                }
+                if (!data.ID && !data.Password) {
+                    $.error('密码不能为空');
+                    return;
+                }
+                $.ajax({
+                    url: '/admin/student/modify',
+                    type: 'post',
+                    data: JSON.stringify(data),
+                    contentType: 'application/json',
+                    success: function (res) {
+                        if (res.success) {
+                            $.msg('保存成功');
+                            $('input[name=ID]').val(res.item.ID);
+                        } else {
+                            $.msg(res.msg);
+                        }
+                    }
+                })
+            })
+        })
+        
+    </script>
+}
+<div class="grid">
+    <div class="row">
+        <div class="span9">
+            <form>
+                <fieldset>
+                    <legend>学生信息</legend>
+                    <input value="@Model.ID" name="ID" type="hidden"/>
+                    <label>学号：</label>
+                    <div class="input-control text" data-role="input-control">
+                        <input type="text" placeholder="学号" name="StudentID" value="@Model.StudentID"/>
+                    </div>
+                    <label>姓名：</label>
+                    <div class="input-control text" data-role="input-control">
+                        <input type="text" placeholder="姓名" name="Name" value="@Model.Name"/>
+                    </div>
+                    <label>英文名称：</label>
+                    <div class="input-control text" data-role="input-control">
+                        <input type="text" placeholder="英文名称" name="EnglishName" value="@Model.EnglishName"/>
+                    </div>
+                    <label>新密码：@if (Model.ID != null)
+                               {@Html.Raw("(留空则不更新)")}</label>
+                    <div class="input-control password" data-role="input-control">
+                        <input type="password" placeholder="新密码" name="Password" />
+                        <button class="btn-reveal"></button>
+                    </div>
+                    <button type="button" name="submitBtn" class="primary">保存</button>
+                </fieldset>
+
+            </form>
+        </div>
+    </div>
+</div>
+

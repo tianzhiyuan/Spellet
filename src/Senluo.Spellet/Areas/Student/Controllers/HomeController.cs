@@ -11,7 +11,10 @@ namespace Senluo.Spellet.Areas.Student.Controllers
     {
         //
         // GET: /Student/Home/
-
+        public HomeController()
+        {
+            this.DoAuth = false;
+        }
         public ActionResult Index()
         {
             return View();

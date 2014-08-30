@@ -121,6 +121,65 @@
         getValues: getValues
     });
 
+    $.delete = function(url, id, cb) {
+        if (!url || !id) return;
+        if (window.confirm('确定删除吗？')) {
+            $.ajax({
+                type: 'delete',
+                data: { ID: id },
+                url: url,
+                contentType:'application/json',
+                success:function(result) {
+                    if (result.success) {
+                        if (cb) {
+                            cb();
+                        }
+                        $.msg('删除成功');
+                    } else {
+                        $.error(result.msg);
+                    }
+                }
+            })
+        }
+    }
+    $.update = function(form, cb) {
+        var json = getValues();
+        $.ajax({
+            url: form.attr('action'),
+            data: json,
+            type: 'PUT',
+            contentType: 'application/json',
+            success:function(result) {
+                if (result.success) {
+                    if (cb && $.isFunction(cb)) {
+                        cb();
+                    }
+                    $.msg('保存成功');
+                } else {
+                    $.error(result.msg);
+                }
+            }
+        })
+    }
+    $.create = function (form, cb) {
+        var json = getValues();
+        $.ajax({
+            url: form.attr('action'),
+            data: json,
+            type: 'post',
+            contentType: 'application/json',
+            success: function (result) {
+                if (result.success) {
+                    if (cb && $.isFunction(cb)) {
+                        cb();
+                    }
+                    $.msg('保存成功');
+                } else {
+                    $.error(result.msg);
+                }
+            }
+        })
+    }
 })(jQuery)
 
 METRO_AUTO_REINIT = true;
