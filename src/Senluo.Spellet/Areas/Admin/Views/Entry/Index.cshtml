@@ -1,7 +1,62 @@
-﻿@model dynamic
+﻿@model IEnumerable<Senluo.Spellet.Models.Entry>
 
 @{
     ViewBag.Title = "词库管理";
     Layout = "~/Areas/Admin/Views/Shared/_Master.cshtml";
 }
 
+
+<div>
+    <nav class="navigation-bar white" style="width: 90%">
+        <nav class="navigation-bar-content">
+
+            <a class="element bd-black" href="/admin/entry/modify" type="button"><i class="icon-plus-2 on-left-more"></i>新增</a>
+
+            <div class="element input-element place-right">
+                <div class="input-control text">
+                    <input type="text" placeholder="Search..." />
+                    <button class="btn-search"></button>
+                </div>
+            </div>
+        </nav>
+    </nav>
+
+
+    <div class="pagination">
+        <ul>
+            @if (string.IsNullOrWhiteSpace(ViewBag.Key))
+            {
+                <li class="active"><a href="/admin/entry" >全部</a></li>
+            }
+            else
+            {
+                <li><a href="/admin/entry">全部</a></li>
+            }
+            @foreach (var key in "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray())
+            {
+                if (key+"" == ViewBag.Key)
+                {
+                    <li class="active"><a>@key</a></li>
+                }
+                else
+                {
+                    <li><a href="/admin/entry?key=@key&skip=@ViewBag.Skip">@key</a></li>
+                }
+            }
+        </ul>
+    </div>
+    <div class="grid">
+        <div class="row">
+            @for (var index = 0; index < 3; index++)
+            {
+                <div class="span4">
+                    @for (var entryIndex = index; entryIndex < Model.Count(); entryIndex += 3)
+                    {
+                        var entry = Model.ElementAt(entryIndex);
+                        <div>@entry.Word</div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>

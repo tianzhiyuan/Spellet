@@ -21,6 +21,6 @@ namespace Senluo.Spellet.Models
     }
     public class ExampleQuery:AbstractQuery<Example>
     {
-        public int? EntryID { get; set; }
+        public int[] EntryIDList { get; set; }
     }
 }

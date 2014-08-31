@@ -13,6 +13,6 @@ namespace Senluo.Spellet.Models
     }
     public class TranslationQuery:AbstractQuery<Translation>
     {
-        public int? EntryID { get; set; }
+        public int[] EntryIDList { get; set; }
     }
 }
