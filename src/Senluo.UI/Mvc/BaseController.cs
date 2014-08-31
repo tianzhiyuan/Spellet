@@ -96,7 +96,7 @@ namespace Senluo.UI.Mvc
 
     public class BaseController<TModel, TQuery> : BaseController
         where TModel : class, IModel, new()
-        where TQuery : IQuery<TModel>
+        where TQuery : IQuery<TModel>, new()
     {
         public virtual ActionResult List(TQuery query)
         {
@@ -118,7 +118,7 @@ namespace Senluo.UI.Mvc
                     svc.Create(item);
                     return Serialize(new {success = true, item = item});
                 case "PUT":
-                    svc.Update(item);
+                    svc.Patch<TModel, TQuery>(item);
                     break;
                 case "DELETE":
                     svc.Delete(item);

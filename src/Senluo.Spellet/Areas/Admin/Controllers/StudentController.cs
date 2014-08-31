@@ -46,7 +46,7 @@ namespace Senluo.Spellet.Areas.Admin.Controllers
                 {
                     student.Password = student.Password.Hash();
                 }
-                Service.Update(student);
+                Service.Patch<Models.Student, Models.StudentQuery>(student);
             }
             else
             {

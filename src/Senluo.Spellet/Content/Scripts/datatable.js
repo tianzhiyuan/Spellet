@@ -6,7 +6,7 @@
         options: {
             width: '100%',
             height: 'auto',
-            cls: 'table',
+            cls: 'table striped bordered hovered',
             checkRow: false,
             colModel: [],
             data: [],
@@ -14,7 +14,8 @@
             autoLoad: true,
             remote: true,
             url: '',
-            pageSize:15
+            pageSize: 15,
+            queryParam: {}
         },
 
         _create: function () {
@@ -64,14 +65,16 @@
                 tbody = $(me.element).find('tbody');
             
             if (!opt.remote) return;
-            if (me.paging && !page) return;
-            if (me.paging && page == 0) return;
-            if (page == me.currentPage) return;
+            if (opt.paging && !page) return;
+            if (opt.paging && page == 0) return;
             
             var param = {};
             if (page) {
                 param.Take = opt.pageSize;
                 param.Skip = (me.currentPage - 1) * opt.pageSize;
+            }
+            if (opt.queryParam) {
+                param = $.extend(param, opt.queryParam);
             }
             $.ajax({
                 url: opt.url,
@@ -160,7 +163,7 @@
                 var targetpage = $(target).attr('data-target-page');
                 try {
                     var page = parseInt(targetpage);
-                    if (page) {
+                    if (page && page != me.currentPage) {
                         me.load(page);
                     }
                     

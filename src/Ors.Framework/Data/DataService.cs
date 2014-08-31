@@ -32,7 +32,7 @@ namespace Ors.Framework.Data
         {
             if (BeforeUpdate != null)
             {
-                BeforeUpdate.Invoke(this, new DataServiceEventArgs(){Items = models});
+                BeforeUpdate.Invoke(this, new DataServiceEventArgs() { Items = models });
             }
             using (var db = GetContext())
             {
@@ -47,7 +47,7 @@ namespace Ors.Framework.Data
             }
             if (AfterUpdate != null)
             {
-                AfterUpdate.Invoke(this, new DataServiceEventArgs() {Items = models});
+                AfterUpdate.Invoke(this, new DataServiceEventArgs() { Items = models });
             }
         }
 
@@ -80,7 +80,7 @@ namespace Ors.Framework.Data
             }
         }
 
-        
+
 
         public event EventHandler<DataServiceEventArgs> BeforeUpdate;
         public event EventHandler<DataServiceEventArgs> AfterUpdate;
@@ -132,12 +132,12 @@ namespace Ors.Framework.Data
                     }
                 }
                 IEnumerable<TModel> result;
-                
+
                 if (query.Includes != null && query.Includes.Any())
                 {
                     source = query.Includes.Aggregate(source, (current, include) => current.Include(include));
                 }
-                
+
                 result = ((Func<IQueryable<TModel>, IQuery<TModel>, IQueryable<TModel>>)handler).Invoke(source,
                                                                                                          query)
                                                                                                  .AsNoTracking();
@@ -192,16 +192,15 @@ namespace Ors.Framework.Data
             return db;
         }
 
-        void CreateMap<TModel>()
+        public IEnumerable<TModel> SqlQuery<TModel>(string query, params object[] parameters) where TModel : class
         {
-            Mapper.Configuration.AllowNullCollections = true;
-            Mapper.CreateMap<TModel, TModel>().ForAllMembers(config =>
-                config.Condition(context =>
-                    context.DestinationValue == null
-                )
-            );
+            using (var db = GetContext())
+            {
+                var source = db.Set<TModel>();
+                return source.SqlQuery(query, parameters).AsNoTracking().ToList();
+            }
         }
-        
+
         #region IModelService Members
 
         IEnumerable<TModel> IModelService.Select<TModel>(IQuery<TModel> query)

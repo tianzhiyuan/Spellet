@@ -28,7 +28,7 @@ namespace Senluo.Spellet.Areas.Admin
 
     public class AdminController<TModel, TQuery> : BaseController<TModel, TQuery>
         where TModel : class, IModel, new()
-        where TQuery : IQuery<TModel>
+        where TQuery : IQuery<TModel>, new()
     {
         protected override string UserKey { get { return "TeacherID"; } }
         protected override string LoginUrl { get { return "/admin/login"; } }

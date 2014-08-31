@@ -48,7 +48,7 @@ namespace Ors.Framework.Data
 
         public static Configuration UseDataServiceDefaultFiller(this Configuration configuration)
         {
-            var svc = ObjectContainer.Resolve<IModelService>();
+            var svc = ObjectContainer.Resolve<IModelService>() as DataService;
             if (svc != null)
             {
                 svc.BeforeUpdate += FillDefaultUpdate;

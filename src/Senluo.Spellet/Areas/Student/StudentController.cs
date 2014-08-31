@@ -25,7 +25,7 @@ namespace Senluo.Spellet.Areas.Student
 
     public class StudentController<TModel, TQuery> : BaseController<TModel, TQuery>
         where TModel : class, IModel, new()
-        where TQuery : IQuery<TModel>
+        where TQuery : IQuery<TModel>, new()
     {
         protected override string UserKey { get { return "StudentID"; } }
         protected override string LoginUrl { get { return "/student/login"; } }

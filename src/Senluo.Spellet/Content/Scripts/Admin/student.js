@@ -12,7 +12,10 @@ $(function () {
             
         })
         td.find('.link').on('click',function(e) {
-            $.delete('/admin/student', record.ID, function() { table.reload(); });
+            $.delete('/admin/student', record.ID, function() {
+                
+                table.reload();
+            });
         })
     }
     var colModel = [

@@ -30,6 +30,7 @@ namespace Senluo.Spellet
                          .UseAutofac()
                          .RegisterCommon()
                          .UseDataService("Senluo.Spellet.EF.EFDbContext, Senluo.Spellet", "Voca")
+                         .UseDataServiceDefaultFiller()
                          .UseYoudaoParser()
                          .UseLog4Net()
                          .InitializeAssemblies(assemblies);

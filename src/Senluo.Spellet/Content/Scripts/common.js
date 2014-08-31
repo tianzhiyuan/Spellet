@@ -123,10 +123,11 @@
 
     $.delete = function(url, id, cb) {
         if (!url || !id) return;
+        
         if (window.confirm('确定删除吗？')) {
             $.ajax({
                 type: 'delete',
-                data: { ID: id },
+                data: JSON.stringify({ ID: id }),
                 url: url,
                 contentType:'application/json',
                 success:function(result) {
@@ -146,7 +147,7 @@
         var json = getValues();
         $.ajax({
             url: form.attr('action'),
-            data: json,
+            data: JSON.stringify(json),
             type: 'PUT',
             contentType: 'application/json',
             success:function(result) {
@@ -165,7 +166,7 @@
         var json = getValues();
         $.ajax({
             url: form.attr('action'),
-            data: json,
+            data: JSON.stringify(json),
             type: 'post',
             contentType: 'application/json',
             success: function (result) {

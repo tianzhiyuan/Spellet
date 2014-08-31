@@ -18,11 +18,5 @@ namespace Ors.Framework.Data
 
         
 
-        event EventHandler<DataServiceEventArgs> BeforeUpdate;
-        event EventHandler<DataServiceEventArgs> AfterUpdate;
-        event EventHandler<DataServiceEventArgs> BeforeDelete;
-        event EventHandler<DataServiceEventArgs> AfterDelete;
-        event EventHandler<DataServiceEventArgs> BeforeCreate;
-        event EventHandler<DataServiceEventArgs> AfterCreate;
     }
 }
