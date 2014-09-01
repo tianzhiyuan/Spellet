@@ -17,7 +17,7 @@ namespace Senluo.Spellet.Models
     public class EntryQuery:AbstractQuery<Entry>
     {
         public string Word { get; set; }
-        public string WrodPattern { get; set; }
+        public string WordPattern { get; set; }
         
     }
 }

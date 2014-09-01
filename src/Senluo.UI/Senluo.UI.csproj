@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Mvc\BaseController.cs" />
     <Compile Include="Mvc\FilterErrorAttribute.cs" />
+    <Compile Include="Mvc\Pagination.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
