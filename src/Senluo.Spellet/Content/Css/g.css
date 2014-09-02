@@ -43,6 +43,6 @@ header {
     height: 50px;
     position: relative;
 }
-.word-list {
-    margin-left: 0px;
+.pronounce {
+    padding: 10px 0;
 }

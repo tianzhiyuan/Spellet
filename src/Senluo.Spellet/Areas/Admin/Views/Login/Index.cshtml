@@ -13,7 +13,7 @@
     <script type="text/javascript" src="~/Content/Scripts/Admin/login.js"></script>
 }
 <script type="text/javascript">
-    var url = "@ViewBag.Url";
+    var url = "@Html.Raw(ViewBag.Url)";
 </script>
 <div class="login-wrapper bg-taupe">
     <h2 class="text-center ">

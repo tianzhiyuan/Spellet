@@ -18,7 +18,7 @@
             var audio = $(link).find('audio');
             audio[0].play();
         })
-        $('.btn-search').on('click',function() {
+        $('.btn-search').on('click', function () {
             search();
         })
         $('input[name=searchTxt]').bind('keypress', function (e) {
@@ -31,125 +31,127 @@
 </script>
 
 <div>
-    <nav class="navigation-bar white" style="width: 90%">
+    <nav class="navigation-bar white " style="width: 90%">
         <nav class="navigation-bar-content">
 
-            <a class="element bd-black" href="/admin/entry/modify" type="button"><i class="icon-plus-2 on-left-more"></i>新增</a>
+            <a class="element bd-black border" href="/admin/entry/create" type="button"><i class="icon-plus-2 on-left-more"></i>新增</a>
 
             <div class="element input-element place-right">
                 <div class="input-control text">
                     @if (ViewBag.StartsWith.ToLower() == "true")
                     {
-                        <input type="text" name="searchTxt" placeholder="Search..."/>
+                        <input type="text" name="searchTxt" placeholder="Search..." />
                     }
                     else
                     {
                         <input type="text" name="searchTxt" placeholder="Search..." value="@ViewBag.Key"/>
                     }
-                    
+
                     <button class="btn-search"></button>
                 </div>
             </div>
         </nav>
     </nav>
-
-
-    <div class="pagination">
-        <ul>
-            @if (string.IsNullOrWhiteSpace(ViewBag.Key))
-            {
-                <li class="active"><a href="/admin/entry">全部</a></li>
-            }
-            else
-            {
-                <li><a href="/admin/entry">全部</a></li>
-            }
-            @foreach (var key in "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray())
-            {
-                if (key + "" == ViewBag.Key)
+    <div class="" style="padding:10px 0;">
+        <div class="pagination">
+            <ul>
+                @if (string.IsNullOrWhiteSpace(ViewBag.Key))
                 {
-                <li class="active"><a>@key</a></li>
+                    <li class="active"><a href="/admin/entry">全部</a></li>
                 }
                 else
                 {
-                <li><a href="/admin/entry?key=@key&startwith=true">@key</a></li>
+                    <li><a href="/admin/entry">全部</a></li>
                 }
-            }
-        </ul>
-    </div>
+                @foreach (var key in "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray())
+                {
+                    if (key + "" == ViewBag.Key)
+                    {
+                    <li class="active"><a>@key</a></li>
+                    }
+                    else
+                    {
+                    <li><a href="/admin/entry?key=@key&startwith=true">@key</a></li>
+                    }
+                }
+            </ul>
+        </div>
 
-    <div class="pagination" style="float:left;">
+        <div class="pagination" style="float: left;">
 
-        <ul>
-            <li class="first" title="首页"><a href="/admin/entry?key=@ViewBag.Key&skip=0&startwith=@ViewBag.StartsWith"><i class="icon-first-2"></i></a></li>
-            <li class="prev" title="上一页"><a href="/admin/entry?key=@ViewBag.Key&skip=@page.PrevSkip&startwith=@ViewBag.StartsWith"><i class="icon-previous"></i></a></li>
-            <li class="next" title="下一页"><a href="/admin/entry?key=@ViewBag.Key&skip=@page.NextSkip&startwith=@ViewBag.StartsWith"><i class="icon-next"></i></a></li>
-            <li class="last" title="末页"><a href="/admin/entry?key=@ViewBag.Key&skip=@page.LastSkip&startwith=@ViewBag.StartsWith"><i class="icon-last-2"></i></a></li>
-        </ul>
+            <ul>
+                <li class="first" title="首页"><a href="/admin/entry?key=@ViewBag.Key&skip=0&startwith=@ViewBag.StartsWith"><i class="icon-first-2"></i></a></li>
+                <li class="prev" title="上一页"><a href="/admin/entry?key=@ViewBag.Key&skip=@page.PrevSkip&startwith=@ViewBag.StartsWith"><i class="icon-previous"></i></a></li>
+                <li class="next" title="下一页"><a href="/admin/entry?key=@ViewBag.Key&skip=@page.NextSkip&startwith=@ViewBag.StartsWith"><i class="icon-next"></i></a></li>
+                <li class="last" title="末页"><a href="/admin/entry?key=@ViewBag.Key&skip=@page.LastSkip&startwith=@ViewBag.StartsWith"><i class="icon-last-2"></i></a></li>
+            </ul>
 
-    </div>
-    <div style="float: right;padding-right: 130px;">@string.Format("共{0}页/{1}条数据，当前第{2}页，显示{3}条数据", page.TotalPage, page.Count, page.CurrentPage, Model.Count())</div>
-    <div style="clear:both;"></div>
-    <div class="grid">
-        <div class="row">
-            @for (var index = 0; index < 3; index++)
-            {
-                <div class="span4">
-                    <div class="listview">
-                        @for (var entryIndex = index; entryIndex < Model.Count(); entryIndex += 3)
-                        {
-                            var entry = Model.ElementAt(entryIndex);
+        </div>
+        <div style="float: right; padding-right: 130px;">@string.Format("共{0}页/{1}条数据，当前第{2}页，显示{3}条数据", page.TotalPage, page.Count, page.CurrentPage, Model.Count())</div>
+        <div style="clear: both;"></div>
+        <div class="grid">
+            <div class="row">
+                @for (var index = 0; index < 3; index++)
+                {
+                    <div class="span4">
+                        <div class="listview">
+                            @for (var entryIndex = index; entryIndex < Model.Count(); entryIndex += 3)
+                            {
+                                var entry = Model.ElementAt(entryIndex);
                         
-                            <div href="javascript:;" class="list bg-hover-lime">
-                                <div class="list-content">
-                                    <div>
+                                <div href="javascript:;" class="list bg-hover-lime">
+                                    <div class="list-content">
+                                        <div>
 
-                                        <div class="item-title">
-                                            <strong>@entry.Word</strong>
-                                        </div>
-                                        <div class="">
-                                            <div class="pronounce">
-                                                英：<span class="phonetic text-muted">@entry.Phonetic_UK </span>
-                                                <a title="发音"><i class="icon-volume"></i>
-                                                    <audio src="/resource/audio/@entry.Word[0]/@(entry.Word + "_1.mp3")"></audio>
-                                                </a>
+                                            <div class="item-title">
+                                                <strong>@entry.Word</strong>
                                             </div>
                                             <div class="pronounce">
-                                                美：<span class="phonetic text-muted">@entry.Phonetic_US</span>
-                                                <a title="发音"><i class="icon-volume"></i>
-                                                    <audio src="/resource/audio/@entry.Word[0]/@(entry.Word + "_2.mp3")"></audio>
-                                                </a>
+                                                <div class="phonetic">
+                                                    英：<span class="text-muted">@entry.Phonetic_UK </span>
+                                                    <a title="发音"><i class="icon-volume"></i>
+                                                        <audio src="/resource/audio/@entry.Word[0]/@(entry.Word + "_1.mp3")"></audio>
+                                                    </a>
+                                                </div>
+                                                <div class="phonetic">
+                                                    美：<span class="text-muted">@entry.Phonetic_US</span>
+                                                    <a title="发音"><i class="icon-volume"></i>
+                                                        <audio src="/resource/audio/@entry.Word[0]/@(entry.Word + "_2.mp3")"></audio>
+                                                    </a>
+                                                </div>
+
+
                                             </div>
+                                            <div class="">
 
-
-                                        </div>
-                                        <div class="">
-
-                                            @if (entry.Translations != null)
-                                            {
-                                                foreach (var tran in entry.Translations)
+                                                @if (entry.Translations != null)
                                                 {
-                                                <div class="">@tran.Description</div>
+                                                    foreach (var tran in entry.Translations)
+                                                    {
+                                                    <div class="">@tran.Description</div>
+                                                    }
                                                 }
-                                            }
-                                        </div>
-                                        <ol class="">
-                                            @if (entry.Examples != null)
-                                            {
-                                                foreach (var example in entry.Examples)
+                                            </div>
+                                            <ol class="">
+                                                @if (entry.Examples != null)
                                                 {
-                                                <li class="" title="@example.Trans">@example.Origin</li>
+                                                    foreach (var example in entry.Examples)
+                                                    {
+                                                    <li class="" title="@example.Trans">@Html.Raw(example.Origin.Replace(entry.Word, string.Format("<em>{0}</em>", entry.Word)))</li>
+                                                    }
                                                 }
-                                            }
-                                        </ol>
+                                            </ol>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                                      
-                        }
+                            }
+                        </div>
                     </div>
-                </div>
-            }
+                }
+            </div>
         </div>
     </div>
+
+
 </div>

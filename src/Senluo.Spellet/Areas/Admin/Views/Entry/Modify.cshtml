@@ -1,0 +1,84 @@
+﻿@using Senluo.Spellet.Models
+@model Senluo.Spellet.Models.Entry
+
+@{
+    ViewBag.Title = "新增/修改单词卡片";
+    Layout = "~/Areas/Admin/Views/Shared/_Master.cshtml";
+}
+<script type="text/javascript">
+    
+</script>
+<div class="grid">
+    <div class="row">
+        <div class="span8">
+            <form method="POST" action="/admin/modify">
+                <input type="hidden" name="ID" value="@Model.ID"/>
+                <div class="row">
+                    <div class="span2">
+                        <label class="">单词：</label>
+                    </div>
+                    <div class="span6">
+                        <div class="input-control text">
+                            <input type="text" name="Word" value="@Model.Word"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span2">
+                        <label>英式发音：</label>
+                    </div>
+                    <div class="span6">
+                        <div class="input-control text">
+                            <input type="text" name="Phonetic_UK" value="@Model.Phonetic_UK"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span2">
+                        <label>美式发音：</label>
+                    </div>
+                    <div class="span6">
+                        <div class="input-control text">
+                            <input type="text" name="Phonetic_US" value="@Model.Phonetic_US"/>
+                        </div>
+                    </div>
+                </div>
+                
+                @foreach (var tran in Model.Translations)
+                {
+                    <div class="row">
+                        <div class="span2">
+                            <label>解释：</label>
+                        </div>
+                        <div class="span6">
+                            <div class="input-control text" data-tran-id="@tran.ID">
+                                <input type="text" value="@tran.Description" placeholder="填写释义"/>
+                            </div>
+                        </div>
+                    </div>
+                }
+                @foreach (var example in Model.Examples)
+                {
+                    <div class="row">
+                        <div class="span2">
+                            <label>例句 ：</label>
+                        </div>
+                        <div class="span6">
+                            <div class="input-control text" data-example-id="@example.ID">
+                                <input type="text" value="@example.Origin" placeholder="填写例句"/>
+                                <input type="text" value="@example.Trans" placeholder="填写例句翻译"/>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <div class="row">
+                    <button type="button" class="default" id="addTran">+ 添加释义</button>
+                    <button type="button" class="info" id="addExample">+ 添加例句</button>
+                </div>
+                <div class="row">
+                    <button class="primary large" type="button" id="submitBtn">创建</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

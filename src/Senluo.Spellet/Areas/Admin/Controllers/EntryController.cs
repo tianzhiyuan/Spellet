@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Transactions;
 using System.Web;
 using System.Web.Mvc;
 using MySql.Data.MySqlClient;
@@ -60,5 +62,50 @@ namespace Senluo.Spellet.Areas.Admin.Controllers
             return View(entries);
         }
 
+
+        public ActionResult Modify(int? id = null)
+        {
+            var model = (id == null)
+                            ? new Entry() {Examples = new Example[0], Translations = new Translation[0]}
+                            : Service.FindByID<Entry, EntryQuery>(id.Value);
+            
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Modify()
+        {
+            return null;
+        }
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Create(Entry entry)
+        {
+            using (var ts = new TransactionScope())
+            {
+                Service.Create(entry);
+                if (entry.Translations != null && entry.Translations.Any())
+                {
+                    foreach (var t in entry.Translations)
+                    {
+                        t.EntryID = entry.ID;
+                    }
+                    Service.Create(entry.Translations.ToArray());
+                }
+                if (entry.Examples != null && entry.Examples.Any())
+                {
+                    foreach (var ex in entry.Examples)
+                    {
+                        ex.EntryID = entry.ID;
+                    }
+                    Service.Create(entry.Examples.ToArray());
+                }
+                ts.Complete();
+            }
+            return Serialize(new {success = true});
+        }
     }
 }

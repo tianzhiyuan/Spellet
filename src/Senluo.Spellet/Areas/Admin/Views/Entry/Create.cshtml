@@ -1,0 +1,128 @@
+﻿@{
+    ViewBag.Title = "新增/修改单词卡片";
+    Layout = "~/Areas/Admin/Views/Shared/_Master.cshtml";
+}
+<script type="text/javascript">
+    $(function () {
+        $('#addTran').on('click', function () {
+            var length = $('.translation .row').length;
+            if (length > 2) {
+                $.msg('最多三条')
+                return;
+            }
+            $('.translation').append('<div class="row"><div class="span2"><label>翻译：<label></div>' +
+                '<div class="span6"><div class="input-control text">' +
+                '<input type="text" placeholder="填写释义"/>' +
+                '</div></div>' +
+                '</div>');
+        })
+
+        $('#addExample').on('click', function () {
+            var length = $('.examples .row').length;
+            if (length > 2) {
+                $.msg('最多三条');
+                return;
+            }
+            $('.examples').append('<div class="row"><div class="span2"><label>例句：</label></div>' +
+                '<div class="span6"><div class="input-control text">' +
+                '<input type="text" placeholder="填写例句"/><input type="text" placeholder="填写例句翻译"/>' +
+                '</div></div>' +
+                '</div>');
+        })
+        $('#submitBtn').on('click', function () {
+            var data = $('form').getValues();
+            if (!data.Word) {
+                $.error('单词必填')
+                return;
+            }
+            if (!data.Phonetic_UK || !data.Phonetic_US) {
+                $.error('发音必填')
+                return;
+            }
+             
+            var trans = [];
+            $('.translation .row').each(function (idx, target) {
+                var tran = $(target).find('input').val();
+                if (tran) {
+                    trans.push({ Description: tran });
+                }
+            })
+            if (!trans.length) {
+                $.error('至少添加一个翻译')
+                return;
+            }
+
+            var examples = [];
+            $('.examples .row').each(function (idx, target) {
+                var origin = $(target).find('input:first').val();
+                var tran = $(target).find('input:last').val();
+                if (origin) {
+                    examples.push({ Origin: origin, Tran: tran });
+                }
+            })
+            if (!examples.length) {
+                $.error('至少添加一个例句')
+                return;
+            }
+            data.Translations = trans;
+            data.Examples = examples;
+            $.ajax({
+                url: '/admin/entry/create',
+                data: JSON.stringify(data),
+                type: 'post',
+                contentType: 'application/json',
+                success:function() {
+                    
+                }
+            })
+        })
+    })
+</script>
+<div class="grid">
+    <div class="row">
+        <div class="span8">
+            <form method="POST" action="/admin/modify">
+                <input type="hidden" name="ID" />
+                <div class="row">
+                    <div class="span2">
+                        <label class="">单词：</label>
+                    </div>
+                    <div class="span6">
+                        <div class="input-control text">
+                            <input type="text" name="Word" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span2">
+                        <label>英式发音：</label>
+                    </div>
+                    <div class="span6">
+                        <div class="input-control text">
+                            <input type="text" name="Phonetic_UK" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span2">
+                        <label>美式发音：</label>
+                    </div>
+                    <div class="span6">
+                        <div class="input-control text">
+                            <input type="text" name="Phonetic_US" />
+                        </div>
+                    </div>
+                </div>
+                <div class="translation"></div>
+                <div class="examples"></div>
+                <div class="row">
+                    <button type="button" class="default" id="addTran">+ 添加释义</button>
+                    <button type="button" class="info" id="addExample">+ 添加例句</button>
+                </div>
+                <div class="row">
+                    <button class="primary large" type="button" id="submitBtn">创建</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

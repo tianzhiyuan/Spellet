@@ -10,7 +10,7 @@ using Senluo.Spellet.Models;
 
 namespace Senluo.Spellet.Areas.Admin.Controllers
 {
-    public class StudentController : AdminController<Models.Student, StudentQuery>
+    public class StudentController : AdminController<Senluo.Spellet.Models.Student, StudentQuery>
     {
         //
         // GET: /Admin/Student/
@@ -21,15 +21,15 @@ namespace Senluo.Spellet.Areas.Admin.Controllers
         }
         public ActionResult Modify(int? id)
         {
-            Models.Student student = id != null
-                                         ? Service.FindByID<Models.Student, StudentQuery>(id.Value)
-                                         : new Models.Student();
+            Senluo.Spellet.Models.Student student = id != null
+                                         ? Service.FindByID<Senluo.Spellet.Models.Student, StudentQuery>(id.Value)
+                                         : new Senluo.Spellet.Models.Student();
             student.Password = "";
             
             return View(student);
         }
         [HttpPost]
-        public ActionResult Modify(Models.Student student)
+        public ActionResult Modify(Senluo.Spellet.Models.Student student)
         {
             var same = Service.FirstOrDefault(new StudentQuery() {StudentID = student.StudentID});
             if (same != null && same.ID != student.ID)
@@ -46,7 +46,7 @@ namespace Senluo.Spellet.Areas.Admin.Controllers
                 {
                     student.Password = student.Password.Hash();
                 }
-                Service.Patch<Models.Student, Models.StudentQuery>(student);
+                Service.Patch<Senluo.Spellet.Models.Student, StudentQuery>(student);
             }
             else
             {
