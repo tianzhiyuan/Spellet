@@ -2,15 +2,203 @@
 @model Senluo.Spellet.Models.Entry
 
 @{
-    ViewBag.Title = "新增/修改单词卡片";
+    ViewBag.Title = "修改单词卡片";
     Layout = "~/Areas/Admin/Views/Shared/_Master.cshtml";
 }
 <script type="text/javascript">
-    
+    function refresh() {
+        window.location.reload();
+    }
+    $(function () {
+        
+        $('.translation a[data-role=delete]').on('click',function() {
+            var me = this;
+            
+            if (window.confirm('确定删除?')) {
+                $.ajax({
+                    url: '/admin/translation',
+                    type: 'delete',
+                    data: { ID: $(me).attr('data-tran-id') },
+                    success:function(result) {
+                        if (result.success) {
+                            refresh();
+                        } else {
+                            $.error(result.msg);
+                        }
+                    }
+                })
+            }
+        })
+        $('.examples a[data-role=delete]').on('click',function() {
+            var me = this;
+            if (window.confirm('确定删除?')) {
+                $.ajax({
+                    url: '/admin/example',
+                    type: 'delete',
+                    data: { ID: $(me).attr('data-example-id') },
+                    success:function(result) {
+                        if (result.success) {
+                            refresh();
+                        } else {
+                            $.error(result.msg);
+                        }
+                    }
+                })
+            }
+        })
+        $('#submitBtn').on('click', function () {
+            var data = $('form').getValues();
+            if (!data.Word) {
+                $.error('单词必填')
+                return;
+            }
+            if (!data.Phonetic_UK || !data.Phonetic_US) {
+                $.error('发音必填')
+                return;
+            }
+             
+            var trans = [];
+            $('.translation .row').each(function (idx, target) {
+                var tran = $(target).find('input').val();
+                var id = $(target).attr('data-tran-id');
+                if (tran) {
+                    trans.push({ Description: tran, ID:id });
+                }
+            })
+            if (!trans.length) {
+                $.error('至少添加一个翻译')
+                return;
+            }
+
+            var examples = [];
+            $('.examples .row').each(function (idx, target) {
+                var origin = $(target).find('input:first').val();
+                var tran = $(target).find('input:last').val();
+                var id = $(target).attr('data-example-id')
+                if (origin) {
+                    examples.push({ Origin: origin, Tran: tran, ID:id });
+                }
+            })
+            if (!examples.length) {
+                $.error('至少添加一个例句')
+                return;
+            }
+            data.Translations = trans;
+            data.Examples = examples;
+            $.ajax({
+                url: '/admin/entry/modify',
+                data: JSON.stringify(data),
+                type: 'post',
+                contentType: 'application/json',
+                success:function(result) {
+                    if (result.success) {
+                        reload();
+                    } else {
+                        $.error(result.msg);
+                    }
+                }
+            })
+        })
+        $('#addTran').on('click', function () {
+            var id = $('input[name=ID]').val();
+            var content = [
+                '<form >',
+                '<label>解释 </label>',
+                '<div class="input-control text"><input type="text" name="Description"></div>',
+                '<div class="form-actions">',
+                '<button class="button primary" type="button">保存</button>&nbsp;',
+                '<button class="button" type="button" onclick="$.Dialog.close()">取&nbsp;消</button> ',
+                '</div>',
+                '</form>'
+            ].join('');
+            $.Dialog({
+                overlay: true,
+                shadow: true,
+                flat: true,
+                icon: '',
+                padding:10,
+                title: '增加释义',
+                content: content,
+                width: 500,
+                height:200,
+                onShow:function(_dialog) {
+                    var form = _dialog.find('form');
+                    _dialog.find('.primary').on('click', function () {
+                        var desc = form.find('input').val();
+                        if (!desc) {
+                            $.error('不能为空');
+                            return;
+                        }
+                        $.ajax({
+                            type: 'POST',
+                            url: '/admin/translation',
+                            data: { EntryID: id, Description:  desc},
+                            success:function(result) {
+                                if (result) {
+                                    refresh();
+                                } else {
+                                    $.error(result.msg);
+                                }
+                            }
+                        })
+                    })
+                }
+            })
+        })
+        $('#addExample').on('click',function() {
+            var id = $('input[name=ID]').val();
+            var content = [
+                '<form >',
+                '<label>例句： </label>',
+                '<div class="input-control text"><input type="text" name="Origin"></div>',
+                '<label>例句翻译： </label>',
+                '<div class="input-control text"><input type="text" name="Tran"></div>',
+                '<div class="form-actions">',
+                '<button class="button primary" type="button">保存</button>&nbsp;',
+                '<button class="button" type="button" onclick="$.Dialog.close()">取&nbsp;消</button> ',
+                '</div>',
+                '</form>'
+            ].join('');
+            $.Dialog({
+                overlay: true,
+                shadow: true,
+                flat: true,
+                padding: 10,
+                icon: '',
+                title: '增加例句',
+                content: content,
+                width: 500,
+                height: 200,
+                onShow: function (_dialog) {
+                    var form = _dialog.find('form');
+                    _dialog.find('.primary').on('click', function () {
+                        var data = form.getValues();
+                        data.EntryID = id;
+                        if (!data.Origin) {
+                            return;
+                        }
+                        
+                        $.ajax({
+                            type: 'POST',
+                            url: '/admin/example',
+                            data: data,
+                            success: function (result) {
+                                if (result) {
+                                    refresh();
+                                } else {
+                                    $.error(result.msg);
+                                }
+                            }
+                        })
+                    })
+                }
+            })
+        })
+    })
 </script>
 <div class="grid">
     <div class="row">
-        <div class="span8">
+        <div class="span9">
             <form method="POST" action="/admin/modify">
                 <input type="hidden" name="ID" value="@Model.ID"/>
                 <div class="row">
@@ -27,56 +215,59 @@
                     <div class="span2">
                         <label>英式发音：</label>
                     </div>
-                    <div class="span6">
+                    <div class="span2">
                         <div class="input-control text">
                             <input type="text" name="Phonetic_UK" value="@Model.Phonetic_UK"/>
                         </div>
                     </div>
-                </div>
-                <div class="row">
                     <div class="span2">
                         <label>美式发音：</label>
                     </div>
-                    <div class="span6">
+                    <div class="span2">
                         <div class="input-control text">
                             <input type="text" name="Phonetic_US" value="@Model.Phonetic_US"/>
                         </div>
                     </div>
                 </div>
-                
-                @foreach (var tran in Model.Translations)
-                {
-                    <div class="row">
-                        <div class="span2">
-                            <label>解释：</label>
-                        </div>
-                        <div class="span6">
-                            <div class="input-control text" data-tran-id="@tran.ID">
-                                <input type="text" value="@tran.Description" placeholder="填写释义"/>
+                <div class="translation">
+                    @foreach (var tran in Model.Translations)
+                    {
+                        <div class="row" data-tran-id="@tran.ID">
+                            <div class="span2">
+                                <label>解释：</label>
                             </div>
+                            <div class="span6">
+                                <div class="input-control text">
+                                    <input type="text" value="@tran.Description" placeholder="填写释义"/>
+                                </div>
+                            </div>
+                            <div class="span1"><a title="删除该释义" href="javascript:;" data-role="delete" data-tran-id="@tran.ID"><i class="icon-cancel-2"></i></a></div>
                         </div>
-                    </div>
-                }
+                    }
+                </div>
+                <div class="examples">
                 @foreach (var example in Model.Examples)
                 {
-                    <div class="row">
+                    <div class="row" data-example-id="@example.ID">
                         <div class="span2">
                             <label>例句 ：</label>
                         </div>
                         <div class="span6">
-                            <div class="input-control text" data-example-id="@example.ID">
+                            <div class="input-control text" >
                                 <input type="text" value="@example.Origin" placeholder="填写例句"/>
                                 <input type="text" value="@example.Trans" placeholder="填写例句翻译"/>
                             </div>
                         </div>
+                        <div class="span1"><a title="删除该例句" href="javascript:;" data-role="delete" data-example-id="@example.ID"><i class="icon-cancel-2"></i></a></div>
                     </div>
                 }
+                </div>
                 <div class="row">
                     <button type="button" class="default" id="addTran">+ 添加释义</button>
                     <button type="button" class="info" id="addExample">+ 添加例句</button>
                 </div>
                 <div class="row">
-                    <button class="primary large" type="button" id="submitBtn">创建</button>
+                    <button class="primary large" type="button" id="submitBtn">修改</button>
                 </div>
             </form>
         </div>

@@ -31,9 +31,10 @@ namespace Senluo.VocaSpider.Parser
             var pronounce = doc.DocumentNode.SelectNodes(@"//div[@class='baav']/span[@class='pronounce']");
             foreach (var p in pronounce)
             {
+                var local = p;
                 if (p.InnerText.Contains("英"))
                 {
-                    var phonectic = p.SelectSingleNode("//span[@class='phonetic']");
+                    var phonectic = local.SelectSingleNode("span[@class='phonetic']");
                     if (phonectic != null)
                     {
                         entry.Phonetic_UK = TrimSpacing(phonectic.InnerText);
@@ -47,7 +48,7 @@ namespace Senluo.VocaSpider.Parser
                 }
                 else if (p.InnerText.Contains("美"))
                 {
-                    var phonectic = p.SelectSingleNode("//span[@class='phonetic']");
+                    var phonectic = local.SelectSingleNode("span[@class='phonetic']");
                     if (phonectic != null)
                     {
                         entry.Phonetic_US = TrimSpacing(phonectic.InnerText);
@@ -89,6 +90,7 @@ namespace Senluo.VocaSpider.Parser
         }
         void downloadAndSaveMp3(string path, string url)
         {
+            return;
             try
             {
                 var client = new WebClient();

@@ -7,20 +7,22 @@ using System.Transactions;
 using System.Web;
 using System.Web.Mvc;
 using MySql.Data.MySqlClient;
+using Ors.Core.Components;
 using Ors.Core.Data;
 using Ors.Framework.Data;
 using Senluo.Spellet.Models;
 using Senluo.UI.Mvc;
+using Senluo.VocaSpider.Parser;
 
 namespace Senluo.Spellet.Areas.Admin.Controllers
 {
     public class EntryController : AdminController<Entry, EntryQuery>
     {
-        
+
         //
         // GET: /Admin/Entry/
         private int take = 15;
-        public ActionResult Index( string key, int skip = 0, bool startWith = false)
+        public ActionResult Index(string key, int skip = 0, bool startWith = false)
         {
             var svc = Service as DataService;
             IEnumerable<Entry> entries;
@@ -31,8 +33,8 @@ namespace Senluo.Spellet.Areas.Admin.Controllers
             }
             if (startWith && !string.IsNullOrWhiteSpace(key))
             {
-                string sql = string.Format("SELECT * FROM ENTRY WHERE Word like @key ORDER BY Word ", skip ,take);
-                var param = new MySqlParameter("@key", MySqlDbType.String, 200) {Value =  key + "%"};
+                string sql = string.Format("SELECT * FROM ENTRY WHERE Word like @key ORDER BY Word ", skip, take);
+                var param = new MySqlParameter("@key", MySqlDbType.String, 200) { Value = key + "%" };
                 entries = svc.SqlQuery<Entry>(sql, param);
                 count = entries.Count();
                 entries = entries.Skip(skip).Take(take).ToArray();
@@ -40,20 +42,20 @@ namespace Senluo.Spellet.Areas.Admin.Controllers
             }
             else
             {
-                var query = new EntryQuery() {Take = take, Skip = skip, OrderField = "Word", WordPattern = key};
+                var query = new EntryQuery() { Take = take, Skip = skip, OrderField = "Word", WordPattern = key };
                 entries = svc.Select(query);
                 count = query.Count ?? 0;
             }
             ViewBag.Key = key;
             ViewBag.Skip = skip;
-            ViewBag.Total = (int)Math.Round(((double) count)/take + 0.5);
+            ViewBag.Total = (int)Math.Round(((double)count) / take + 0.5);
             ViewBag.Current = (int)Math.Round(((double)take) / take + 0.5);
             ViewBag.Take = take;
             ViewBag.StartsWith = startWith.ToString().ToLower();
             ViewBag.Pagination = new Pagination(take, skip, count);
             var entryids = entries.Select(o => o.ID).OfType<int>().ToArray();
-            var trans = svc.Select(new TranslationQuery() {EntryIDList = entryids});
-            var examples = svc.Select(new ExampleQuery() {EntryIDList = entryids});
+            var trans = svc.Select(new TranslationQuery() { EntryIDList = entryids });
+            var examples = svc.Select(new ExampleQuery() { EntryIDList = entryids });
             foreach (var entry in entries)
             {
                 entry.Translations = trans.Where(o => o.EntryID == entry.ID).ToArray();
@@ -63,18 +65,30 @@ namespace Senluo.Spellet.Areas.Admin.Controllers
         }
 
 
-        public ActionResult Modify(int? id = null)
+        public ActionResult Modify(int id)
         {
-            var model = (id == null)
-                            ? new Entry() {Examples = new Example[0], Translations = new Translation[0]}
-                            : Service.FindByID<Entry, EntryQuery>(id.Value);
-            
+            var model = Service.FindByID<Entry, EntryQuery>(id);
+            model.Translations = Service.Select(new TranslationQuery() {EntryIDList = new[] {id}}).ToArray();
+            model.Examples = Service.Select(new ExampleQuery() {EntryIDList = new[] {id}}).ToArray();
             return View(model);
         }
         [HttpPost]
-        public ActionResult Modify()
+        public ActionResult Modify(Entry entry)
         {
-            return null;
+            using (var ts = new TransactionScope())
+            {
+                Service.Update(entry);
+                if (entry.Translations!= null && entry.Translations.Any())
+                {
+                    Service.Update(entry.Translations.ToArray());
+                }
+                if (entry.Examples != null && entry.Examples.Any())
+                {
+                    Service.Update(entry.Examples.ToArray());
+                }
+                ts.Complete();
+            }
+            return Serialize(new {success = true});
         }
 
         public ActionResult Create()
@@ -105,7 +119,31 @@ namespace Senluo.Spellet.Areas.Admin.Controllers
                 }
                 ts.Complete();
             }
-            return Serialize(new {success = true});
+            return Serialize(new { success = true });
+        }
+
+        public ActionResult Test()
+        {
+            var count = Service.GetCount(new EntryQuery());
+            var parser = ObjectContainer.Resolve<IParser>();
+            
+            for (var index = 0; index < count; index++)
+            {
+                var query = new EntryQuery() { Take = 1, Skip = index };
+                var entry = Service.Select(query).FirstOrDefault();
+                if (entry == null) break;
+                try
+                {
+                    var res = parser.Search(entry.Word);
+                    entry.Phonetic_US = res.Phonetic_US;
+                    Service.Update(entry);
+                }
+                catch
+                {
+                }
+            }
+            
+            return null;
         }
     }
 }

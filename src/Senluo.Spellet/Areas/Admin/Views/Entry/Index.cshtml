@@ -27,6 +27,7 @@
                 search();
             }
         });
+
     })
 </script>
 
@@ -52,7 +53,7 @@
             </div>
         </nav>
     </nav>
-    <div class="" style="padding:10px 0;">
+    <div class="" style="padding: 10px 0;">
         <div class="pagination">
             <ul>
                 @if (string.IsNullOrWhiteSpace(ViewBag.Key))
@@ -87,7 +88,7 @@
             </ul>
 
         </div>
-        <div style="float: right; padding-right: 130px;">@string.Format("共{0}页/{1}条数据，当前第{2}页，显示{3}条数据", page.TotalPage, page.Count, page.CurrentPage, Model.Count())</div>
+        <div style="float: right; padding-right: 130px;">@string.Format("当前第{2}页/{3}条数据，共{0}页/{1}条数据", page.TotalPage, page.Count, page.CurrentPage, Model.Count())</div>
         <div style="clear: both;"></div>
         <div class="grid">
             <div class="row">
@@ -99,12 +100,18 @@
                             {
                                 var entry = Model.ElementAt(entryIndex);
                         
-                                <div href="javascript:;" class="list bg-hover-lime">
+                                <div class="list bg-hover-lime">
                                     <div class="list-content">
+
                                         <div>
 
                                             <div class="item-title">
                                                 <strong>@entry.Word</strong>
+                                                <div class="entry-edit">
+                                                    <a title="修改" href="/admin/entry/modify?id=@entry.ID"><i class="icon-cog fg-teal"></i></a>
+                                                    <a title="删除" href="javascript:;"><i class="icon-cancel-2 fg-olive"></i></a>
+                                                </div>
+                                                
                                             </div>
                                             <div class="pronounce">
                                                 <div class="phonetic">

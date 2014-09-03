@@ -22,7 +22,7 @@
     -moz-border-radius-bottomleft: 2px;
     -webkit-border-bottom-left-radius: 2px;
     border-bottom-right-radius: 2px;
-    -moz-border-radius-bottomright: 2px;
+    -moz-border-radius-bottomright: 2px;Q
     -webkit-border-bottom-right-radius: 2px;
     color: #fff;
     margin: 2px 2px 2px 0;
@@ -45,4 +45,13 @@ header {
 }
 .pronounce {
     padding: 10px 0;
+}
+
+.entry-edit {
+    float: right;
+    display: none;
+}
+
+.list:hover .entry-edit {
+    display: block;
 }

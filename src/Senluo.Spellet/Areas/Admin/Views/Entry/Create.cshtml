@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "新增/修改单词卡片";
+    ViewBag.Title = "新增单词卡片";
     Layout = "~/Areas/Admin/Views/Shared/_Master.cshtml";
 }
 <script type="text/javascript">
@@ -71,8 +71,12 @@
                 data: JSON.stringify(data),
                 type: 'post',
                 contentType: 'application/json',
-                success:function() {
-                    
+                success:function(result) {
+                    if (result.success) {
+                        window.location.href = '/admin/entry/modify?id=' + result.item.ID;
+                    } else {
+                        $.error(result.msg);
+                    }
                 }
             })
         })
@@ -97,17 +101,15 @@
                     <div class="span2">
                         <label>英式发音：</label>
                     </div>
-                    <div class="span6">
+                    <div class="span2">
                         <div class="input-control text">
                             <input type="text" name="Phonetic_UK" />
                         </div>
                     </div>
-                </div>
-                <div class="row">
                     <div class="span2">
                         <label>美式发音：</label>
                     </div>
-                    <div class="span6">
+                    <div class="span2">
                         <div class="input-control text">
                             <input type="text" name="Phonetic_US" />
                         </div>
