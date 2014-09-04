@@ -1,0 +1,47 @@
+﻿@model Senluo.Spellet.Models.Course
+
+@{
+    ViewBag.Title = "修改课程";
+    Layout = "~/Areas/Admin/Views/Shared/_Master.cshtml";
+}
+
+<form>
+    <div class="grid">
+        <div class="row">
+            <div class="span9">
+                <div class="row">
+                    <div class="span2">
+                        <label>开始时间：</label></div>
+                    <div class="span2">
+                        <div class="input-control text" data-role="datepicker"
+                             data-format="yyyy/m/d"
+                             data-position="top|bottom"
+                             data-effect="none|slide|fade">
+                            <input type="text" name="StartTime">
+                            <button class="btn-date"></button>
+                        </div>
+                    </div>
+                    <div class="span2">
+                        <label>结束时间：</label></div>
+                    <div class="span2">
+                        <div class="input-control text" data-role="datepicker"
+                            data-format="yyyy/m/d"
+                            data-position="top|bottom"
+                            data-effect="none|slide|fade">
+                            <input type="text" name="EndTime">
+                            <button class="btn-date"></button>
+                        </div>
+                    </div>
+                </div>
+                
+
+
+                <div class="row">
+                    <button class="primary large" type="button" id="submitBtn">保存</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</form>

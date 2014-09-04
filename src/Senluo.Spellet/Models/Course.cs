@@ -10,11 +10,13 @@ namespace Senluo.Spellet.Models
     {
         public string Name { get; set; }
         public DateTime? StartTime { get; set; }
-        public int? Duration { get; set; }
+        public DateTime? EndTime { get; set; }
+        public CourseContent[] Contents { get; set; }
     }
 
     public class CourseQuery : AbstractQuery<Course>
     {
+        public Range<DateTime> StartTimeRange { get; set; }
         
     }
 }

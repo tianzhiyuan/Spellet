@@ -10,10 +10,11 @@ namespace Senluo.Spellet.Models
     {
         public int? CourseID { get; set; }
         public int? ContentID { get; set; }
+        public Entry Entry { get; set; }
     }
     public class CourseContentQuery : AbstractQuery<CourseContent>
     {
-        public int? CourseID { get; set; }
-        public int? ContentID { get; set; }
+        public int[] CourseIDList { get; set; }
+        public int[] ContentIDList { get; set; }
     }
 }
