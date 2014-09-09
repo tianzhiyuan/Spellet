@@ -10,6 +10,7 @@ namespace Senluo.Spellet.Models
     {
         public int? Count { get; set; }
         public int? DurationMinite { get; set; }
+        public Question[] Questions { get; set; }
     }
     public class ExamQuery:AbstractQuery<Exam>
     {
