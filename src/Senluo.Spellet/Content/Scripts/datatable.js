@@ -15,7 +15,11 @@
             remote: true,
             url: '',
             pageSize: 15,
-            queryParam: {}
+            queryParam: {},
+            pageParam: {
+                OrderField: 'ID',
+                OrderDirection: 'DESC'
+            }
         },
 
         _create: function () {
@@ -75,6 +79,9 @@
             }
             if (opt.queryParam) {
                 param = $.extend(param, opt.queryParam);
+            }
+            if (opt.pageParam) {
+                param = $.extend(param, opt.pageParam);
             }
             $.ajax({
                 url: opt.url,

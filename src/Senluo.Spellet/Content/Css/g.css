@@ -55,3 +55,41 @@ header {
 .list:hover .entry-edit {
     display: block;
 }
+
+.word-container {
+    
+}
+.word-container a {
+    border: #d5d5d5 solid 1px;
+    background: #fff;
+    height: 25px;
+    line-height: 25px;
+    padding: 0 8px;
+    display: inline-block;
+    margin-right: 5px;
+    margin-top: 5px;
+    color: black;
+}
+.word-container span {
+    height: 25px;
+    line-height: 25px;
+    display: inline-block;
+}
+.word-container i {
+    width: 10px;
+    cursor: pointer;
+    font-family: "黑体";
+    font-size: 18px;
+    line-height: 20px;
+    margin-left: 5px;
+    visibility: hidden;
+    font-size: 5px;
+    line-height: 5px;
+}
+.word-container a:hover {
+    background: #b28850;
+    color: #fff;
+}
+.word-container a:hover i {
+    visibility: visible;
+}

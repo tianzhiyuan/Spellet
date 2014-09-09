@@ -2,8 +2,99 @@
     ViewBag.Title = "课程新增";
     Layout = "~/Areas/Admin/Views/Shared/_Master.cshtml";
 }
+@section Css
+{
+    <link rel="stylesheet" href="~/Content/Library/jquery-ui/jquery-ui.min.css" />
+}
+@section Script
+{
+    <script type="text/javascript" src="~/Content/Library/jquery-ui/jquery-ui.min.js"></script>
+}
+<script type="text/javascript">
+    
+    
+    
+    $(function() {
 
+        $('input[name=Search]').autocomplete({
+            appendTo: '#SearchDiv',
+            minLength: 2,
+            focus: function(event, ui) {
+                return false;
+            },
+            select: function(event, ui) {
+                var input = this;
+                var item = ui.item;
+                var count = $('#words a').length;
+                if (count > 20) {
+                    $.error('最多添加20条');
+                    return false;
+                }
 
+                if ($('#words a[data-word-id=' + item.ID + ']').length) {
+                    return false;
+                }
+                var html = $('<a>').append('<span>' + item.Word + '</span>').append('<i class="icon-cancel-2"></i>').attr('data-word-id', item.ID);
+                html.find('i').on('click', function() {
+                    var me = this;
+                    $(me).parent().remove();
+                });
+                html.appendTo('#words');
+                $(input).val('');
+                return false;
+            },
+            source: function(request, response) {
+                $.ajax({
+                    url: '/admin/entry/list',
+                    data: { Take: 10, WordPattern: request.term },
+                    success: function(result) {
+                        if (result.success) {
+                            if (result.items) {
+                                response(result.items);
+                            }
+
+                        }
+                    }
+                })
+            }
+        })
+            .autocomplete('instance')._renderItem = function(ul, item) {
+                var html = $('<li>')
+                    .append('<a title="添加到课程中">' + item.Word + '<i class="icon-plus-2" title="删除该单词" style="float:right;"></i></a>')
+                    .appendTo(ul);
+                return html;
+            }
+        $("#submitBtn").on('click', function () {
+            var data = {};
+            data.StartTime = $('input[name=StartTime]').val();
+            data.EndTime = $('input[name=EndTime]').val();
+            if (!data.StartTime || !data.EndTime) {
+                $.error('起止时间必填');
+                return;
+            }
+            var words = [];
+            $('#words a').each(function(idx, ele) {
+                words.push({
+                    ContentID:$(ele).attr('data-word-id')
+                })
+            })
+            data.Contents = words;
+            $.ajax({
+                url: '/admin/course/create',
+                type: 'post',
+                data: JSON.stringify(data),
+                contentType:'application/json',
+                success:function(result) {
+                    if (result.success) {
+                        window.location.href = '/admin/course/modify?id=' + result.item.ID;
+                    } else {
+                        $.error(result.msg);
+                    }
+                }
+            })
+        });
+    })
+</script>
 <form>
     <div class="grid">
         <div class="row">
@@ -17,7 +108,7 @@
                              data-position="top|bottom"
                              data-effect="none|slide|fade">
                             <input type="text" name="StartTime">
-                            <button class="btn-date"></button>
+                            <button class="btn-date" type="button"></button>
                         </div>
                     </div>
                     <div class="span2">
@@ -28,12 +119,22 @@
                             data-position="top|bottom"
                             data-effect="none|slide|fade">
                             <input type="text" name="EndTime">
-                            <button class="btn-date"></button>
+                            <button class="btn-date" type="button"></button>
                         </div>
                     </div>
                 </div>
-                
-
+                <div class="row">
+                    <div class="span4">
+                        <div class="input-control text" data-role="text" id="SeachDiv">
+                            <input type="text" class="text" placeholder="搜索单词以添加" name="Search"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span8">
+                        <div id="words" class="word-container"></div>
+                    </div>
+                </div>
 
                 <div class="row">
                     <button class="primary large" type="button" id="submitBtn">创建</button>

@@ -5,9 +5,139 @@
     Layout = "~/Areas/Admin/Views/Shared/_Master.cshtml";
 }
 
+@section Css
+{
+    <link rel="stylesheet" href="~/Content/Library/jquery-ui/jquery-ui.min.css" />
+}
+@section Script
+{
+    <script type="text/javascript" src="~/Content/Library/jquery-ui/jquery-ui.min.js"></script>
+}
+<script type="text/javascript">
+
+
+
+    $(function () {
+
+        $('input[name=Search]').autocomplete({
+            appendTo: '#SearchDiv',
+            minLength: 2,
+            focus: function (event, ui) {
+                return false;
+            },
+            select: function (event, ui) {
+                var input = this;
+                var item = ui.item;
+                var count = $('#words a').length;
+                if (count > 20) {
+                    $.error('最多添加20条');
+                    return false;
+                }
+
+                if ($('#words a[data-word-id=' + item.ID + ']').length) {
+                    return false;
+                }
+                $.ajax({
+                    url: '/admin/course/content',
+                    type: 'post',
+                    data: {
+                        ContentID: item.ID,
+                        CourseID:$('input[name=ID]').val()
+                    },
+                    success: function (result) {
+                        if (result.success) {
+                            var html = $('<a>').append('<span>' + item.Word + '</span>')
+                                .append('<i class="icon-cancel-2" data-cc-id="' + result.item.ID + '"></i>').attr('data-word-id', item.ID);
+                            html.find('i').on('click', function() {
+                                var me = this;
+                                $.ajax({
+                                    url: '/admin/course/content',
+                                    type: 'delete',
+                                    data: { ID: $(me).attr('data-cc-id') },
+                                    success:function(res) {
+                                        if (res.success) {
+                                            $(me).parent().remove();
+                                        } else {
+                                            $.error(res.msg);
+                                        }
+                                    }
+                                })
+                                
+                            });
+                            html.appendTo('#words');
+                            $(input).val('');
+                        } else {
+                            $.error(result.msg);
+                        }
+                    }
+                })
+                
+                return false;
+            },
+            source: function (request, response) {
+                $.ajax({
+                    url: '/admin/entry/list',
+                    data: { Take: 10, WordPattern: request.term },
+                    success: function (result) {
+                        if (result.success) {
+                            if (result.items) {
+                                response(result.items);
+                            }
+
+                        }
+                    }
+                })
+            }
+        })
+            .autocomplete('instance')._renderItem = function (ul, item) {
+                var html = $('<li>')
+                    .append('<a title="添加到课程中">' + item.Word + '<i class="icon-plus-2" style="float:right;"></i></a>')
+                    .appendTo(ul);
+                return html;
+            }
+        $('#words a i').on('click',function() {
+            var me = this;
+            $.ajax({
+                url: '/admin/course/content',
+                type: 'delete',
+                data: { ID: $(me).attr('data-cc-id') },
+                success: function (res) {
+                    if (res.success) {
+                        $(me).parent().remove();
+                    } else {
+                        $.error(res.msg);
+                    }
+                }
+            })
+        })
+        $("#submitBtn").on('click', function () {
+            var data = {};
+            data.StartTime = $('input[name=StartTime]').val();
+            data.EndTime = $('input[name=EndTime]').val();
+            if (!data.StartTime || !data.EndTime) {
+                $.error('起止时间必填');
+                return;
+            }
+            data.ID = $('input[name=ID]').val();
+            $.ajax({
+                url: '/admin/course',
+                type: 'put',
+                data: data,
+                success: function (result) {
+                    if (result.success) {
+                        $.msg('保存成功');
+                    } else {
+                        $.error(result.msg);
+                    }
+                }
+            })
+        });
+    })
+</script>
 <form>
     <div class="grid">
         <div class="row">
+            <input type="hidden" name="ID" value="@Model.ID"/>
             <div class="span9">
                 <div class="row">
                     <div class="span2">
@@ -16,28 +146,52 @@
                         <div class="input-control text" data-role="datepicker"
                              data-format="yyyy/m/d"
                              data-position="top|bottom"
-                             data-effect="none|slide|fade">
-                            <input type="text" name="StartTime">
-                            <button class="btn-date"></button>
+                             data-effect="none|slide|fade"
+                             data-date="@Model.StartTime"
+                            >
+                            <input type="text" name="StartTime" >
+                            <button class="btn-date" type="button"></button>
                         </div>
                     </div>
                     <div class="span2">
                         <label>结束时间：</label></div>
                     <div class="span2">
                         <div class="input-control text" data-role="datepicker"
-                            data-format="yyyy/m/d"
-                            data-position="top|bottom"
-                            data-effect="none|slide|fade">
-                            <input type="text" name="EndTime">
-                            <button class="btn-date"></button>
+                             data-format="yyyy/m/d"
+                             data-position="top|bottom"
+                             data-date="@Model.EndTime"
+                             data-effect="none|slide|fade">
+                            <input type="text" name="EndTime" >
+                            <button class="btn-date" type="button"></button>
                         </div>
                     </div>
                 </div>
-                
-
+                <div class="row">
+                    <div class="span4">
+                        <div class="input-control text" data-role="text" id="SeachDiv">
+                            <input type="text" class="text" placeholder="搜索单词以添加" name="Search"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span8">
+                        <div id="words" class="word-container">
+                            @if (Model.Contents != null)
+                            {
+                                foreach (var c in Model.Contents)
+                                {
+                                    if (c.Entry != null)
+                                    {
+                                        <a data-word-id="@c.ContentID"><span>@c.Entry.Word </span><i class="icon-cancel-2" title="从课程中删除该单词" data-cc-id="@c.ID"></i></a>
+                                    }
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
 
                 <div class="row">
-                    <button class="primary large" type="button" id="submitBtn">保存</button>
+                    <button class="primary large" type="button" id="submitBtn">创建</button>
                 </div>
 
             </div>

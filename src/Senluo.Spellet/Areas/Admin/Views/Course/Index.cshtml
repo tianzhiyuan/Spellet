@@ -1,5 +1,4 @@
-﻿@model dynamic
-
+﻿
 @{
     ViewBag.Title = "课程管理";
     Layout = "~/Areas/Admin/Views/Shared/_Master.cshtml";
@@ -11,6 +10,9 @@
 <script type="text/javascript">
     $(function () {
         var colModel = [
+            {field:'ID', caption:"编号", width:80, renderer:function(tbl, record, td) {
+                td.html('<a title="点击以编辑" href="/admin/course/modify?id=' + record.ID + '">' + record.ID + '</a>');
+            }},
             { field: 'StartTime', caption: '开始时间',width:200 },
             { field: 'EndTime', caption: '结束时间',width:200 },
             { field: 'Content', caption: '学习内容', renderer:function(tb, record, td) {
