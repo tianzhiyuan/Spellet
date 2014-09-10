@@ -7,7 +7,7 @@ using Ors.Core.Properties;
 
 namespace Ors.Core.Exceptions
 {
-
+    [Serializable]
     public class RuleViolatedException : ApplicationException
     {
         public int Code { get; private set; }

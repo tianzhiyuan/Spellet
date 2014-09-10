@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ors.Core.Data
 {
+    [Serializable]
     public class Range<T> where T : struct
     {
         public T? Left { get; set; }

@@ -2,6 +2,7 @@
 
 namespace Ors.Core.Data
 {
+    [Serializable]
     public class AbstractModel : IModel
     {
         public int? ID { get; set; }
@@ -10,7 +11,7 @@ namespace Ors.Core.Data
         public DateTime? CreatedAt { get; set; }
         public DateTime? LastModifiedAt { get; set; }
     }
-
+    [Serializable]
     public abstract class AbstractQuery : IQuery
     {
         public int? ID { get; set; }
@@ -34,7 +35,7 @@ namespace Ors.Core.Data
         public OrderDirection? OrderDirection { get; set; }
         public abstract Type ModelType { get; }
     }
-
+    [Serializable]
     public class AbstractQuery<TModel> : AbstractQuery, IQuery<TModel> where TModel : IModel
     {
         public override Type ModelType

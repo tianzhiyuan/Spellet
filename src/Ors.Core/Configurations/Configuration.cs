@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Ors.Core.Caching;
 using Ors.Core.Components;
 using Ors.Core.Serialization;
 using Ors.Core.Utilities;
@@ -38,28 +39,46 @@ namespace Ors.Core.Configurations
         public Configuration RegisterCommon()
         {
             this.SetDefault<IJsonSerializer, Json>();
+            this.SetDefault<ICache, MemoryCache>();
             return this;
         }
 
-        private readonly IList<Type> _assemblyInitializers = new List<Type>(); 
-        
-        public Configuration InitializeAssemblies(Assembly[] assemblies)
+        private readonly IList<Type> _assemblyInitializers = new List<Type>();
+
+        public Configuration RegisterBusinessComponents(params Assembly[] assemblies)
         {
             foreach (var assembly in assemblies)
             {
                 try
                 {
-                    foreach (var type in assembly.GetTypes().Where(TypeUtils.IsAssemblyInitializer))
+                    foreach (var type in assembly.GetTypes().Where(TypeUtils.IsComponent))
                     {
                         ObjectContainer.RegisterType(type, LifeStyle.Singleton);
-                        var initializer = ObjectContainer.Resolve(type) as IAssemblyInitializer;
-                        if (initializer != null)
+                        foreach (var interfaceType in type.GetInterfaces())
                         {
-                            initializer.Initialize(assemblies);
+                            ObjectContainer.RegisterType(interfaceType, type);
+                        }
+                        if (TypeUtils.IsAssemblyInitializer(type))
+                        {
+                            _assemblyInitializers.Add(type);
                         }
                     }
                 }
                 catch { }
+            }
+
+            return this;
+        }
+        
+        public Configuration InitializeAssemblies(params Assembly[] assemblies)
+        {
+            foreach (var initType in _assemblyInitializers)
+            {
+                var initializer = ObjectContainer.Resolve(initType) as IAssemblyInitializer;
+                if (initializer != null)
+                {
+                    initializer.Initialize(assemblies);
+                }
             }
             
             return this;

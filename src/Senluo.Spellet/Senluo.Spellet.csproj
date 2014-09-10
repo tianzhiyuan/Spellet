@@ -156,6 +156,7 @@
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\CourseContent.cs" />
     <Compile Include="Models\Entry.cs" />
+    <Compile Include="Models\EntryManager.cs" />
     <Compile Include="Models\Exam.cs" />
     <Compile Include="Models\Example.cs" />
     <Compile Include="Models\Question.cs" />

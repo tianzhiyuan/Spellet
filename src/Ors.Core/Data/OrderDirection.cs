@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ors.Core.Data
 {
+    [Serializable]
     public enum OrderDirection
     {
         ASC = 1,

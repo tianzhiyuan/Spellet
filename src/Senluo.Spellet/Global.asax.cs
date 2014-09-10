@@ -33,6 +33,7 @@ namespace Senluo.Spellet
                          .UseDataServiceDefaultFiller()
                          .UseYoudaoParser()
                          .UseLog4Net()
+                         .RegisterBusinessComponents(assemblies)
                          .InitializeAssemblies(assemblies);
         }
 

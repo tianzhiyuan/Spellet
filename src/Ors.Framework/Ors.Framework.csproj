@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Complilation\Compiler.cs" />
+    <Compile Include="Components\CacheProvider.cs" />
     <Compile Include="Data\ConfigExtensions.cs" />
     <Compile Include="Data\DataServiceEventArgs.cs" />
     <Compile Include="Data\PartialFiller.cs" />

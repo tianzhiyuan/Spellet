@@ -9,6 +9,7 @@ namespace Ors.Core.Exceptions
     /// <summary>
     /// 错误码
     /// </summary>
+   [Serializable]
     public enum RuleViolatedType
     {
         UnKnown = 1,
