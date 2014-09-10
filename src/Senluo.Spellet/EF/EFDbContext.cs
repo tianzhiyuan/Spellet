@@ -27,6 +27,7 @@ namespace Senluo.Spellet.EF
             modelBuilder.Entity<Exam>().ToTable("Exam");
             modelBuilder.Entity<Example>().ToTable("Example");
             modelBuilder.Entity<Question>().ToTable("Question");
+            modelBuilder.Entity<Question>().Ignore(o => o.Example);
             modelBuilder.Entity<Student>().ToTable("Student");
             modelBuilder.Entity<Teacher>().ToTable("Teacher");
             modelBuilder.Entity<Translation>().ToTable("Translation");

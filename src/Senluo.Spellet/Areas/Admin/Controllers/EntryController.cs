@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net;
 using System.Transactions;
 using System.Web;
 using System.Web.Mvc;
@@ -77,17 +78,18 @@ namespace Senluo.Spellet.Areas.Admin.Controllers
         {
             using (var ts = new TransactionScope())
             {
-                Service.Update(entry);
+                Service.Patch<Entry, EntryQuery>(entry);
                 if (entry.Translations!= null && entry.Translations.Any())
                 {
-                    Service.Update(entry.Translations.ToArray());
+                    Service.Patch<Translation,TranslationQuery >(entry.Translations.ToArray());
                 }
                 if (entry.Examples != null && entry.Examples.Any())
                 {
-                    Service.Update(entry.Examples.ToArray());
+                    Service.Patch<Example, ExampleQuery>(entry.Examples.ToArray());
                 }
                 ts.Complete();
             }
+            new EntryManager().Refresh(entry.Word[0]);
             return Serialize(new {success = true});
         }
 
@@ -119,9 +121,34 @@ namespace Senluo.Spellet.Areas.Admin.Controllers
                 }
                 ts.Complete();
             }
+            new EntryManager().Refresh(entry.Word[0]);
             return Serialize(new { success = true });
         }
 
+        [AcceptVerbs(HttpVerbs.Post | HttpVerbs.Put | HttpVerbs.Delete)]
+        public override ActionResult Index(Entry item)
+        {
+            var svc = Service;
+            if (item == null) return new HttpStatusCodeResult((int)HttpStatusCode.BadRequest);
+
+            var verb = Request.HttpMethod;
+            switch (verb)
+            {
+                case "POST":
+                    svc.Create(item);
+                    return Serialize(new { success = true, item = item });
+                case "PUT":
+                    svc.Patch<Entry, EntryQuery>(item);
+                    break;
+                case "DELETE":
+                    svc.Delete(item);
+                    break;
+                default:
+                    return new HttpStatusCodeResult((int)HttpStatusCode.MethodNotAllowed);
+            }
+            new EntryManager().Refresh(item.Word[0]);
+            return Serialize(new { success = true });
+        }
         public ActionResult Test()
         {
             var count = Service.GetCount(new EntryQuery());

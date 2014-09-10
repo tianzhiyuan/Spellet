@@ -16,6 +16,8 @@ namespace Senluo.Spellet.Models
     }
     public class AnswerQuery : AbstractQuery<Answer>
     {
+        public int[] QuestionIDList { get; set; }
+        public int[] SheetIDList { get; set; }
 
     }
 }

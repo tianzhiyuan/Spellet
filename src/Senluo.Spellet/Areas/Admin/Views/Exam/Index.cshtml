@@ -7,3 +7,28 @@
 {
     <script type="text/javascript" src="~/Content/Scripts/datatable.js"></script>
 }
+<script type="text/javascript">
+    $(function() {
+        var colModel = [
+            {
+                field: 'Name', caption: "名称", width: 80, renderer: function (tbl, record, td) {
+                    var name = "---";
+                    if (record.Name) {
+                        name = record.Name;
+                    }
+                    td.html('<a title="点击以编辑" href="/admin/exam/modify?id=' + record.ID + '">' + name + '</a>');
+                }
+            },
+            { field: 'Count', caption: '试题总数', width: 100 },
+            { field: 'DurationMinite', caption: '考试时间（分钟）', width: 100 }
+        ];
+        $("#tableDiv").datatable({
+            colModel: colModel,
+            url: '/admin/exam/list',
+            cls: 'table striped bordered hovered'
+        });
+    })
+</script>
+<div id="tableDiv">
+    <a class="button bg-white bd-olive large" href="/admin/exam/create" type="button"><i class="icon-plus-2 on-left-more"></i>新增</a>
+</div>

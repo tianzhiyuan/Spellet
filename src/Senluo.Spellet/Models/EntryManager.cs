@@ -9,6 +9,7 @@ using Ors.Framework.Data;
 
 namespace Senluo.Spellet.Models
 {
+    [Component]
     public class EntryManager
     {
         
@@ -37,10 +38,18 @@ namespace Senluo.Spellet.Models
             var provider = ObjectContainer.Resolve<CacheProvider>();
             return (Entry[])provider.Get("entrycache_" + firstletter);
         }
+        public Entry[] Get(char firstletter)
+        {
+            return Get("" + firstletter);
+        }
         public Entry[] Refresh(string firstletter)
         {
             var provider = ObjectContainer.Resolve<CacheProvider>();
             return (Entry[]) provider.Refresh("entrycache_" + firstletter);
+        }
+        public Entry[] Refresh(char firstletter)
+        {
+            return Refresh("" + firstletter);
         }
     }
 }

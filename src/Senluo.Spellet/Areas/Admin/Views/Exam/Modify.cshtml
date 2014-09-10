@@ -1,0 +1,95 @@
+﻿@model Senluo.Spellet.Models.Exam
+
+@{
+    ViewBag.Title = "修改考试";
+    Layout = "~/Areas/Admin/Views/Shared/_Master.cshtml";
+}
+
+<script type="text/javascript">
+    $(function () {
+        $('#submitBtn').on('click', function () {
+            
+            var data = $('form').getValues();
+            if (!data.Count) {
+                $.error('数量不能为空');
+                return;
+            }
+            if (!data.DurationMinite) {
+                $.error('持续时间不能为空')
+                return;
+            }
+            $.ajax({
+                url: '/admin/exam',
+                type: 'post',
+                data: data,
+                success: function (res) {
+                    if (res.success) {
+                        $.msg('保存成功')
+                    } else {
+                        $.error(res.msg);
+                    }
+                }
+            })
+        })
+    })
+
+</script>
+<form>
+    <div class="grid">
+        <input type="hidden" name="ID" value="@Model.ID"/>
+        <div class="row">
+            <div class="span9 offset1">
+                <div class="row">
+                    <div class="span2">
+                        名称：
+                    </div>
+                    <div class="span4">
+                        <div class="input-control text" data-role="text">
+                            <input type="text" placeholder="请填写名称" name="Name" value="@Model.Name" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="span2">
+                        <label>试题总数：</label>
+                    </div>
+                    <div class="span4">
+                        <div class="input-control text" data-role="text">
+                            <input type="number" name="Count" value="@Model.Count" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span2">
+                        <label>考试持续时间（分钟）：</label>
+                    </div>
+                    <div class="span4">
+                        <div class="input-control text" data-role="text">
+                            <input type="number" name="DurationMinite" value="@Model.DurationMinite"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span8">
+                        <div id="words" class="word-container">
+                            @if (Model.Questions != null)
+                            {
+                                foreach (var q in Model.Questions)
+                                {
+                                    if (q.Example != null && q.Example.Entry != null)
+                                    {
+                                        <a data-word-id="@q.Example.EntryID"><span>@q.Example.Entry.Word </span><i class="icon-cancel-2" title="从考试中删除该单词" data-cc-id="@q.ID"></i></a>
+                                    }
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <button class="primary large" type="button" id="submitBtn">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

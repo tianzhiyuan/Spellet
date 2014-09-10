@@ -12,7 +12,7 @@ namespace Senluo.Spellet.Models
         public int? Score { get; set; }
         public string Expect { get; set; }
         public int? ExamID { get; set; }
-        
+        public Example Example { get; set; }
     }
     public class QuestionQuery : AbstractQuery<Question>
     {

@@ -14,6 +14,8 @@ namespace Senluo.Spellet.Models
     }
     public class AnswerSheetQuery:AbstractQuery<AnswerSheet>
     {
-        
+        public int[] ExamIDList { get; set; }
+        public int[] StudentIDList { get; set; }
+        public Range<int> TotalScoreRange { get; set; } 
     }
 }
