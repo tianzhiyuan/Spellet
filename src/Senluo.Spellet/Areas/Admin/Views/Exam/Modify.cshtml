@@ -31,6 +31,25 @@
                 }
             })
         })
+        $('#pickWords').on('click',function() {
+            window['callback'] = function (words) {
+                $.ajax({
+                    url:'/admin/exam/modifyitems',
+                    data:JSON.stringify({entryids:words, examid:$('input[name=ID]').val()}),
+                    type:'POST',
+                    contentType:'application/json',
+                    success:function(result) {
+                        if (result.success) {
+                            window.location.reload();
+                        } else {
+                            $.error(result.msg);
+                        }
+                    }
+                })
+            };
+            
+            window.open('/admin/entry/WordPicker?examid='+@Model.ID, '', 'width=' + (window.screen.availWidth) + ',height=' + (window.screen.availHeight) + 'resizable=1,scrollbars=1,status=no,toolbar=no,location=no,menu=no,left=60,top=60');
+        })
     })
 
 </script>
@@ -79,12 +98,15 @@
                                 {
                                     if (q.Example != null && q.Example.Entry != null)
                                     {
-                                        <a data-word-id="@q.Example.EntryID"><span>@q.Example.Entry.Word </span><i class="icon-cancel-2" title="从考试中删除该单词" data-cc-id="@q.ID"></i></a>
+                                        <a data-word-id="@q.Example.EntryID"><span>@q.Example.Entry.Word </span></a>
                                     }
                                 }
                             }
                         </div>
                     </div>
+                </div>
+                <div class="row">
+                    <button class="primary large" type="button" id="pickWords">Pick Words!</button>
                 </div>
                 <div class="row">
                     <button class="primary large" type="button" id="submitBtn">保存</button>

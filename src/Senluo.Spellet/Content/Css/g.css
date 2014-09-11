@@ -22,7 +22,7 @@
     -moz-border-radius-bottomleft: 2px;
     -webkit-border-bottom-left-radius: 2px;
     border-bottom-right-radius: 2px;
-    -moz-border-radius-bottomright: 2px;Q
+    -moz-border-radius-bottomright: 2px;
     -webkit-border-bottom-right-radius: 2px;
     color: #fff;
     margin: 2px 2px 2px 0;
@@ -92,4 +92,16 @@ header {
 }
 .word-container a:hover i {
     visibility: visible;
+}
+
+.word {
+    cursor: pointer;
+}
+.word a {
+    display: inline-block;
+    padding: 3px;
+    margin: 3px;
+}
+.word .active {
+    background-color: #95db8b;
 }

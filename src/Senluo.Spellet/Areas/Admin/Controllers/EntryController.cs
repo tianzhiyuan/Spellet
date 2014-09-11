@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using MySql.Data.MySqlClient;
 using Ors.Core.Components;
 using Ors.Core.Data;
+using Ors.Core.Serialization;
 using Ors.Framework.Data;
 using Senluo.Spellet.Models;
 using Senluo.UI.Mvc;
@@ -149,6 +150,7 @@ namespace Senluo.Spellet.Areas.Admin.Controllers
             new EntryManager().Refresh(item.Word[0]);
             return Serialize(new { success = true });
         }
+        [HttpPost]
         public ActionResult Test()
         {
             var count = Service.GetCount(new EntryQuery());
@@ -171,6 +173,29 @@ namespace Senluo.Spellet.Areas.Admin.Controllers
             }
             
             return null;
+        }
+
+        public ActionResult WordPicker(int examid)
+        {
+            var model = Service.FindByID<Exam, ExamQuery>(examid);
+            model.Questions = Service.Select(new QuestionQuery() { ExamIDList = new int[] { examid } }).ToArray();
+            var examples =
+                Service.Select(new ExampleQuery()
+                {
+                    IDList = model.Questions.Select(o => o.ContentID).OfType<int>().ToArray(),
+                    Includes = new string[]{"Entry"}
+                });
+            ViewBag.EntryIDs = examples.Select(o => o.EntryID).ToArray();
+            ViewBag.Entries = examples.Select(o => o.Entry).ToArray();
+            
+            ViewBag.Max = model.Count;
+            return View();
+        }
+
+        public ActionResult GetWords(string word)
+        {
+            var list = new EntryManager().Get(word);
+            return Serialize(new {success = true, items = list, count = list.Count()});
         }
     }
 }

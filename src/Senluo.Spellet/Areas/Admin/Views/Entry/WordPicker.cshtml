@@ -1,0 +1,163 @@
+﻿@using Senluo.Spellet.Models
+@{
+    ViewBag.Title = "挑选单词";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var wordids = "[" + string.Join(",", ViewBag.EntryIDs) + "]";
+}
+<script type="text/javascript">
+
+    function switchTo(word) {
+        $('button[data-word-first=' + word + ']').click();
+    }
+    $(function () {
+        var current = '';
+        function tab(word) {
+            if (word == current) return;
+            var tab_new = $('#tab_' + word);
+            tab_new.css('display', 'block');
+            var loaded = tab_new.data('loaded');
+            if (!loaded) {
+                $.ajax({
+                    url: '/admin/entry/getwords?word=' + word,
+                    type: 'post',
+                    success: function (result) {
+                        if (result.success) {
+                            if (result.items && result.items.length) {
+                                for (var i = 0; i < 4; i++) {
+                                    var span = $('<div class="span2"></div>').appendTo(tab_new);
+                                    var words = [];
+                                    for (var j = i; j < result.items.length; j = j + 4) {
+                                        var item = result.items[j];
+                                        var cls = "";
+                                        if ($.inArray(item.ID, currentWordIds)!=-1) {
+                                            cls = "active";
+                                        }
+                                        words.push('<div class="word" data-word-id="' + item.ID + '"><a class="'+cls+ '">' + item.Word + '</a></div>');
+                                    }
+                                    span.append(words.join(''));
+                                }
+                                tab_new.find('.word').on('click', function () {
+                                    var me = this;
+                                    var wordId = $(me).attr('data-word-id');
+                                    var a = $(me).find('a');
+                                    var w = a.text();
+                                    if (a.hasClass('active')) {
+                                        remove({ ID: wordId, Word: w });
+                                    } else {
+                                        if (selected == max) return;
+                                        add({ ID: wordId, Word: w });
+                                    }
+                                    a.toggleClass('active');
+                                })
+                            }
+                            loaded = true;
+                            tab_new.data('loaded', true);
+                        } else {
+                            console.log(result.msg);
+                        }
+                    }
+                })
+            }
+            if (current) {
+                var tab_old = $('#tab_' + current);
+                tab_old.css('display', 'none');
+            }
+            current = word;
+        }
+
+        var max = @ViewBag.Max;
+        var selected = 0;
+        var currentWordIds = @Html.Raw(wordids);
+
+        selected = currentWordIds.length;
+        function setSelected(c) {
+            $('#selected').html('<strong>已选择 ' + c + ' 个单词</strong>');
+            $('#leftToSelect').html('<strong>需再选 ' + (max - c) + ' 个单词</strong>');
+        }
+        function add(word) {
+            if ($('.list-content span[data-word-id=' + word.ID + ']').length) {
+                return;
+            }
+            
+            $('.list-content').append('<span class="word" data-word-id="' + word.ID + '"><a>' + word.Word + '</a></span>');
+            selected = selected + 1;
+            setSelected(selected);
+        }
+        function remove(word) {
+            if (!$('.list-content span[data-word-id=' + word.ID + ']').length) {
+                return;
+            }
+            selected = selected - 1;
+            $('.list-content').find('span[data-word-id=' + word.ID + ']').remove();
+            setSelected(selected);
+        }
+        function getSelected() {
+            var words = [];
+            $('.list-content .word').each(function(idx, ele) {
+                words.push($(ele).attr('data-word-id'));
+            })
+            return words;
+        }
+        $('.button-set').buttongroup().bind('buttongroupclick', function (evt, obj) {
+            var btn = obj.button;
+            tab(btn.text());
+        });
+        $('#submitBtn').on('click',function() {
+            var words = getSelected();
+            if (selected != max) {
+                $.error('请继续选择');
+                return;
+            }
+            var cb = window.opener["callback"];
+            if (cb && $.isFunction(cb)) {
+                cb(words);
+            }
+            window.close();
+        })
+        switchTo('A');
+        setSelected(selected);
+        self.moveTo(0, 0);
+    })
+</script>
+<div class="grid">
+    <div class="row">
+        <div class="button-set offset1">
+            @foreach (var ch in "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray())
+            {
+                <button data-word-first="@ch">@ch</button>
+                
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="span8 offset1">
+            @foreach (var ch in "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray())
+            {
+                <div class="row" style="display: none;" id="tab_@ch"></div>
+            }
+        </div>
+
+        <div class="span3">
+            <div class="listview">
+                <div class="list bg-lime">
+                    <div class="list-content" style="min-height: 300px;">
+                        <div>
+                            <div class="item-title">
+                                <div id="selected"><strong>已选择 0 个单词</strong></div>
+                                <div id="leftToSelect"><strong>需再选 @ViewBag.Max 个单词</strong></div>
+                            </div>
+
+                        </div>
+                        @foreach (Entry entry in ViewBag.Entries)
+                        {
+                            <span class="word" data-word-id="@entry.ID"><a>@entry.Word </a></span>
+                        }
+                    </div>
+                </div>
+
+
+            </div>
+            <button type="button" class="large primary " id="submitBtn">Done!</button>
+        </div>
+    </div>
+</div>
