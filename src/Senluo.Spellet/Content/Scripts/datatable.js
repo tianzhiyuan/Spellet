@@ -155,20 +155,20 @@
                 next = totalPage;
             }
             
-            ul.append('<li class="first"><a data-target-page="'+ 1 + '"><i class="icon-first-2"></i></a></li>' +
-                '<li class="prev"><a data-target-page="'+prev + '"> <i class="icon-previous"></i></a></li>');
+            ul.append('<li class="first" title="首页"><a data-target-page="'+ 1 + '"><i class="icon-first-2"></i></a></li>' +
+                '<li class="prev" title="上一页"><a data-target-page="'+prev + '"> <i class="icon-previous"></i></a></li>');
             if (totalPage < 16) {
                 for (var index = 1; index <= totalPage; index++) {
                     if (index == me.currentPage) {
                         content = "<li class='active'><a data-target-page='"+ index + "'>" + index + "</a></li>";
                     } else {
-                        content = "<li><a data-target-page='" + index + "'>" + index + "</a></li>";
+                        content = "<li title='第"+index + "页'><a data-target-page='" + index + "'>" + index + "</a></li>";
                     }
                     ul.append(content);
                 }
             }
-            ul.append('<li class="next"><a data-target-page="' + next + '"><i class="icon-next"></i></a></li>' +
-                '<li class="last"><a data-target-page="' + totalPage + '"><i class="icon-last-2"></i></a></li>');
+            ul.append('<li class="next" title="下一页"><a data-target-page="' + next + '"><i class="icon-next"></i></a></li>' +
+                '<li class="last" title="尾页"><a data-target-page="' + totalPage + '"><i class="icon-last-2"></i></a></li>');
             ul.find('a').on('click', function(e) {
                 var target = this;
                 var targetpage = $(target).attr('data-target-page');
