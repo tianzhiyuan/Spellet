@@ -181,6 +181,7 @@
             }
         })
     }
+    
 })(jQuery)
 
 METRO_AUTO_REINIT = true;

@@ -76,6 +76,9 @@
             if (page) {
                 param.Take = opt.pageSize;
                 param.Skip = (me.currentPage - 1) * opt.pageSize;
+                if (param.Skip < 0) {
+                    param.Skip = 0;
+                }
             }
             if (opt.queryParam) {
                 param = $.extend(param, opt.queryParam);
@@ -86,6 +89,7 @@
             $.ajax({
                 url: opt.url,
                 data: param,
+                traditional:true,
                 success:function(res) {
                     if (res.success) {
                         if (page) {
@@ -219,12 +223,24 @@
                 tr.addClass(row.__row_class);
             }
             $.each(this.options.colModel, function (index, val) {
-                var content;
+                var content = "";
                 td = $("<td/>").css("width", val.width).addClass(val.cls).appendTo(tr);
-                if (val.renderer) {
+                if (val.renderer && $.isFunction(val.renderer)) {
                     val.renderer(me, row, td);
                 } else {
-                    content = row[val.field];
+                    var properties = val.field.split('.');
+                    var field = row;
+                    var flag = false;
+                    $.each(properties, function(idx, property) {
+                        if (field[property] == undefined) {
+                            flag = true;
+                            return false;
+                        };
+                        field = field[property];
+                    })
+                    if (!flag) {
+                        content = field;
+                    }
                     td.html(content);
                 }
                 

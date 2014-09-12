@@ -13,6 +13,7 @@ namespace Senluo.Spellet.Models
         public int? SheetID { get; set; }
         public int? Score { get; set; }
         public string Fill { get; set; }
+        public Question Question { get; set; }
     }
     public class AnswerQuery : AbstractQuery<Answer>
     {
