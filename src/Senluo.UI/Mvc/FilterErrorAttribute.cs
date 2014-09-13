@@ -42,7 +42,7 @@ namespace Senluo.UI.Mvc
                 };
             }
             else
-            {
+            { 
                 if (string.IsNullOrWhiteSpace(ErrPage))
                 {
                     filterContext.Result =
@@ -50,14 +50,14 @@ namespace Senluo.UI.Mvc
                             {
                                 {"controller", "Home"},
                                 {"action", "Error"},
-                                {"message", error.Message}
                             });
                 }
                 else
                 {
                     filterContext.Result = new RedirectResult(ErrPage);
                 }
-                
+                filterContext.Controller.ViewData["Message"] = error.Message;
+                filterContext.Controller.ViewData["LastPage"] = filterContext.HttpContext.Request.Url;
             }
 
             
