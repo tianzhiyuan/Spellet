@@ -18,6 +18,11 @@ namespace Senluo.Spellet
                 new {controller = "Error", action = "Index"}
                 );
             routes.MapRoute(
+                "error",
+                "errorpage.html",
+                new {controller = "Error", action = "Error"}
+                );
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional},

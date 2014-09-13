@@ -16,5 +16,9 @@ namespace Senluo.Spellet.Controllers
             return View();
         }
 
+        public ActionResult Error()
+        {
+            return View();
+        }
     }
 }

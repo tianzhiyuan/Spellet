@@ -43,19 +43,7 @@ namespace Senluo.UI.Mvc
             }
             else
             { 
-                if (string.IsNullOrWhiteSpace(ErrPage))
-                {
-                    filterContext.Result =
-                        new RedirectToRouteResult(new RouteValueDictionary()
-                            {
-                                {"controller", "Home"},
-                                {"action", "Error"},
-                            });
-                }
-                else
-                {
-                    filterContext.Result = new RedirectResult(ErrPage);
-                }
+                filterContext.Result = string.IsNullOrWhiteSpace(ErrPage) ? new RedirectResult("/errorpage.html") : new RedirectResult(ErrPage);
                 filterContext.Controller.ViewData["Message"] = error.Message;
                 filterContext.Controller.ViewData["LastPage"] = filterContext.HttpContext.Request.Url;
             }

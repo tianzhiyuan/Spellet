@@ -16,9 +16,6 @@ namespace Senluo.Spellet.Controllers
             return RedirectToAction("Index", "Home", new {area = "Student"});
         }
 
-        public ActionResult Error(string message)
-        {
-            return View();
-        }
+        
     }
 }
