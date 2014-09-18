@@ -12,7 +12,16 @@ namespace Senluo.Spellet
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
+            routes.MapRoute(
+                "erro404",
+                "404.html",
+                new {controller = "Error", action = "Index"}
+                );
+            routes.MapRoute(
+                "error",
+                "errorpage.html",
+                new {controller = "Error", action = "Error"}
+                );
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

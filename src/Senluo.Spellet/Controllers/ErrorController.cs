@@ -6,16 +6,19 @@ using System.Web.Mvc;
 
 namespace Senluo.Spellet.Controllers
 {
-    public class HomeController : Controller
+    public class ErrorController : Controller
     {
         //
-        // GET: /Home/
+        // GET: /Error/
 
         public ActionResult Index()
         {
-            return RedirectToAction("Index", "Home", new {area = "Student"});
+            return View();
         }
 
-        
+        public ActionResult Error()
+        {
+            return View();
+        }
     }
 }

@@ -150,6 +150,7 @@
     <Compile Include="Areas\Student\Controllers\LoginController.cs" />
     <Compile Include="Areas\Student\StudentAreaRegistration.cs" />
     <Compile Include="Areas\Student\StudentController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="EF\EFDbContext.cs" />
     <Compile Include="Global.asax.cs">
@@ -175,9 +176,11 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Content\Css\Admin\login.css" />
     <Content Include="Content\Css\g.css" />
+    <Content Include="Content\Image\cry.gif" />
     <Content Include="Content\Image\head.png" />
     <Content Include="Content\Image\admin.ico" />
     <Content Include="Content\Image\loading.gif" />
+    <Content Include="Content\Image\mend.jpg" />
     <Content Include="Content\Library\jquery-ui\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
     <Content Include="Content\Library\jquery-ui\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
     <Content Include="Content\Library\jquery-ui\images\ui-bg_flat_10_000000_40x100.png" />
@@ -277,6 +280,7 @@
     <Folder Include="Areas\Student\Views\Login\" />
     <Folder Include="Areas\Student\Views\Shared\" />
     <Folder Include="Content\Scripts\Student\" />
+    <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -387,6 +391,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Views\Score\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Error\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Error\Error.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="shortcut icon" href="/content/Image/admin.ico">
+    <title>Spellet-Oops!</title>
+    <link rel="stylesheet" href="~/Content/Library/metro-bootstrap/min/metro-bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/Library/metro-bootstrap/min/metro-bootstrap-responsive.min.css" />
+    <link rel="stylesheet" href="~/Content/Library/metro-bootstrap/min/iconFont.min.css" />
+    <link rel="stylesheet" href="~/Content/Css/g.css"/>
+    <script type="text/javascript" src="~/Content/Library/jquery/jquery-2.0.1.min.js"></script>
+    <script type="text/javascript" src="~/Content/Library/jquery/jquery-widget.js"></script>
+    <script type="text/javascript" src="~/Content/Library/metro-bootstrap/load-metro.js"></script>
+</head>
+<body class="metro" style="background-color: #efefef">
+    <div style="margin: 0 auto;">
+        <div class="shadow" style="margin: auto; height: 500px; width: 943px;">
+            <div class="grid ">
+                <div class="row ">
+                    <div>
+                        <p class="header text-center" >We've got a problem</p>
+                        <div style="text-align:center;"><img src="~/Content/Image/cry.gif" style="width: 300px;"/></div>
+                        
+                    </div>
+                    <div class="row" style="text-align:center;">
+                        @if (ViewData["LastPage"] != null)
+                        {
+                            <span class=""><a href="@ViewData["LastPage"]">返回上一页</a></span>
+                        }
+                        <span class=""><a href="/admin/home" class="button large bg-taupe fg-white bg-hover-gray"><strong>管理平台</strong></a></span>
+                        <span class=""><a href="/student/home" class="button large bg-taupe  fg-white bg-hover-gray"><strong>学生平台</strong></a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
