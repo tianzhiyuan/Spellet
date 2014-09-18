@@ -144,7 +144,10 @@
     <Compile Include="Areas\Admin\Controllers\StudentController.cs" />
     <Compile Include="Areas\Admin\Controllers\TranslationController.cs" />
     <Compile Include="Areas\Admin\Models\EntryVM.cs" />
+    <Compile Include="Areas\Student\Controllers\CourseController.cs" />
+    <Compile Include="Areas\Student\Controllers\ExamController.cs" />
     <Compile Include="Areas\Student\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Student\Controllers\LoginController.cs" />
     <Compile Include="Areas\Student\StudentAreaRegistration.cs" />
     <Compile Include="Areas\Student\StudentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -269,6 +272,9 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Student\Models\" />
+    <Folder Include="Areas\Student\Views\Course\" />
+    <Folder Include="Areas\Student\Views\Exam\" />
+    <Folder Include="Areas\Student\Views\Login\" />
     <Folder Include="Areas\Student\Views\Shared\" />
     <Folder Include="Content\Scripts\Student\" />
   </ItemGroup>
