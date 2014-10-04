@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "登录";
+    Layout = "~/Areas/Student/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+    $(function() {
+        $('input[type=button]').on('click', function () {
+            var data = $('form').getValues();
+            if (!data.username) {
+                return;
+            }
+            if (!data.password) {
+                return;
+            }
+            $.ajax({
+                url: '/student/login',
+                type: 'POST',
+                data: data,
+                success:function(res) {
+                    if (res.success) {
+                        window.location.href = "@ViewBag.Url";
+                    } else {
+                        
+                    }
+                }
+            })
+        })
+    })
+</script>
+<form>
+    <input type="text" name="username" id="username" placeholder="Username" autocomplete="off"/>
+    <input type="password" name="password" id="password" placeholder="Password"/>
+    <input type="button" value="GO"/>
+    <div>New User?<a href="/student/register">Register here!</a></div>
+</form>

@@ -43,6 +43,10 @@ namespace Senluo.Spellet.Areas.Student.Controllers
             {
                 throw new RuleViolatedException("密码错误");
             }
+            if (student.Enabled != true)
+            {
+                throw new RuleViolatedException("未启用");
+            }
             this.LogIn(student.ID.Value);
             return Serialize(new { success = true });
         }

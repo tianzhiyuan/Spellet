@@ -19,6 +19,9 @@
             pageParam: {
                 OrderField: 'ID',
                 OrderDirection: 'DESC'
+            },
+            columnDefaults: {
+                sortable: false, cls: 'text-left', hcls: "text-left"
             }
         },
 
@@ -222,13 +225,14 @@
             if (row.__row_class != undefined) {
                 tr.addClass(row.__row_class);
             }
-            $.each(this.options.colModel, function (index, val) {
+            
+            $.each(this.options.colModel, function (index, column) {
                 var content = "";
-                td = $("<td/>").css("width", val.width).addClass(val.cls).appendTo(tr);
-                if (val.renderer && $.isFunction(val.renderer)) {
-                    val.renderer(me, row, td);
+                td = $("<td/>").css("width", column.width).addClass(column.cls).appendTo(tr);
+                if (column.renderer && $.isFunction(column.renderer)) {
+                    column.renderer(me, row, td);
                 } else {
-                    var properties = val.field.split('.');
+                    var properties = column.field.split('.');
                     var field = row;
                     var flag = false;
                     $.each(properties, function(idx, property) {
@@ -240,6 +244,15 @@
                     })
                     if (!flag) {
                         content = field;
+                    } 
+                    switch (column.type) {
+                        case 'booleancolumn':
+                            if (field === true) {
+                                content = column.trueText;
+                            }else if (field === false) {
+                                content = column.falseText;
+                            }
+                            break;
                     }
                     td.html(content);
                 }

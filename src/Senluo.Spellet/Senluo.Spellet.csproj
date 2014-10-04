@@ -148,6 +148,8 @@
     <Compile Include="Areas\Student\Controllers\ExamController.cs" />
     <Compile Include="Areas\Student\Controllers\HomeController.cs" />
     <Compile Include="Areas\Student\Controllers\LoginController.cs" />
+    <Compile Include="Areas\Student\Controllers\LogoutController.cs" />
+    <Compile Include="Areas\Student\Controllers\RegisterController.cs" />
     <Compile Include="Areas\Student\StudentAreaRegistration.cs" />
     <Compile Include="Areas\Student\StudentController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
@@ -181,6 +183,7 @@
     <Content Include="Content\Image\admin.ico" />
     <Content Include="Content\Image\loading.gif" />
     <Content Include="Content\Image\mend.jpg" />
+    <Content Include="Content\Image\student.ico" />
     <Content Include="Content\Library\jquery-ui\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
     <Content Include="Content\Library\jquery-ui\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
     <Content Include="Content\Library\jquery-ui\images\ui-bg_flat_10_000000_40x100.png" />
@@ -277,8 +280,6 @@
     <Folder Include="Areas\Student\Models\" />
     <Folder Include="Areas\Student\Views\Course\" />
     <Folder Include="Areas\Student\Views\Exam\" />
-    <Folder Include="Areas\Student\Views\Login\" />
-    <Folder Include="Areas\Student\Views\Shared\" />
     <Folder Include="Content\Scripts\Student\" />
     <Folder Include="Views\Home\" />
   </ItemGroup>
@@ -397,6 +398,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Error\Error.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Student\Views\Login\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Student\Views\Shared\_Layout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Student\Views\Register\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

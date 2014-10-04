@@ -7,14 +7,11 @@ using Senluo.UI.Mvc;
 
 namespace Senluo.Spellet.Areas.Student.Controllers
 {
-    public class HomeController : BaseController
+    public class HomeController : StudentController
     {
         //
         // GET: /Student/Home/
-        public HomeController()
-        {
-            this.DoAuth = false;
-        }
+        
         public ActionResult Index()
         {
             return View();

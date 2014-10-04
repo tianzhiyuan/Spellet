@@ -12,7 +12,7 @@ namespace Senluo.Spellet.Models
         public string EnglishName { get; set; }
         public string StudentID { get; set; }
         public string Password { get; set; }
-
+        public bool? Enabled { get; set; }
     }
 
     public class StudentQuery : AbstractQuery<Student>

@@ -33,9 +33,9 @@
             if (!obj.name) continue;
             retObj[obj.name] = obj.value;
         }
-        $(me).find('input[type=checkbox]:not(:checked)').each(function (i, tar) {
-            if (tar.hasAttribute('uncheckedValue') && tar.name) {
-                retObj[tar.name] = $(tar).attr('uncheckedValue');
+        $(me).find('input[type=checkbox]').each(function (i, tar) {
+            if (tar.name) {
+                retObj[tar.name] = tar.checked;
             }
         });
         return retObj;

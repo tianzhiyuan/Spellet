@@ -8,7 +8,7 @@
 @section Script
 {
     <script type="text/javascript">
-        $(function() {
+        $(function () {
             $('button[name=submitBtn]').on('click', function () {
                 var data = $('form').getValues();
                 if (!data.StudentID) {
@@ -35,7 +35,7 @@
                 })
             })
         })
-        
+
     </script>
 }
 <div class="grid">
@@ -57,12 +57,30 @@
                     <div class="input-control text" data-role="input-control">
                         <input type="text" placeholder="英文名称" name="EnglishName" value="@Model.EnglishName"/>
                     </div>
-                    <label>新密码：@if (Model.ID != null)
-                               {@Html.Raw("(留空则不更新)")}</label>
+                    <label>
+                        新密码：@if (Model.ID != null)
+                            {@Html.Raw("(留空则不更新)")}</label>
                     <div class="input-control password" data-role="input-control">
                         <input type="password" placeholder="新密码" name="Password" />
                         <button class="btn-reveal"></button>
                     </div>
+                    <div>
+                        <div class="input-control switch" data-role="input-control">
+                        <label>
+                            状态：
+                            @if (Model.ID == null || Model.Enabled == true)
+                            {
+                                <input type="checkbox" checked="checked" name="Enabled"/>
+                            }
+                            else
+                            {
+                                <input type="checkbox" name="Enabled"/>
+                            }
+                            <span class="check"></span>
+                        </label>
+                    </div>
+                    </div>
+                    
                     <button type="button" name="submitBtn" class="primary">保存</button>
                 </fieldset>
 
