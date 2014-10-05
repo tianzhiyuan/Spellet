@@ -25,6 +25,10 @@ namespace Senluo.Spellet.Areas.Student.Controllers
         [HttpPost]
         public ActionResult Index(Senluo.Spellet.Models.Student student)
         {
+            if (string.IsNullOrWhiteSpace(student.StudentID))
+            {
+                throw new RuleViolatedException("学号不能为空");
+            }
             var same = Service.FirstOrDefault(new StudentQuery() { StudentID = student.StudentID });
             if (same != null && same.ID != student.ID)
             {
@@ -35,6 +39,9 @@ namespace Senluo.Spellet.Areas.Student.Controllers
             {
                 throw new RuleViolatedException("密码不能为空");
             }
+            student.StudentID = student.StudentID.Trim();
+
+            student.Enabled = false;
             student.Password = student.Password.Hash();
             Service.Create(student);
             return Serialize(new { success = true, item = student });

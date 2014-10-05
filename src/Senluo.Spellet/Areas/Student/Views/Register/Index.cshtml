@@ -2,3 +2,35 @@
     ViewBag.Title = "注册";
     Layout = "~/Areas/Student/Views/Shared/_Layout.cshtml";
 }
+<script type="text/javascript">
+    $(function() {
+        $('input[type=button]').on('click',function() {
+            var data = $('form').getValues();
+            if (!data.StudentID) {
+                return;
+            }
+            if (!data.Password) {
+                return;
+            }
+            $.ajax({
+                url: '/student/register',
+                type: 'post',
+                data: data,
+                success:function(res) {
+                    if (res.success) {
+
+                    } else {
+                        
+                    }
+                }
+            })
+        })
+    })
+</script>
+<form>
+    <input type="text" name="StudentID" placeholder="请输入学号"/>
+    <input type="password" name="Password" placeholder="请输入密码"/>
+    <div>
+        <input type="button" value="注册"/>
+    </div>
+</form>
