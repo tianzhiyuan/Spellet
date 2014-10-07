@@ -1,0 +1,70 @@
+﻿@charset "utf-8";
+body,  p, ul, ol, li, form, img, dl, dt, dd, table, th, td, blockquote, fieldset, div, strong, label, em {border: 0 none;margin: 0;padding: 0;font:12px/1.5 tahoma,arial,'Hiragino Sans GB',\5FAE\8F6F\96C5\9ED1,\5b8b\4f53,sans-serif;cursor: default;}
+body {font-family: Arial,Helvetica,sans-serif,\5B8B\4F53;font-size: 12px;margin: 0 auto;background: #F5F5F5}
+ul li{list-style: none}
+.center{width: 1000px;margin: 0 auto;}
+.foot{position: fixed;right: 20px;height: 300px;top: 100px;}
+.foot-ul{background-color: #E7E7E7;border: 1px solid #ddd}
+.foot-ul li{list-style: none}
+.foot-ul li a{display: inline-block;height: 40px;line-height: 40px;width: 80px;text-align: center;border-bottom: 1px solid #ddd}
+.banner{height: 30px;}
+.bg{background: url(/Content/Image/Student/images/Background.jpg) no-repeat;width: 1000px;height: 612px;position: relative;}
+.logo{background: url(/Content/Image/Student/images/Logo.png) no-repeat;width: 402px;height: 113px;margin: 0 auto;}
+.bg-left{background: url(/Content/Image/Student/images/Decorate-Left.png) no-repeat;width: 827px;height: 100px;position: absolute;bottom: 0;left: 0}
+.bg-right{background: url(/Content/Image/Student/images/Decorate-Right.png) no-repeat;width: 940px;height: 91px;bottom: 0;right: 0;z-index: 99;position: absolute;}
+.cloud-original{background: url(/Content/Image/Student/images/Decorate-Cloud.png) no-repeat;width: 625px;height: 400px;float: left;margin-left: 40px;color: #32E58C}
+.cloud{background: url(/Content/Image/Student/images/Decorate-Cloud-big.png) no-repeat;width: 350px;height: 224px;float: left;}
+.cloud-middle{background: url(/Content/Image/Student/images/Decorate-Cloud-middle.png) no-repeat;width: 300px;height: 192px;float: left;}
+.cloud-small{background: url(/Content/Image/Student/images/Decorate-Cloud-small.png) no-repeat;width: 250px;height: 160px;float: left;margin-left: 50px;}
+.cloud-tiny{background: url(/Content/Image/Student/images/Decorate-Cloud-tiny.png) no-repeat;width: 200px;height: 128px;float: left;position: relative;margin-left: 20px;z-index: 9999}
+.course-today{background: url(/Content/Image/Student/images/Course-Today.png) no-repeat center;width: 187px;height: 47px;display: inline-block;padding: 50px 0 120px 130px;}
+.course-history{background: url(/Content/Image/Student/images/Course-History.png) no-repeat center;width: 187px;height: 47px;display: inline-block;padding: 50px 0 120px 130px;}
+.course-self{background: url(/Content/Image/Student/images/Self-Test-ch.png) no-repeat center;width: 96px;height: 47px;display: inline-block;padding: 10px 0 120px 130px;}
+.course-exam{background: url(/Content/Image/Student/images/Test.png) no-repeat center;width: 96px;height: 47px;display: inline-block;padding: 10px 0 120px 130px;}
+
+.course-setting{background: url(/Content/Image/Student/images/Course-Setting.png) no-repeat center;width: 187px;height: 47px;display: inline-block;padding: 50px 0 120px 130px;}
+.test-setting{background: url(/Content/Image/Student/images/Test-Setting.png) no-repeat center;width: 187px;height: 47px;display: inline-block;padding: 50px 0 120px 130px;}
+.student-info{background: url(/Content/Image/Student/images/Students-Info.png) no-repeat center;width: 96px;height: 47px;display: inline-block;padding: 10px 0 120px 130px;}
+.test-info{background: url(/Content/Image/Student/images/Test-Info.png) no-repeat center;width: 96px;height: 47px;display: inline-block;padding: 10px 0 120px 130px;}
+
+.add{background: url(/Content/Image/Student/images/Add.png) no-repeat center;width: 85px;height: 55px;display: inline-block;padding: 10px 0 100px 150px;}
+.modify{background: url(/Content/Image/Student/images/Modify.png) no-repeat center;width: 168px;height: 55px;display: inline-block;padding: 10px 0 100px 100px;}
+
+.review{background: url(/Content/Image/Student/images/Review.png) no-repeat center;width: 145px;height: 47px;display: inline-block;padding: 30px 0 120px 140px;}
+.self-test{background: url(/Content/Image/Student/images/Self-Test-en.png) no-repeat center;width: 212px;height: 47px;display: inline-block;padding: 30px 0 120px 70px;}
+.congratulations{background: url(/Content/Image/Student/images/Congratulations.png) no-repeat center;width: 543px;height: 83px;display: inline-block;padding: 10px 0 80px 130px;}
+.test-self{background: url(/Content/Image/Student/images/Test-Yourself.png) no-repeat center;width: 416px;height: 80px;display: inline-block;padding: 10px 0 40px 280px;}
+.iwant{background: url(/Content/Image/Student/images/Quantity-Setting.png) no-repeat center;width: 416px;height: 80px;display: inline-block;padding: 10px 0 40px 240px;}
+.are-you-ready{background: url(/Content/Image/Student/images/Are-You-Ready.png) no-repeat center;width: 492px;height: 92px;display: inline-block;padding: 10px 0 40px 240px;}
+.test-design{background: url(/Content/Image/Student/images/Test-Design.png) no-repeat center;width: 492px;height: 92px;display: inline-block;padding: 10px 0 40px 240px;}
+.go{background: url(/Content/Image/Student/images/Go.png) no-repeat center;width: 73px;height: 55px;display: inline-block;padding: 10px 0 70px 130px;}
+.ok{background: url(/Content/Image/Student/images/OK.png) no-repeat center;width: 73px;height: 55px;display: inline-block;padding: 10px 0 70px 130px;}
+.cloud-area{padding: 0 150px;overflow: hidden;}
+.cloud-area2{padding-left:  200px;overflow: hidden;}
+.serial{margin-top: 20px;font-size: 22px;margin-left: 120px;}
+.words{font-size: 60px;margin-left: 120px;font-family: "Microsoft YaHei";margin-top: 5px}
+.yinbiao{font-size: 28px;margin-left: 120px;}
+.meaning{font-size: 24px;margin-left: 120px;}
+.example{font-size: 22px;margin-left: 40px;}
+
+.cloud-tiny div{color: #32E58C;font-size: 30px;}
+.rewarding{position: absolute;top: 40px;left: 40px;}
+.frustrate{position: absolute;top: 40px;left: 40px;}
+.former{position: absolute;top: 40px;left: 50px;}
+.positive{position: absolute;top: 40px;left: 50px;}
+.intimidate{position: absolute;top: 40px;left: 40px;}
+.commitment{position: absolute;top: 40px;left: 30px;}
+.discipline{position: absolute;top: 40px;left: 40px;}
+.left-750{margin-left: 750px}
+.left-600{margin-left: 600px}
+.left-500{margin-left: 500px}
+.left-400{margin-left: 400px}
+.left-220{margin-left: 220px}
+.single-words{width: 450px;margin: 0 auto;padding-top: 140px;font-size: 30px;padding-left: 20px;}
+.infos{color: #32E58C;font-size: 35px;letter-spacing: 0.5em;text-align: center;}
+.last-main{width: 880px;margin: 0 auto}
+.english{color: #32E58C;font-size: 42px;letter-spacing: 0.2em}
+.select-ul{width: 150px;float: left;color: #32E58C;}
+.select-ul li{font-size: 20px;}
+.last-right{width: 350px;background-color: #fff;padding: 30px;float: left;border-radius:10px;overflow: hidden;}
+.title{font-size: 20px;color: #3BE691}
