@@ -150,6 +150,7 @@
     <Compile Include="Areas\Student\Controllers\LoginController.cs" />
     <Compile Include="Areas\Student\Controllers\LogoutController.cs" />
     <Compile Include="Areas\Student\Controllers\RegisterController.cs" />
+    <Compile Include="Areas\Student\Controllers\TestController.cs" />
     <Compile Include="Areas\Student\StudentAreaRegistration.cs" />
     <Compile Include="Areas\Student\StudentController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
@@ -310,7 +311,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Student\Models\" />
-    <Folder Include="Areas\Student\Views\Course\" />
     <Folder Include="Areas\Student\Views\Exam\" />
     <Folder Include="Content\Scripts\Student\" />
     <Folder Include="Views\Home\" />
@@ -439,6 +439,21 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Student\Views\Register\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Student\Views\Course\Detail.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Student\Views\Test\Self.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Student\Views\Test\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Student\Views\Course\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Student\Views\Test\Success.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
