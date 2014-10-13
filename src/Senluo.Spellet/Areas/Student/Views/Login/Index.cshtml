@@ -2,9 +2,15 @@
     ViewBag.Title = "登录";
     Layout = "~/Areas/Student/Views/Shared/_Layout.cshtml";
 }
+@section css
+{
+    <link rel="stylesheet" href="~/Content/Css/Student/login.css"/>
+}
 <script type="text/javascript">
-    $(function() {
+    $(function () {
+        var logging = false;
         $('input[type=button]').on('click', function () {
+            if (logging) return;
             var data = $('form').getValues();
             if (!data.username) {
                 return;
@@ -16,7 +22,8 @@
                 url: '/student/login',
                 type: 'POST',
                 data: data,
-                success:function(res) {
+                success: function (res) {
+                    logging = false;
                     if (res.success) {
                         window.location.href = "@ViewBag.Url";
                     } else {
@@ -27,9 +34,17 @@
         })
     })
 </script>
-<form>
-    <input type="text" name="username" id="username" placeholder="Username" autocomplete="off" value="1001"/>
-    <input type="password" name="password" id="password" placeholder="Password" value="111111"/>
-    <input type="button" value="GO"/>
-    <div>New User?<a href="/student/register">Register here!</a></div>
-</form>
+
+<form id="login">
+    <h1>Log In</h1>
+    <fieldset id="inputs">
+        <input name="username" type="text" placeholder="enter you ID" autofocus required autocomplete="off" class="username">   
+        <input name="password" type="password" placeholder="password" required class="password">
+    </fieldset>
+    <fieldset id="actions">
+        <input type="button" class="submit" value="Log in">
+        <input type="button" class="submit register" value="Register"/>
+         
+    </fieldset>
+    
+</form>

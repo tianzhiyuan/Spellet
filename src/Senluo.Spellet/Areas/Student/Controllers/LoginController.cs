@@ -23,6 +23,10 @@ namespace Senluo.Spellet.Areas.Student.Controllers
         public ActionResult Index(string url)
         {
             ViewBag.Url = HttpUtility.UrlDecode(url);
+            if (string.IsNullOrWhiteSpace(ViewBag.Url))
+            {
+                ViewBag.Url = "/";
+            }
             return View();
         }
         [HttpPost]

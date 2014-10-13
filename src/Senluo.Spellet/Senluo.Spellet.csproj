@@ -180,6 +180,7 @@
     <Content Include="Content\Css\Admin\login.css" />
     <Content Include="Content\Css\g.css" />
     <Content Include="Content\Css\Student\global.css" />
+    <Content Include="Content\Css\Student\login.css" />
     <Content Include="Content\Image\cry.gif" />
     <Content Include="Content\Image\head.png" />
     <Content Include="Content\Image\admin.ico" />
