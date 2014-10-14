@@ -4,18 +4,27 @@
 }
 @section css
 {
-    <link rel="stylesheet" href="~/Content/Css/Student/login.css"/>
+    <link rel="stylesheet" href="~/Content/Css/Student/login.css" />
+
+}
+@section script
+{
 }
 <script type="text/javascript">
     $(function () {
         var logging = false;
-        $('input[type=button]').on('click', function () {
+        function login() {
+            $('input[name=username]').webuiPopover('destroy');
+            $('input[name=password]').webuiPopover('destroy');
+            $('form').webuiPopover('destroy');
             if (logging) return;
             var data = $('form').getValues();
             if (!data.username) {
+                $('input[name=username]').webuiPopover({ content: 'enter your id plz.', placement: 'right', trigger: 'manual' }).webuiPopover('show');
                 return;
             }
             if (!data.password) {
+                $('input[name=password]').webuiPopover({ content: 'enter your password plz.', placement: 'right', trigger: 'manual' }).webuiPopover('show');
                 return;
             }
             $.ajax({
@@ -27,7 +36,50 @@
                     if (res.success) {
                         window.location.href = "@ViewBag.Url";
                     } else {
-                        
+                        $('form').webuiPopover({ content: res.msg, placement: 'right', trigger: 'manual' }).webuiPopover('show');
+                    }
+                }
+            })
+        }
+        $('input[name=submit]').on('click', function () {
+            login();
+        })
+        $('input[type=password]').bind('keypress', function (e) {
+            var key = window.event ? e.keyCode : e.which;
+            if (key == "13") {
+                login();
+            }
+        });
+        $('input[type=text]').bind('keypress', function (e) {
+            var key = window.event ? e.keyCode : e.which;
+            if (key == "13") {
+                login();
+            }
+        })
+        $('input[name=register]').on('click',function() {
+            $('input[name=username]').webuiPopover('destroy');
+            $('input[name=password]').webuiPopover('destroy');
+            $('form').webuiPopover('destroy');
+            if (logging) return;
+            var data = $('form').getValues();
+            if (!data.username) {
+                $('input[name=username]').webuiPopover({ content: 'enter your id plz.', placement: 'right', trigger: 'manual' }).webuiPopover('show');
+                return;
+            }
+            if (!data.password) {
+                $('input[name=password]').webuiPopover({ content: 'enter your password plz.', placement: 'right', trigger: 'manual' }).webuiPopover('show');
+                return;
+            }
+            $.ajax({
+                url: '/student/register',
+                type: 'POST',
+                data: {StudentID:data.username, Password:data.password},
+                success: function (res) {
+                    logging = false;
+                    if (res.success) {
+                        $('form').webuiPopover({ content: '注册成功，请牢记你的密码，帐号审核通过后即可以登录改系统。', placement: 'right', trigger: 'manual' }).webuiPopover('show');
+                    } else {
+                        $('form').webuiPopover({ content: res.msg, placement: 'right', trigger: 'manual' }).webuiPopover('show');
                     }
                 }
             })
@@ -38,13 +90,14 @@
 <form id="login">
     <h1>Log In</h1>
     <fieldset id="inputs">
-        <input name="username" type="text" placeholder="enter you ID" autofocus required autocomplete="off" class="username">   
+        <input name="username" type="text" placeholder="enter you ID" autofocus required autocomplete="off" class="username">
         <input name="password" type="password" placeholder="password" required class="password">
     </fieldset>
     <fieldset id="actions">
-        <input type="button" class="submit" value="Log in">
-        <input type="button" class="submit register" value="Register"/>
-         
+        <input type="button" class="submit" name="submit" value="Log in">
+        <input type="button" class="submit register" name="register" value="Register" />
+
     </fieldset>
-    
-</form>
+
+</form>
+

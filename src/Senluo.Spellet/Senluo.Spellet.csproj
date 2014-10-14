@@ -291,6 +291,10 @@
     <Content Include="Content\Library\metro-bootstrap\min\metro-bootstrap-responsive.min.css" />
     <Content Include="Content\Library\metro-bootstrap\min\metro-bootstrap.min.css" />
     <Content Include="Content\Library\metro-bootstrap\min\metro.min.js" />
+    <Content Include="Content\Library\webpopover\jquery.webui-popover.css" />
+    <Content Include="Content\Library\webpopover\jquery.webui-popover.js" />
+    <Content Include="Content\Library\webpopover\jquery.webui-popover.min.css" />
+    <Content Include="Content\Library\webpopover\jquery.webui-popover.min.js" />
     <Content Include="Content\Scripts\Admin\entry.js" />
     <Content Include="Content\Scripts\Admin\login.js" />
     <Content Include="Content\Scripts\Admin\master.js" />
