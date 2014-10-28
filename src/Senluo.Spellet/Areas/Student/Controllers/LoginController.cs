@@ -34,21 +34,30 @@ namespace Senluo.Spellet.Areas.Student.Controllers
             {
                 throw new RuleViolatedException("用户名和密码不能为空");
             }
-            var student = Service.FirstOrDefault(new StudentQuery() { StudentID = username });
-            if (student == null)
+            try
             {
-                throw new RuleViolatedException("用户不存在");
+                var student = Service.FirstOrDefault(new StudentQuery() { StudentID = username });
+
+                if (student == null)
+                {
+                    throw new RuleViolatedException("用户不存在");
+                }
+                if (!Encryption.IsMatch(student.Password, password))
+                {
+                    throw new RuleViolatedException("密码错误");
+                }
+                if (student.Enabled != true)
+                {
+                    throw new RuleViolatedException("未启用");
+                }
+                this.LogIn(student.ID.Value);
+                return Serialize(new { success = true });
             }
-            if (!Encryption.IsMatch(student.Password, password))
+            catch (Exception ex)
             {
-                throw new RuleViolatedException("密码错误");
+                string msg = ex.ToString();
+                return null;
             }
-            if (student.Enabled != true)
-            {
-                throw new RuleViolatedException("未启用");
-            }
-            this.LogIn(student.ID.Value);
-            return Serialize(new { success = true });
         }
     }
 }

@@ -296,6 +296,7 @@
     <Content Include="Content\Scripts\Admin\student.js" />
     <Content Include="Content\Scripts\common.js" />
     <Content Include="Content\Scripts\datatable.js" />
+    <Content Include="Content\Scripts\Student\word.js" />
     <Content Include="Global.asax" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -312,7 +313,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Student\Models\" />
     <Folder Include="Areas\Student\Views\Exam\" />
-    <Folder Include="Content\Scripts\Student\" />
     <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>
@@ -454,6 +454,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Student\Views\Test\Success.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Student\Views\Course\Words.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
