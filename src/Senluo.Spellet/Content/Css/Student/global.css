@@ -68,3 +68,13 @@ ul li{list-style: none}
 .select-ul li{font-size: 20px;}
 .last-right{width: 350px;background-color: #fff;padding: 30px;float: left;border-radius:10px;overflow: hidden;}
 .title{font-size: 20px;color: #3BE691}
+
+.head-img {
+    float: right;
+    margin-right: -126px;
+    margin-top: 14px;
+    cursor: pointer;
+}
+.head-img img{
+    cursor: pointer;
+}

@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using Ors.Core.Data;
 using Ors.Framework.Data;
+using Senluo.Spellet.Models;
 using Senluo.UI.Mvc;
 
 namespace Senluo.Spellet.Areas.Student
@@ -20,6 +22,20 @@ namespace Senluo.Spellet.Areas.Student
                 var svc = Service;
                 return svc.FindByID<Models.Student, Models.StudentQuery>(UserID);
             }
+        }
+
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            base.OnActionExecuting(filterContext);
+            var userObj = Session[UserKey];
+            if (userObj != null)
+            {
+                if (!filterContext.HttpContext.Request.IsAjaxRequest())
+                {
+                    ViewBag.User = Service.Select(new StudentQuery() {ID = (int) userObj}).FirstOrDefault();
+                }
+            }
+
         }
     }
 

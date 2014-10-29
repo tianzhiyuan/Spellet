@@ -1,0 +1,16 @@
+﻿@using Senluo.Spellet.Models
+@{
+    Layout = "~/Areas/Student/Views/Shared/_Layout.cshtml";
+    Student user = ViewBag.User;
+}
+<div class="center">
+<div class="bg">
+	<div class="banner"></div>
+    <div class="logo">
+        <a class="head-img" href="/student/account"><img src="~/Content/Image/head.png" title="欢迎 @user.Name"/></a>
+    </div>
+	@RenderBody()
+	<div class="bg-left"></div>
+	<div class="bg-right"></div>
+</div>
+</div> 

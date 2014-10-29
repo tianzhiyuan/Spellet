@@ -144,6 +144,7 @@
     <Compile Include="Areas\Admin\Controllers\StudentController.cs" />
     <Compile Include="Areas\Admin\Controllers\TranslationController.cs" />
     <Compile Include="Areas\Admin\Models\EntryVM.cs" />
+    <Compile Include="Areas\Student\Controllers\AccountController.cs" />
     <Compile Include="Areas\Student\Controllers\CourseController.cs" />
     <Compile Include="Areas\Student\Controllers\ExamController.cs" />
     <Compile Include="Areas\Student\Controllers\HomeController.cs" />
@@ -459,6 +460,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Student\Views\Test\Success.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Student\Views\Shared\_Master.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Student\Views\Account\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
