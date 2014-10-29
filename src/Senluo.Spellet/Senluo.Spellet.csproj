@@ -144,7 +144,6 @@
     <Compile Include="Areas\Admin\Controllers\StudentController.cs" />
     <Compile Include="Areas\Admin\Controllers\TranslationController.cs" />
     <Compile Include="Areas\Admin\Models\EntryVM.cs" />
-    <Compile Include="Areas\Student\Controllers\AccountController.cs" />
     <Compile Include="Areas\Student\Controllers\CourseController.cs" />
     <Compile Include="Areas\Student\Controllers\ExamController.cs" />
     <Compile Include="Areas\Student\Controllers\HomeController.cs" />
@@ -181,7 +180,6 @@
     <Content Include="Content\Css\Admin\login.css" />
     <Content Include="Content\Css\g.css" />
     <Content Include="Content\Css\Student\global.css" />
-    <Content Include="Content\Css\Student\login.css" />
     <Content Include="Content\Image\cry.gif" />
     <Content Include="Content\Image\head.png" />
     <Content Include="Content\Image\admin.ico" />
@@ -292,16 +290,13 @@
     <Content Include="Content\Library\metro-bootstrap\min\metro-bootstrap-responsive.min.css" />
     <Content Include="Content\Library\metro-bootstrap\min\metro-bootstrap.min.css" />
     <Content Include="Content\Library\metro-bootstrap\min\metro.min.js" />
-    <Content Include="Content\Library\webpopover\jquery.webui-popover.css" />
-    <Content Include="Content\Library\webpopover\jquery.webui-popover.js" />
-    <Content Include="Content\Library\webpopover\jquery.webui-popover.min.css" />
-    <Content Include="Content\Library\webpopover\jquery.webui-popover.min.js" />
     <Content Include="Content\Scripts\Admin\entry.js" />
     <Content Include="Content\Scripts\Admin\login.js" />
     <Content Include="Content\Scripts\Admin\master.js" />
     <Content Include="Content\Scripts\Admin\student.js" />
     <Content Include="Content\Scripts\common.js" />
     <Content Include="Content\Scripts\datatable.js" />
+    <Content Include="Content\Scripts\Student\word.js" />
     <Content Include="Global.asax" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -318,7 +313,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Student\Models\" />
     <Folder Include="Areas\Student\Views\Exam\" />
-    <Folder Include="Content\Scripts\Student\" />
     <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>
@@ -462,10 +456,7 @@
     <Content Include="Areas\Student\Views\Test\Success.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Student\Views\Shared\_Master.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Student\Views\Account\Index.cshtml" />
+    <Content Include="Areas\Student\Views\Course\Words.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

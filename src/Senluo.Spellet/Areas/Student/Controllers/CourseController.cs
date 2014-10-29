@@ -33,6 +33,7 @@ namespace Senluo.Spellet.Areas.Student.Controllers
             }
             return View(courses);
         }
+
         public override ActionResult List(CourseQuery query)
         {
             var courses = Service.Select(query);
@@ -57,7 +58,7 @@ namespace Senluo.Spellet.Areas.Student.Controllers
             var course =
                 Service.FirstOrDefault(new CourseQuery()
                     {
-                        StartTimeRange = new Range<DateTime>() {Left = new DateTime(now.Year, now.Month, now.Day)}
+                        StartTimeRange = new Range<DateTime>() { Left = new DateTime(now.Year, now.Month, now.Day) }
                     });
             if (course != null)
             {
@@ -65,10 +66,15 @@ namespace Senluo.Spellet.Areas.Student.Controllers
                 ViewBag.Title = "今日课程";
                 return View("Detail", course);
             }
-            
+
             return RedirectToAction("Index", "Home");
         }
-        
+
+        public ActionResult History()
+        {
+            return View();
+        }
+
         public ActionResult Detail(int courseId)
         {
             var course =
@@ -76,15 +82,45 @@ namespace Senluo.Spellet.Areas.Student.Controllers
                 {
                     ID = courseId
                 });
-            
+
             if (course != null)
             {
                 fillCourse(course);
                 ViewBag.Title = "查看课程";
                 return View("Detail", course);
             }
-            
+
             return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult Words(int id = 7)
+        {
+            IEnumerable<CourseContent> Contents =
+                    Service.Select(new CourseContentQuery() { CourseIDList = new int[] { id } }).ToArray();
+
+            if (Contents == null || !Contents.Any())
+                return View();
+
+            IEnumerable<Entry> entries =
+                Service.Select(new EntryQuery()
+                {
+                    IDList = Contents.Select(o => o.ContentID).OfType<int>().ToArray()
+                });
+            foreach (var content in Contents)
+            {
+                content.Entry = entries.FirstOrDefault(o => o.ID == content.ContentID);
+            }
+            var trans =
+                Service.Select(new TranslationQuery() { EntryIDList = entries.Select(o => o.ID).OfType<int>().ToArray() });
+            var examples =
+                Service.Select(new ExampleQuery() { EntryIDList = entries.Select(o => o.ID).OfType<int>().ToArray() });
+            foreach (var entry in entries)
+            {
+                entry.Translations = trans.Where(o => o.EntryID == entry.ID).ToArray();
+                entry.Examples = examples.Where(o => o.EntryID == entry.ID).ToArray();
+            }
+
+            return View(entries);
         }
 
         private Course fillCourse(Course course)
@@ -101,9 +137,9 @@ namespace Senluo.Spellet.Areas.Student.Controllers
                 content.Entry = entries.FirstOrDefault(o => o.ID == content.ContentID);
             }
             var trans =
-                Service.Select(new TranslationQuery() {EntryIDList = entries.Select(o => o.ID).OfType<int>().ToArray()});
+                Service.Select(new TranslationQuery() { EntryIDList = entries.Select(o => o.ID).OfType<int>().ToArray() });
             var examples =
-                Service.Select(new ExampleQuery() {EntryIDList = entries.Select(o => o.ID).OfType<int>().ToArray()});
+                Service.Select(new ExampleQuery() { EntryIDList = entries.Select(o => o.ID).OfType<int>().ToArray() });
             foreach (var entry in entries)
             {
                 entry.Translations = trans.Where(o => o.EntryID == entry.ID).ToArray();
