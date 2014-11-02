@@ -12,9 +12,10 @@
         var colModel = [
             {field:'ID', caption:"编号", width:80, renderer:function(tbl, record, td) {
                 td.html('<a title="点击以编辑" href="/admin/course/modify?id=' + record.ID + '">' + record.ID + '</a>');
-            }},
+            }
+            },
+            {field:'Name',caption:'名称',width:100},
             { field: 'StartTime', caption: '开始时间',width:200 },
-            { field: 'EndTime', caption: '结束时间',width:200 },
             { field: 'Content', caption: '学习内容', renderer:function(tb, record, td) {
                 if (record.Contents && record.Contents.length) {
                     var words = [];
@@ -25,7 +26,11 @@
                     })
                     td.html(words.join(' '));
                 }
-            } }
+            }
+            },
+            { field:'', caption:'操作',width:100,renderer:function(tbl, record, td) {
+                td.html('<a class="button primary" href="/admin/course/modify?id=' + record.ID + '">修改</a>');
+            }}
         ];
         $("#tableDiv").datatable({
             colModel: colModel,

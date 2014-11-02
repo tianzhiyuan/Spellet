@@ -5,6 +5,7 @@ using System.Net;
 using System.Transactions;
 using System.Web;
 using System.Web.Mvc;
+using Ors.Core.Exceptions;
 using Ors.Framework.Data;
 using Senluo.Spellet.Models;
 
@@ -69,6 +70,9 @@ namespace Senluo.Spellet.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Create(Course course)
         {
+            Require.NotNullOrEmpty(course.Name, "名称");
+            Require.NotNull(course.StartTime, "起始时间");
+            Require.LengthWithin(course.Name, 100, "名称");
             using (var ts = new TransactionScope())
             {
                 Service.Create(course);

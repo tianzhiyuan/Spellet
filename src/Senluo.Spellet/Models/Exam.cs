@@ -11,6 +11,7 @@ namespace Senluo.Spellet.Models
         public string Name { get; set; }
         public int? Count { get; set; }
         public int? DurationMinite { get; set; }
+        public bool? Enabled { get; set; }
         public Question[] Questions { get; set; }
     }
     public class ExamQuery:AbstractQuery<Exam>

@@ -241,7 +241,7 @@
                                     <input type="text" value="@tran.Description" placeholder="填写释义"/>
                                 </div>
                             </div>
-                            <div class="span1"><a title="删除该释义" href="javascript:;" data-role="delete" data-tran-id="@tran.ID"><i class="icon-cancel-2"></i></a></div>
+                            @*<div class="span1"><a title="删除该释义" href="javascript:;" data-role="delete" data-tran-id="@tran.ID"><i class="icon-cancel-2"></i></a></div>*@
                         </div>
                     }
                 </div>
@@ -258,11 +258,11 @@
                                 <input type="text" value="@example.Trans" placeholder="填写例句翻译"/>
                             </div>
                         </div>
-                        <div class="span1"><a title="删除该例句" href="javascript:;" data-role="delete" data-example-id="@example.ID"><i class="icon-cancel-2"></i></a></div>
+                        @*<div class="span1"><a title="删除该例句" href="javascript:;" data-role="delete" data-example-id="@example.ID"><i class="icon-cancel-2"></i></a></div>*@
                     </div>
                 }
                 </div>
-                <div class="row">
+                <div class="row" style="display: none;">
                     <button type="button" class="default" id="addTran">+ 添加释义</button>
                     <button type="button" class="info" id="addExample">+ 添加例句</button>
                 </div>

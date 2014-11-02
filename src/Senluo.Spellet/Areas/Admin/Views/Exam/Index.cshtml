@@ -8,7 +8,42 @@
     <script type="text/javascript" src="~/Content/Scripts/datatable.js"></script>
 }
 <script type="text/javascript">
-    $(function() {
+    $(function () {
+        function action(table, record, td) {
+            var html = [
+                '<a class="button primary" href="/admin/exam/modify?id=' + record.ID + '">修改</a>',
+                '&nbsp;&nbsp;'
+            ];
+            if (record.Enabled) {
+                html.push('<a class="button link" data-action-type="off" >禁用</a>')
+            } else {
+                html.push('<a class="button link" data-action-type="on" >启用</a>')
+            }
+            td.html(html);
+            td.find('.primary').on('click', function (e) {
+
+            })
+            td.find('.link').on('click', function (e) {
+                var type = $(this).attr('data-action-type');
+                var enabled = false;
+                if (type == "on") {
+                    enabled = true;
+                }
+                $.ajax({
+                    url: '/admin/exam',
+                    type: 'put',
+                    data: { ID: record.ID, Enabled: enabled },
+                    success: function (res) {
+                        if (res.success) {
+                            table.reload();
+                            $.msg('保存成功');
+                        } else {
+                            $.error(res.msg);
+                        }
+                    }
+                })
+            })
+        }
         var colModel = [
             {
                 field: 'Name', caption: "名称", width: 80, renderer: function (tbl, record, td) {
@@ -20,7 +55,9 @@
                 }
             },
             { field: 'Count', caption: '试题总数', width: 100 },
-            { field: 'DurationMinite', caption: '考试时间（分钟）', width: 100 }
+            { field: 'DurationMinite', caption: '考试时间（分钟）', width: 100 },
+            { field: 'Enabled', caption: '状态', type: 'booleancolumn', width: 100, sortable: false, cls: 'text-center', hcls: 'text-center', trueText: '已启用', falseText: '已禁用' },
+            { field: 'Action', caption: '操作', width: '80', sortable: false, cls: 'text-left', hcls: "text-center", renderer: action }
         ];
         $("#tableDiv").datatable({
             colModel: colModel,

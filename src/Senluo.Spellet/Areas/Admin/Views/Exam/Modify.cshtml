@@ -20,7 +20,7 @@
             }
             $.ajax({
                 url: '/admin/exam',
-                type: 'post',
+                type: 'put',
                 data: data,
                 success: function (res) {
                     if (res.success) {
@@ -110,6 +110,7 @@
                 </div>
                 <div class="row">
                     <button class="primary large" type="button" id="submitBtn">保存</button>
+                    <a class="button link large" href="/admin/exam">取消</a>
                 </div>
             </div>
         </div>

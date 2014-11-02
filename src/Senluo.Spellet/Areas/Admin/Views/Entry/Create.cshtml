@@ -4,7 +4,7 @@
 }
 <script type="text/javascript">
     $(function () {
-        $('#addTran').on('click', function () {
+        function addTran() {
             var length = $('.translation .row').length;
             if (length > 2) {
                 $.msg('最多三条')
@@ -15,9 +15,11 @@
                 '<input type="text" placeholder="填写释义"/>' +
                 '</div></div>' +
                 '</div>');
+        }
+        $('#addTran').on('click', function () {
+            addTran();
         })
-
-        $('#addExample').on('click', function () {
+        function addExample() {
             var length = $('.examples .row').length;
             if (length > 2) {
                 $.msg('最多三条');
@@ -28,7 +30,11 @@
                 '<input type="text" placeholder="填写例句"/><input type="text" placeholder="填写例句翻译"/>' +
                 '</div></div>' +
                 '</div>');
+        }
+        $('#addExample').on('click', function () {
+            addExample();
         })
+        
         $('#submitBtn').on('click', function () {
             var data = $('form').getValues();
             if (!data.Word) {
@@ -80,6 +86,10 @@
                 }
             })
         })
+        
+        //目前翻译和例句只能有一个
+        addTran();
+        addExample();
     })
 </script>
 <div class="grid">
@@ -117,7 +127,7 @@
                 </div>
                 <div class="translation"></div>
                 <div class="examples"></div>
-                <div class="row">
+                <div class="row" style="display: none;">
                     <button type="button" class="default" id="addTran">+ 添加释义</button>
                     <button type="button" class="info" id="addExample">+ 添加例句</button>
                 </div>
