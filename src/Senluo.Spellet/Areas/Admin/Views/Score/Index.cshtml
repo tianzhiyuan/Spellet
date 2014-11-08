@@ -13,17 +13,21 @@
             {
                 field: 'Exam.Name', caption: "考试名称", width: 80,renderer:function(tbl, record, td) {
                     if (record.Exam) {
-                        td.html( '<a href="/admin/exam/modify?id=' + record.Exam.ID + '"></a>');
+                        td.html( '<a href="/admin/exam/modify?id=' + record.Exam.ID + '">查看/编辑考试信息</a>');
                     }
                 }
             },
             { field:'Student.StudentID', caption:'学生学号',width:100,renderer:function(tbl, record, td) {
                 if (record.Student && record.StudentID) {
-                    td.html('<a href="/admin/student/modify?id=' + record.Student.ID + '"></a>');
+                    td.html('<a href="/admin/student/modify?id=' + record.Student.ID + '">查看/编辑学生信息</a>');
                 }
             }},
-            { field: 'Exam.Count', caption: '试题总数', width: 100 },
-            { field: 'TotalScore', caption: '分数', width: 100 }
+            { field: 'Exam.Count', caption: '试题总数', width: 50 },
+            { field: 'TotalScore', caption: '总得分', width: 50 },
+            {field:'Action',caption:'',width:150,renderer:function(tbl, record, td) {
+                var html = ['<a href="/admin/score/'+record.ID+'" class="button primary">详情</a>'];
+                td.html(html.join());
+            }}
             
         ];
         $("#tableDiv").datatable({

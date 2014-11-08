@@ -20,13 +20,13 @@ namespace Senluo.Spellet.Areas.Admin.Controllers
             if (filter != null)
             {
                 var objects = new List<string>();
-                if (filter.ExamIDList != null)
+                if (filter.ExamID != null)
                 {
-                    objects.Add(string.Format("ExamIDList:[{0}]", string.Join(",", filter.ExamIDList)));
+                    objects.Add(string.Format("ExamIDList:{0}", filter.ExamID));
                 }
-                if (filter.StudentIDList != null)
+                if (filter.StudentID != null)
                 {
-                    objects.Add(string.Format("StudentIDList:[{0}]", string.Join(",", filter.StudentIDList)));
+                    objects.Add(string.Format("StudentID:{0}", filter.StudentID));
                 }
                 ViewBag.Filter = string.Format("{{{0}}}", string.Join(",", objects));
             }
