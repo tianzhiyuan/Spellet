@@ -101,5 +101,10 @@ namespace Senluo.Spellet.Areas.Student.Controllers
                 return View();
             }
         }
+
+        public ActionResult Exam()
+        {
+            return View();
+        }
     }
 }

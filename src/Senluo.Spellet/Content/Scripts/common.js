@@ -181,7 +181,14 @@
             }
         })
     }
-    
 })(jQuery)
 
 METRO_AUTO_REINIT = true;
+
+$(function () {
+    $(".head").css("opacity", 0.5).hover(function () {
+        $(this).stop(true, false).animate({ "opacity": "0.9" }, 400);
+    }, function () {
+        $(this).stop(true, false).animate({ "opacity": "0.5" }, 400);
+    });
+});

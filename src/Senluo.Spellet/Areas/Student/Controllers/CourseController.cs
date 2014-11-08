@@ -58,42 +58,49 @@ namespace Senluo.Spellet.Areas.Student.Controllers
             var course =
                 Service.FirstOrDefault(new CourseQuery()
                     {
-                        StartTimeRange = new Range<DateTime>() { Left = new DateTime(now.Year, now.Month, now.Day) }
+                        StartTimeRange = new Range<DateTime>() 
+                        {
+                            Right = new DateTime(now.Year, now.Month, now.Day),
+                            Left = DateTime.Now.AddMonths(-1)
+                        }
                     });
+
             if (course != null)
             {
-                fillCourse(course);
-                ViewBag.Title = "今日课程";
-                return View("Detail", course);
+                return RedirectToAction("words", "course", new {id = course.ID });
             }
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("empty", "course");
         }
 
-        public ActionResult History()
+        public ActionResult History(int id = 1)
+        {
+            ViewBag.pre = id - 1;
+            ViewBag.next = 0;
+
+            var query = new CourseQuery()
+            {
+                OrderDirection = OrderDirection.DESC,
+                OrderField = "ID",
+                Skip = (id - 1) * 7,
+                Take = 8
+            };
+            var courses = Service.Select(query);
+
+            if (courses.Count() == 8)
+            {
+                ViewBag.next = id + 1;
+                return View(courses.Take(7));
+            }
+            return View(courses);
+        }
+
+        public ActionResult Empty()
         {
             return View();
         }
 
-        public ActionResult Detail(int courseId)
-        {
-            var course =
-                Service.FirstOrDefault(new CourseQuery()
-                {
-                    ID = courseId
-                });
-
-            if (course != null)
-            {
-                fillCourse(course);
-                ViewBag.Title = "查看课程";
-                return View("Detail", course);
-            }
-
-            return RedirectToAction("Index", "Home");
-        }
-
-        public ActionResult Words(int id = 7)
+        public ActionResult Words(int id = 1)
         {
             IEnumerable<CourseContent> Contents =
                     Service.Select(new CourseContentQuery() { CourseIDList = new int[] { id } }).ToArray();

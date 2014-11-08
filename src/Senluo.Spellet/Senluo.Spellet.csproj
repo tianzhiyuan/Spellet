@@ -166,6 +166,7 @@
     <Compile Include="Models\Entry.cs" />
     <Compile Include="Models\EntryManager.cs" />
     <Compile Include="Models\Exam.cs" />
+    <Compile Include="Models\ExamContent.cs" />
     <Compile Include="Models\Example.cs" />
     <Compile Include="Models\Question.cs" />
     <Compile Include="Models\Student.cs" />
@@ -181,6 +182,7 @@
     <Content Include="Content\Css\g.css" />
     <Content Include="Content\Css\Student\global.css" />
     <Content Include="Content\Image\cry.gif" />
+    <Content Include="Content\Image\dh.png" />
     <Content Include="Content\Image\head.png" />
     <Content Include="Content\Image\admin.ico" />
     <Content Include="Content\Image\loading.gif" />
@@ -201,6 +203,7 @@
     <Content Include="Content\Image\Student\images\Decorate-Left.png" />
     <Content Include="Content\Image\Student\images\Decorate-Right.png" />
     <Content Include="Content\Image\Student\images\Go.png" />
+    <Content Include="Content\Image\Student\images\head.jpg" />
     <Content Include="Content\Image\Student\images\Logo.png" />
     <Content Include="Content\Image\Student\images\Modify.png" />
     <Content Include="Content\Image\Student\images\OK.png" />
@@ -296,6 +299,8 @@
     <Content Include="Content\Scripts\Admin\student.js" />
     <Content Include="Content\Scripts\common.js" />
     <Content Include="Content\Scripts\datatable.js" />
+    <Content Include="Content\Scripts\Student\history.js" />
+    <Content Include="Content\Scripts\Student\test.js" />
     <Content Include="Content\Scripts\Student\word.js" />
     <Content Include="Global.asax" />
     <Content Include="Web.config">
@@ -441,7 +446,7 @@
     <Content Include="Areas\Student\Views\Register\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Student\Views\Course\Detail.cshtml" />
+    <Content Include="Areas\Student\Views\Course\Empty.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Student\Views\Test\Self.cshtml" />
@@ -457,6 +462,24 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Student\Views\Course\Words.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Student\Views\Course\History.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Student\Views\Test\Exam.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Student\Views\Shared\_ExamLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Student\Views\Test\Empty.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Student\Views\Test\Joined.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Student\Views\Shared\_LoginLayout.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

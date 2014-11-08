@@ -1,21 +1,29 @@
-﻿
+﻿@using Senluo.Spellet.Models
+@model Exam
 @{
     ViewBag.Title = "考试";
     Layout = "~/Areas/Student/Views/Shared/_Layout.cshtml";
 }
-
-<div class="center">
-<div class="bg">
-	<div class="banner"></div>
-	<div class="logo"></div>
-	<div class="cloud-area">
-	<div class="are-you-ready"></div>
-	</div>
-	<div class="cloud-area">
-	<div class="infos">本次考试共<span style="text-decoration:underline;text-align: center;">50</span>题</div>
-	<div class="infos">考试时间19:00-20:00</div>
-	</div>
-	<div class="bg-left"></div>
-	<div class="bg-right"></div>
+<script type="text/javascript" src="~/Content/Scripts/Student/test.js"></script>
+<div class="cm_dg cm_label">
+    <div class="cm_ht">
+        <mh>Exam</mh>
+        <a href="javascript:;">X</a>
+    </div>
+    <div class="cm_bd" id="examPannel">
+    </div>
 </div>
-</div> 
+<div class="cloud-area">
+    <div class="are-you-ready"></div>
+</div>
+<div class="cloud-area">
+    <div class="infos">本次考试共<span style="text-decoration: underline; text-align: center;">@Model.Count </span>题</div>
+    <div class="infos">考试时间 @Model.DurationMinite 分钟</div>
+</div>
+<div class="cloud-area">
+    <div class="cloud-tiny left-220">
+        <a href="javascript:void(0);" class="go" onclick="GetExam(3,1);"></a>
+    </div>
+</div>
+
+
