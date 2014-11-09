@@ -1,0 +1,58 @@
+﻿@using Senluo.Spellet.Models
+@model IEnumerable<ExamContent>
+@{
+    int type = (int)ViewBag.type;
+    int qid = (int)ViewBag.qid;
+    ViewBag.Title = "Detail";
+    Layout = "~/Areas/Student/Views/Shared/_ExamLayout.cshtml";
+}
+<script type="text/javascript" src="~/Content/Scripts/Student/test.js"></script>
+<style>
+    body {
+        background-color: white;
+    }
+</style>
+
+@{
+    if (Model != null && Model.Any())
+    {
+        int index = 0;
+    <ul>
+        @foreach (var item in Model)
+        {
+            index++;
+            <li class="list">
+                @index .
+                @item.first @item.word.Substring(0, 1)
+                <input type="text" class="sheet" id="e_@(item.id)" data-head="@item.word.Substring(0, 1)"/>
+                @item.second
+                @if (type < 3)
+                {
+                    <span class="answer">(@item.word)</span>
+                }
+            </li>
+        }
+        @*@for (int indexs = 1; indexs < 21; indexs++)
+        {
+            <li class="list">@indexs . Finding himself under fire from all a<input type="text" class="sheet" />, he had no alternative but to abandon his scheme for the time being.Finding himself under fire from all quarters, he had no alternative but to abandon his scheme for the time being.
+            </li>
+        }*@
+    </ul>
+    <div class="cm_ft">
+        @if (type < 3)
+        {
+            <a href="javascript:;" class="cm_label_s">查看答案</a>
+        }
+        else
+        {
+            <a href="javascript:;" class="cm_sumbit_s" data-qid="@qid">提交答案</a>
+        }
+    </div>
+    }
+    else
+    {
+    <h1>木有题目</h1>
+    }
+}
+
+
