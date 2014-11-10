@@ -1,0 +1,82 @@
+﻿@using Senluo.Spellet.Models
+@model IEnumerable<Entry>
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Areas/Student/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript" src="~/Content/Scripts/Student/word.js"></script>
+
+
+@{
+    if (Model != null && Model.Any())
+    {
+        int index = 1;
+        foreach (var item in Model)
+        {
+
+            String meanings = "";
+            String examples = "";
+            String trans = "";
+            if (item.Translations != null && item.Translations.Any())
+            {
+                //foreach (Translation tItem in item.Translations)
+                //{
+                //    meanings += tItem.Description;
+                //    meanings += " ";
+                //}
+                meanings = item.Translations.ToArray()[0].Description;
+            }
+            if (item.Examples != null && item.Examples.Any())
+            {
+                //foreach (Example eItem in item.Examples)
+                //{
+                //    examples += eItem.Origin;
+                //    examples += "";
+                //    examples += eItem.Trans;
+                //    examples += "";
+                //}
+                Example oEx = item.Examples.ToArray()[0];
+                examples = oEx.Origin;
+                trans = oEx.Trans;
+            }
+
+            if (index == 1)
+            {
+    <div class="cloud-area">
+        <div class="cloud-original">
+            <div class="serial">No.@index</div>
+            <div class="words">@item.Word</div>
+            <div class="yinbiao">UK @item.Phonetic_UK  US @item.Phonetic_US</div>
+
+            <div class="meaning">@meanings</div>
+            <div class="example">@examples
+                <br />
+                @trans
+            </div>
+        </div>
+    </div>
+            }
+            else
+            {
+    <div class="cloud-area" style="display: none;">
+        <div class="cloud-original">
+            <div class="serial">No.@index</div>
+            <div class="words">@item.Word</div>
+            <div class="yinbiao">UK @item.Phonetic_UK  US @item.Phonetic_US</div>
+            <div class="meaning">@meanings</div>
+            <div class="example">@examples
+                <br />
+                @trans
+            </div>
+        </div>
+    </div>
+            }
+            index++;
+        }
+
+    }
+}
+
+<a class="preNext pre" style="opacity: 0.1;"  href="Javascript:void(0);" onclick="Javascript:init(@Model.Count());pre();"></a>
+<a class="preNext next" style="opacity: 0.1;" href="Javascript:void(0);" onclick="Javascript:init(@Model.Count());next();"></a>
+

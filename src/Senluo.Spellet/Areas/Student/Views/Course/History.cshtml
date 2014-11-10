@@ -1,0 +1,72 @@
+﻿@using Senluo.Spellet.Models
+@model IEnumerable<Course>
+
+@{
+    if (string.IsNullOrWhiteSpace(ViewBag.Title))
+    {
+        ViewBag.Title = "历史课程";
+    }
+    int preId = (int)ViewBag.pre;
+    int nextId = (int)ViewBag.next;
+    String preUrl = "student/course/history/" + preId.ToString();
+    String nextUrl = "student/course/history/" + nextId.ToString();
+    Layout = "~/Areas/Student/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript" src="~/Content/Scripts/Student/history.js"></script>
+
+@if (Model != null && Model.Any())
+{
+    int count = Model.Count();
+    int real = Math.Min(count, 7);
+    for (int i = 0; i < count; i++)
+    {
+        switch (i)
+        {
+            case 0:
+    <a href="~/student/course/words/@Model.ToArray()[i].ID" class="cloud-tiny ">
+        @Model.ToArray()[i].Name
+    </a>
+                break;
+            case 1:
+    <a href="~/student/course/words/@Model.ToArray()[i].ID" class="cloud-tiny ">
+        @Model.ToArray()[i].Name
+    </a>
+                break;
+            case 2:
+    <a href="~/student/course/words/@Model.ToArray()[i].ID" class="cloud-tiny ">
+        @Model.ToArray()[i].Name
+    </a>
+                break;
+            case 3:
+    <a href="~/student/course/words/@Model.ToArray()[i].ID" class="cloud-tiny ">
+        @Model.ToArray()[i].Name
+    </a>
+                break;
+            case 4:
+    <a href="~/student/course/words/@Model.ToArray()[i].ID" class="cloud-tiny left-600">
+        @Model.ToArray()[i].Name
+    </a>
+                break;
+            case 5:
+    <a href="words/@Model.ToArray()[i].ID" class="cloud-tiny left-500">
+        @Model.ToArray()[i].Name
+    </a>
+                break;
+            case 6:
+    <a href="~/student/course/words/@Model.ToArray()[i].ID" class="cloud-tiny left-400">
+        @Model.ToArray()[i].Name
+    </a>
+                break;
+            default:
+                break;
+        }
+    }
+}
+@if (preId > 0)
+{
+    <a class="preNext pre" style="opacity: 0.1;" href="~/@preUrl"></a>
+}
+@if (nextId > 0)
+{
+    <a class="preNext next" style="opacity: 0.1;" href="~/@nextUrl"></a>
+}
