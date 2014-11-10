@@ -1,13 +1,11 @@
-﻿
-
-@{
+﻿@{
     ViewBag.Title = "创建考试";
     Layout = "~/Areas/Admin/Views/Shared/_Master.cshtml";
 }
 <script type="text/javascript">
     $(function () {
         $('#submitBtn').on('click', function () {
-            
+
             var data = $('form').getValues();
             if (!data.Count) {
                 $.error('数量不能为空');
@@ -29,7 +27,7 @@
                     }
                 }
             })
-            
+
 
             $('#words a i').on('click', function () {
                 var me = this;
@@ -82,6 +80,15 @@
                     <div class="span4">
                         <div class="input-control text" data-role="text">
                             <input type="number" name="DurationMinite" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span4">
+                        <div class="input-control switch" data-role="input-control">
+                            <label>状态：
+                            <input type="checkbox" name="Enabled" />
+                            <span class="check"></span></label>
                         </div>
                     </div>
                 </div>

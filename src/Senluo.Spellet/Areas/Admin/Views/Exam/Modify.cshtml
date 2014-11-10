@@ -90,6 +90,22 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class="span4">
+                        <div class="input-control switch" data-role="input-control">
+                            <label>状态：
+                            @if (Model.Enabled == true)
+                            {
+                                <input type="checkbox" name="Enabled" checked="checked"/>
+                            }
+                            else
+                            {
+                                <input type="checkbox" name="Enabled" />
+                            }
+                            <span class="check"></span></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="span8">
                         <div id="words" class="word-container">
                             @if (Model.Questions != null)
