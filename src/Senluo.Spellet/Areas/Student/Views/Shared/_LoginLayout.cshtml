@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="shortcut icon" href="/content/Image/student.ico">
+    <title>Spellet-@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/Content/Css/g.css" />
+    <link rel="stylesheet" href="~/Content/Css/Student/global.css" />
+    <link rel="stylesheet" href="~/Content/Library/webpopover/jquery.webui-popover.min.css" />
+    @RenderSection("css", false)
+    <script type="text/javascript" src="~/Content/Library/jquery/jquery-2.0.1.min.js"></script>
+    <script type="text/javascript" src="~/Content/Library/webpopover/jquery.webui-popover.js"></script>
+    <script type="text/javascript" src="~/Content/Scripts/common.js"></script>
+    @RenderSection("script", false)
+</head>
+<body>
+    <div class="center">
+        <div class="bg">
+            <div class="banner"></div>
+            <div class="logo"></div>
+            @RenderBody()
+            <div class="bg-left"></div>
+            <div class="bg-right"></div>
+        </div>
+    </div>
+</body>
+</html>
