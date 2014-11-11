@@ -70,6 +70,7 @@
     <Compile Include="File\File.cs" />
     <Compile Include="File\FileType.cs" />
     <Compile Include="File\IFileService.cs" />
+    <Compile Include="Installation\IInstallationService.cs" />
     <Compile Include="Module\AbstractModule.cs" />
     <Compile Include="Module\IModule.cs" />
     <Compile Include="Plugins\AbstractPlugin.cs" />

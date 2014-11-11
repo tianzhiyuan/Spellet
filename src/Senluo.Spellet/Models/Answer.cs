@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using Ors.Core.Data;
@@ -12,6 +13,7 @@ namespace Senluo.Spellet.Models
 
         public int? SheetID { get; set; }
         public int? Score { get; set; }
+        [MaxLength(255)]
         public string Fill { get; set; }
         public Question Question { get; set; }
     }
