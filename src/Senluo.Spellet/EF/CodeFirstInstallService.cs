@@ -23,7 +23,7 @@ namespace Senluo.Spellet.EF
             _modelService.Create(new Teacher()
                 {
                     Account = defaultUserName,
-                    Password = defaultUserName.Hash(),
+                    Password = defaultUserPassword.Hash(),
                     Name = "Admin"
                 });
             
