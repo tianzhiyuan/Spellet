@@ -186,6 +186,7 @@
     <Content Include="Content\Css\Admin\login.css" />
     <Content Include="Content\Css\g.css" />
     <Content Include="Content\Css\Student\global.css" />
+    <Content Include="Content\Css\Student\login.css" />
     <Content Include="Content\Image\cry.gif" />
     <Content Include="Content\Image\dh.png" />
     <Content Include="Content\Image\head.png" />
@@ -196,6 +197,7 @@
     <Content Include="Content\Image\Student\images\Add.png" />
     <Content Include="Content\Image\Student\images\Are-You-Ready.png" />
     <Content Include="Content\Image\Student\images\Background.jpg" />
+    <Content Include="Content\Image\Student\images\Background2.jpg" />
     <Content Include="Content\Image\Student\images\Congratulations.png" />
     <Content Include="Content\Image\Student\images\Course-History.png" />
     <Content Include="Content\Image\Student\images\Course-Setting.png" />
@@ -209,15 +211,19 @@
     <Content Include="Content\Image\Student\images\Decorate-Right.png" />
     <Content Include="Content\Image\Student\images\Go.png" />
     <Content Include="Content\Image\Student\images\head.jpg" />
+    <Content Include="Content\Image\Student\images\head.png" />
     <Content Include="Content\Image\Student\images\Logo.png" />
     <Content Include="Content\Image\Student\images\Modify.png" />
+    <Content Include="Content\Image\Student\images\nextArrow.png" />
     <Content Include="Content\Image\Student\images\OK.png" />
     <Content Include="Content\Image\Student\images\Pick-Words.png" />
+    <Content Include="Content\Image\Student\images\prevArrow.png" />
     <Content Include="Content\Image\Student\images\Quantity-Info.png" />
     <Content Include="Content\Image\Student\images\Quantity-Setting.png" />
     <Content Include="Content\Image\Student\images\Review.png" />
     <Content Include="Content\Image\Student\images\Self-Test-ch.png" />
     <Content Include="Content\Image\Student\images\Self-Test-en.png" />
+    <Content Include="Content\Image\Student\images\sprite.png" />
     <Content Include="Content\Image\Student\images\Students-Info.png" />
     <Content Include="Content\Image\Student\images\Test-Design.png" />
     <Content Include="Content\Image\Student\images\Test-Info.png" />
@@ -298,6 +304,10 @@
     <Content Include="Content\Library\metro-bootstrap\min\metro-bootstrap-responsive.min.css" />
     <Content Include="Content\Library\metro-bootstrap\min\metro-bootstrap.min.css" />
     <Content Include="Content\Library\metro-bootstrap\min\metro.min.js" />
+    <Content Include="Content\Library\webpopover\jquery.webui-popover.css" />
+    <Content Include="Content\Library\webpopover\jquery.webui-popover.js" />
+    <Content Include="Content\Library\webpopover\jquery.webui-popover.min.css" />
+    <Content Include="Content\Library\webpopover\jquery.webui-popover.min.js" />
     <Content Include="Content\Scripts\Admin\entry.js" />
     <Content Include="Content\Scripts\Admin\login.js" />
     <Content Include="Content\Scripts\Admin\master.js" />
