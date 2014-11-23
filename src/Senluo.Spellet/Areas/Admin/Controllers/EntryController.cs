@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using MySql.Data.MySqlClient;
 using Ors.Core.Components;
 using Ors.Core.Data;
+using Ors.Core.Exceptions;
 using Ors.Core.Serialization;
 using Ors.Framework.Data;
 using Senluo.Spellet.Models;
@@ -142,7 +143,7 @@ namespace Senluo.Spellet.Areas.Admin.Controllers
         {
             var svc = Service;
             if (item == null) return new HttpStatusCodeResult((int)HttpStatusCode.BadRequest);
-
+            PartialFiller.Fill<Entry, EntryQuery>(item);
             var verb = Request.HttpMethod;
             switch (verb)
             {
@@ -153,6 +154,11 @@ namespace Senluo.Spellet.Areas.Admin.Controllers
                     svc.Patch<Entry, EntryQuery>(item);
                     break;
                 case "DELETE":
+                    if (svc.Any(new CourseContentQuery() {ContentIDList = new int[] {item.ID.Value}}))
+                    {
+                        throw new RuleViolatedException("有相关的课程，不可以删除");
+                    }
+                    
                     svc.Delete(item);
                     break;
                 default:

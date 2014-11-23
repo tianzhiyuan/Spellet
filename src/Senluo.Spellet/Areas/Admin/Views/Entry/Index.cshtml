@@ -27,7 +27,24 @@
                 search();
             }
         });
-
+        $('.icon-cancel-2').on('click', function () {
+            if (confirm("真的要删除吗？")) {
+                var id = $(this).parent().attr('data-entry-id');
+                $.ajax({
+                    type: 'delete',
+                    contentType:'application/json',
+                    data: JSON.stringify({ ID: id }),
+                    url:'/admin/entry',
+                    success:function(result) {
+                        if (result.success) {
+                            window.location.reload();
+                        } else {
+                            $.error(result.msg);
+                        }
+                    }
+                })
+            }
+        })
     })
 </script>
 
@@ -109,7 +126,7 @@
                                                 <strong>@entry.Word</strong>
                                                 <div class="entry-edit">
                                                     <a title="修改" href="/admin/entry/modify?id=@entry.ID"><i class="icon-cog fg-teal"></i></a>
-                                                    <a title="删除" href="javascript:;"><i class="icon-cancel-2 fg-olive"></i></a>
+                                                    <a title="删除" href="javascript:;" data-entry-id="@entry.ID"><i class="icon-cancel-2 fg-olive"></i></a>
                                                 </div>
                                                 
                                             </div>
