@@ -23,7 +23,6 @@ namespace Senluo.Spellet.Areas.Student.Controllers
         {
             return View();
         }
-
         public ActionResult Self()
         {
             return View();
@@ -43,7 +42,8 @@ namespace Senluo.Spellet.Areas.Student.Controllers
             }
             var asheet = Service.Select(new AnswerSheetQuery()
             {
-                ExamID = exam.ID
+                ExamID = exam.ID,
+                StudentID = UserID
             }).FirstOrDefault();
             if (asheet != null)
             {

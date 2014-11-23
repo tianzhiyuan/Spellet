@@ -13,13 +13,13 @@
             {
                 field: 'Exam.Name', caption: "考试名称", width: 80,renderer:function(tbl, record, td) {
                     if (record.Exam) {
-                        td.html( '<a href="/admin/exam/modify?id=' + record.Exam.ID + '">查看/编辑考试信息</a>');
+                        td.html( '<a title="查看/编辑考试信息" href="/admin/exam/modify?id=' + record.Exam.ID + '">'+record.Exam.Name+'</a>');
                     }
                 }
             },
             { field:'Student.StudentID', caption:'学生学号',width:100,renderer:function(tbl, record, td) {
                 if (record.Student && record.StudentID) {
-                    td.html('<a href="/admin/student/modify?id=' + record.Student.ID + '">查看/编辑学生信息</a>');
+                    td.html('<a title="查看/编辑学生信息" href="/admin/student/modify?id=' + record.Student.ID + '">'+record.Student.StudentID+'</a>');
                 }
             }},
             { field: 'Exam.Count', caption: '试题总数', width: 50 },
