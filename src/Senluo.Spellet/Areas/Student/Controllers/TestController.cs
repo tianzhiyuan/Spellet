@@ -33,7 +33,9 @@ namespace Senluo.Spellet.Areas.Student.Controllers
         {
             var exam = Service.Select(new ExamQuery()
             {
-                ID = 1
+                Enabled = true,
+                OrderField = "ID",
+                OrderDirection = OrderDirection.DESC
             }).FirstOrDefault();
             if (exam == null)
             {
@@ -48,7 +50,7 @@ namespace Senluo.Spellet.Areas.Student.Controllers
                 return RedirectToAction("joined");
             }
 
-            return View();
+            return View(exam);
         }
 
         public ActionResult Success()

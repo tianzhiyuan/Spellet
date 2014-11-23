@@ -86,6 +86,13 @@ namespace Senluo.Spellet.Areas.Admin.Controllers
                 }
                 if (entry.Examples != null && entry.Examples.Any())
                 {
+                    foreach (var example in entry.Examples)
+                    {
+                        if (string.IsNullOrWhiteSpace(example.Keyword))
+                        {
+                            example.Keyword = entry.Word;
+                        }
+                    }
                     Service.Patch<Example, ExampleQuery>(entry.Examples.ToArray());
                 }
                 ts.Complete();
@@ -117,13 +124,17 @@ namespace Senluo.Spellet.Areas.Admin.Controllers
                     foreach (var ex in entry.Examples)
                     {
                         ex.EntryID = entry.ID;
+                        if (string.IsNullOrWhiteSpace(ex.Keyword))
+                        {
+                            ex.Keyword = entry.Word;
+                        }
                     }
                     Service.Create(entry.Examples.ToArray());
                 }
                 ts.Complete();
             }
             new EntryManager().Refresh(entry.Word[0]);
-            return Serialize(new { success = true });
+            return Serialize(new { success = true, item = entry });
         }
 
         [AcceptVerbs(HttpVerbs.Post | HttpVerbs.Put | HttpVerbs.Delete)]

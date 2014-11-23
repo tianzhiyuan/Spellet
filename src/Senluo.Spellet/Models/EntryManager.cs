@@ -16,7 +16,7 @@ namespace Senluo.Spellet.Models
         static EntryManager()
         {
             var provider = ObjectContainer.Resolve<CacheProvider>();
-            foreach (var firstletter in "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray())
+            foreach (var firstletter in "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToLower().ToCharArray())
             {
                 var key = "entrycache_" + firstletter;
                 char local = firstletter;
@@ -36,7 +36,7 @@ namespace Senluo.Spellet.Models
         public Entry[] Get(string firstletter)
         {
             var provider = ObjectContainer.Resolve<CacheProvider>();
-            return (Entry[])provider.Get("entrycache_" + firstletter);
+            return (Entry[])provider.Get("entrycache_" + firstletter.ToLower());
         }
         public Entry[] Get(char firstletter)
         {
@@ -45,7 +45,7 @@ namespace Senluo.Spellet.Models
         public Entry[] Refresh(string firstletter)
         {
             var provider = ObjectContainer.Resolve<CacheProvider>();
-            return (Entry[]) provider.Refresh("entrycache_" + firstletter);
+            return (Entry[])provider.Refresh("entrycache_" + firstletter.ToLower());
         }
         public Entry[] Refresh(char firstletter)
         {

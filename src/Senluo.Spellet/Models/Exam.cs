@@ -19,5 +19,6 @@ namespace Senluo.Spellet.Models
     public class ExamQuery:AbstractQuery<Exam>
     {
         public string NamePattern { get; set; }
+        public bool? Enabled { get; set; }
     }
 }

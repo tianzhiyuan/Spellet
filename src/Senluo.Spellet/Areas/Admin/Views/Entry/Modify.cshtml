@@ -73,10 +73,11 @@
             var examples = [];
             $('.examples .row').each(function (idx, target) {
                 var origin = $(target).find('input:first').val();
-                var tran = $(target).find('input:last').val();
+                var tran = $($(target).find('input')[1]).val();
+                var keyword = $(target).find('input:last').val();
                 var id = $(target).attr('data-example-id')
                 if (origin) {
-                    examples.push({ Origin: origin, Tran: tran, ID:id });
+                    examples.push({ Origin: origin, Trans: tran, ID:id, Keyword:keyword });
                 }
             })
             if (!examples.length) {
@@ -92,7 +93,7 @@
                 contentType: 'application/json',
                 success:function(result) {
                     if (result.success) {
-                        reload();
+                        //refresh();
                     } else {
                         $.error(result.msg);
                     }
@@ -256,6 +257,7 @@
                             <div class="input-control text" >
                                 <input type="text" value="@example.Origin" placeholder="填写例句"/>
                                 <input type="text" value="@example.Trans" placeholder="填写例句翻译"/>
+                                <input type="text" value="@example.Keyword" placeholder="关键词（不填则默认为原单词）" />
                             </div>
                         </div>
                         @*<div class="span1"><a title="删除该例句" href="javascript:;" data-role="delete" data-example-id="@example.ID"><i class="icon-cancel-2"></i></a></div>*@
