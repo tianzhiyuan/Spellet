@@ -17,7 +17,7 @@
 })
 
 function GetExam(type, tid) {
-    $('body').mask('正在生成自测试卷...');
+    $('body').mask('获取试卷中...');
     $.ajax({
         type: 'get',
         url: '/student/test/exam',
@@ -61,11 +61,24 @@ function showAnswer() {
 
 function submitAnswer() {
     var data = "";
+    var hasNotFilled = false;
     $(".sheet").each(function () {
         var id = $(this).attr("id").split("_")[1];
         var word = $(this).attr("data-head") + $(this).val();
         data += id + "_" + word + ";";
+        if (!$(this).val()) {
+            hasNotFilled = true;
+        }
     })
+    if (hasNotFilled ) {
+        if (!confirm("您尚有题目没有填写，确定提交吗？(提交之后将不可更改)")) {
+            return false;
+        }
+    } else {
+        if (!confirm("确定提交吗？(提交之后将不可更改)")) {
+            return false;
+        }
+    }
     data += $(".cm_sumbit_s").attr("data-qid");
     $.ajax({
         type: 'post',

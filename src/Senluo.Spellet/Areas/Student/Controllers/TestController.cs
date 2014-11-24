@@ -1,4 +1,5 @@
-﻿using Ors.Core.Data;
+﻿using System.Transactions;
+using Ors.Core.Data;
 using Ors.Core.Exceptions;
 using Ors.Framework.Data;
 using Senluo.Spellet.Areas.Student.Models;
@@ -62,43 +63,48 @@ namespace Senluo.Spellet.Areas.Student.Controllers
         }
 
         [HttpPost]
-        public JsonResult answer(String data)
+        public JsonResult Answer(String data)
         {
             var response = new JsonResult()
-            {
-                JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-            };
-            try
-            {
-                String[] items = data.Split(';');
-                int examId = Convert.ToInt32(items[items.Length - 1].ToString());
-                var aSheets = Service.Select(new AnswerSheetQuery()
+                {
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+                };
+            String[] items = data.Split(';');
+            int examId = Convert.ToInt32(items[items.Length - 1].ToString());
+            var aSheets = Service.Select(new AnswerSheetQuery()
                 {
                     ExamID = examId,
                     StudentID = UserID
                 }).FirstOrDefault();
-                if (aSheets != null)
-                {
-                    response.Data = new
+            if (aSheets != null)
+            {
+                response.Data = new
                     {
                         success = false,
                         msg = "Can't join the same exam for two times"
                     };
-                    return response;
-                }
-                var questions = Service.Select(new QuestionQuery()
+                return response;
+            }
+            var questions = Service.Select(new QuestionQuery()
                 {
-                    ExamIDList = new[] { examId }
+                    ExamIDList = new[] {examId}
                 });
-                if (questions == null || !questions.Any())
+            var examples = Service.Select(new ExampleQuery()
                 {
-                    response.Data = new
+                    IDList = questions.Select(o => o.ContentID).OfType<int>().ToArray(),
+                    Includes = new string[]{"Entry"}
+                });
+            if (questions == null || !questions.Any())
+            {
+                response.Data = new
                     {
                         success = false,
                         msg = "System Data Error"
                     };
-                    return response;
-                }
+                return response;
+            }
+            using (var ts = new TransactionScope())
+            {
                 AnswerSheet aSheet = new AnswerSheet();
                 aSheet.CreatedAt = DateTime.Now;
                 aSheet.CreatorID = UserID;
@@ -107,38 +113,43 @@ namespace Senluo.Spellet.Areas.Student.Controllers
                 aSheet.LastModifiedAt = DateTime.Now;
                 aSheet.LastModifierID = UserID;
                 Service.Create(aSheet);
-
-                foreach (String item in items)
+                var totalScore = 0;
+                foreach (String item in items.Take(items.Count()-1))
                 {
                     Answer model = new Answer();
                     model.CreatedAt = DateTime.Now;
                     model.CreatorID = UserID;
                     int eid = Convert.ToInt32(item.Split('_')[0].ToString());
-                    Question queston = questions.Where(c => c.ContentID == eid).FirstOrDefault();
+                    Question question = questions.FirstOrDefault(c => c.ContentID == eid);
+                    var example = examples.FirstOrDefault(o => o.ID == question.ContentID);
                     model.Fill = item.Split('_')[1].ToString();
                     model.LastModifiedAt = DateTime.Now;
                     model.LastModifierID = UserID;
                     model.SheetID = aSheet.ID;
-                    model.QuestionID = queston == null ? -1 : queston.ID;
+                    model.QuestionID = question == null ? -1 : question.ID;
+                    if (model.Fill.Equals(example.Keyword ?? example.Entry.Word, StringComparison.OrdinalIgnoreCase))
+                    {
+                        model.Score = 1;
+                    }
+                    else
+                    {
+                        model.Score = 0;
+                    }
+                    totalScore += model.Score.Value;
                     Service.Create(model);
                 }
+                aSheet.TotalScore = totalScore;
+                Service.Update(aSheet);
+                ts.Complete();
+            }
+            
 
-                response.Data = new
+            response.Data = new
                 {
                     success = true,
                     msg = "OK"
                 };
-                return response;
-            }
-            catch (Exception ex)
-            {
-                response.Data = new
-                {
-                    success = false,
-                    msg = ex.ToString()
-                };
-                return response;
-            }
+            return response;
         }
 
         /// <summary>
@@ -237,16 +248,16 @@ namespace Senluo.Spellet.Areas.Student.Controllers
             {
                 ExamContent model = new ExamContent();
                 model.id = entry.ID.Value;
-                model.word = entry.Word;
-                Example example = examples.Where(o => o.EntryID == entry.ID).FirstOrDefault();
+                Example example = examples.FirstOrDefault(o => o.EntryID == entry.ID);
                 if (example == null)
                 {
                     break;
                 }
-                String sentence = example.Origin.ToLower().Replace(entry.Word.ToLower(), "#");
-                if (sentence.IndexOf("#") >= 0)
+                model.word = example.Keyword ?? entry.Word;
+                String sentence = example.Origin.ToLower().Replace(model.word.ToLower(), "__PLACEHOLDER__");
+                if (sentence.IndexOf("__PLACEHOLDER__", StringComparison.InvariantCulture) >= 0)
                 {
-                    String[] oList = sentence.Split('#');
+                    String[] oList = sentence.Split(new string[] { "__PLACEHOLDER__" }, StringSplitOptions.None);
                     model.first = oList[0];
                     model.second = oList[1];
                 }
