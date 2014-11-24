@@ -17,11 +17,13 @@
 })
 
 function GetExam(type, tid) {
+    $('body').mask('正在生成自测试卷...');
     $.ajax({
         type: 'get',
         url: '/student/test/exam',
         data: { type: type, tid: tid },
         success: function (responsetext) {
+            $('body').unmask();
             $("#examPannel").html(responsetext);
         }
     });

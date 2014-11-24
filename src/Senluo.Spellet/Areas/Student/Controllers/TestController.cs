@@ -1,4 +1,7 @@
 ﻿using Ors.Core.Data;
+using Ors.Core.Exceptions;
+using Ors.Framework.Data;
+using Senluo.Spellet.Areas.Student.Models;
 using Senluo.Spellet.Models;
 using System;
 using System.Collections.Generic;
@@ -47,7 +50,7 @@ namespace Senluo.Spellet.Areas.Student.Controllers
             }).FirstOrDefault();
             if (asheet != null)
             {
-                return RedirectToAction("joined");
+                return View("Joined");
             }
 
             return View(exam);
@@ -251,6 +254,55 @@ namespace Senluo.Spellet.Areas.Student.Controllers
             }
 
             return models;
+        }
+
+
+        public ActionResult Score(int examid)
+        {
+            var exam = Service.FirstOrDefault(new ExamQuery() {ID = examid});
+            if (exam == null || !(exam.ID > 0))
+            {
+                throw new RuleViolatedException("exam为空");
+            }
+            var questions = Service.Select(new QuestionQuery()
+            {
+                ExamIDList = new[] { examid }
+            });
+            var examples =
+                Service.Select(new ExampleQuery() {IDList = questions.Select(o => o.ContentID).OfType<int>().ToArray()});
+            var answersheet = Service.FirstOrDefault(new AnswerSheetQuery() {ExamID = examid});
+            if (answersheet == null || !(answersheet.ID > 0))
+            {
+                throw new RuleViolatedException("答卷为空");
+            }
+            var answers = Service.Select(new AnswerQuery() {SheetIDList = new int[] {answersheet.ID.Value}});
+            var viewModel = new AnswerSheetVM();
+            viewModel.ID = answersheet.ID.Value;
+            viewModel.Count = answers.Count();
+            viewModel.ExamID = examid;
+            viewModel.TotalScore = (answersheet.TotalScore.Value)*100/answers.Count();
+            var answerVMs = new List<AnswerVM>();
+            foreach (var question in questions)
+            {
+                var vm = new AnswerVM();
+                var answer = answers.FirstOrDefault(o => o.QuestionID == question.ID);
+                var example = examples.FirstOrDefault(o => o.ID == question.ContentID);
+                vm.OriginSentense = example.Origin;
+                vm.Translation = example.Trans;
+                vm.Expect = example.Keyword;
+                if (answer == null)
+                {
+                    vm.Filling = "";
+                    vm.IsRight = false;
+                }
+                else
+                {
+                    vm.Filling = answer.Fill;
+                    vm.IsRight = answer.Score > 0;
+                }
+                answerVMs.Add(vm);
+            }
+            return View(viewModel);
         }
     }
 }

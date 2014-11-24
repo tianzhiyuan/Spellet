@@ -11,6 +11,10 @@ namespace Senluo.Spellet.Models
     {
         public int? ContentID { get; set; }
         public int? Score { get; set; }
+        /// <summary>
+        /// 正确答案
+        /// 暂时不使用这个字段
+        /// </summary>
         [MaxLength(255)]
         public string Expect { get; set; }
         public int? ExamID { get; set; }
