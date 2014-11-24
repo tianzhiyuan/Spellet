@@ -15,12 +15,12 @@ namespace Senluo.Spellet.Areas.Student
         protected override string UserKey { get { return "StudentID"; } }
         protected override string LoginUrl { get { return "/student/login"; } }
 
-        protected Models.Student Student
+        protected Senluo.Spellet.Models.Student Student
         {
             get
             {
                 var svc = Service;
-                return svc.FindByID<Models.Student, Models.StudentQuery>(UserID);
+                return svc.FindByID<Senluo.Spellet.Models.Student, Senluo.Spellet.Models.StudentQuery>(UserID);
             }
         }
 
@@ -46,12 +46,12 @@ namespace Senluo.Spellet.Areas.Student
         protected override string UserKey { get { return "StudentID"; } }
         protected override string LoginUrl { get { return "/student/login"; } }
 
-        protected Models.Student Student
+        protected Senluo.Spellet.Models.Student Student
         {
             get
             {
                 var svc = Service;
-                return svc.FindByID<Models.Student, Models.StudentQuery>(UserID);
+                return svc.FindByID<Senluo.Spellet.Models.Student, Senluo.Spellet.Models.StudentQuery>(UserID);
             }
         }
     }

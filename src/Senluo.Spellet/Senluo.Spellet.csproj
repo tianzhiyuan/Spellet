@@ -151,6 +151,7 @@
     <Compile Include="Areas\Student\Controllers\LogoutController.cs" />
     <Compile Include="Areas\Student\Controllers\RegisterController.cs" />
     <Compile Include="Areas\Student\Controllers\TestController.cs" />
+    <Compile Include="Areas\Student\Models\AnswerSheetVM.cs" />
     <Compile Include="Areas\Student\StudentAreaRegistration.cs" />
     <Compile Include="Areas\Student\StudentController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
@@ -331,7 +332,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Student\Models\" />
     <Folder Include="Areas\Student\Views\Exam\" />
     <Folder Include="Views\Home\" />
   </ItemGroup>

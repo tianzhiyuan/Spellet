@@ -161,7 +161,7 @@
                                                 {
                                                     foreach (var example in entry.Examples)
                                                     {
-                                                    <li class="" title="@example.Trans">@Html.Raw(example.Origin.Replace(entry.Word, string.Format("<em>{0}</em>", entry.Word)))</li>
+                                                    <li class="" title="@example.Trans">@Html.Raw(example.Origin.Replace((example.Keyword??entry.Word), string.Format("<em>{0}</em>", example.Keyword??entry.Word)))</li>
                                                     }
                                                 }
                                             </ol>

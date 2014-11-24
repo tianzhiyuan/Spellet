@@ -55,7 +55,7 @@ namespace Senluo.Spellet.Areas.Admin.Controllers
                 var q = new Question()
                     {
                         ContentID = first.ID,
-                        Expect = entry.Word,
+                        Expect = first.Keyword,
                         Score = 1,
                         ExamID = examid
                     };
