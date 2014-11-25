@@ -315,6 +315,7 @@ namespace Senluo.Spellet.Areas.Student.Controllers
                 }
                 answerVMs.Add(vm);
             }
+            viewModel.Answers = answerVMs;
             return View(viewModel);
         }
     }

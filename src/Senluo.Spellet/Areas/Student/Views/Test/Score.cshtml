@@ -1,0 +1,28 @@
+﻿@model Senluo.Spellet.Areas.Student.Models.AnswerSheetVM
+
+
+
+
+<div class="modal" style="width: 70%;">
+    <div >
+    <ul>
+    
+        @for (int index = 0; index < Model.Answers.Count();index++ )
+        {
+            var item = Model.Answers.ElementAt(index);
+            <li class="list">
+                @index . 
+                @item.OriginSentense.Replace(item.Expect, item.Filling)
+                <span class="answer">(@item.Expect)</span>
+                @if (item.IsRight)
+                {
+
+                }
+                else
+                {
+                
+                }
+            </li>
+        }
+    </ul></div>
+</div>

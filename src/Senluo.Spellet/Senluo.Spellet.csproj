@@ -232,6 +232,11 @@
     <Content Include="Content\Image\Student\images\Test-Time.png" />
     <Content Include="Content\Image\Student\images\Test-Yourself.png" />
     <Content Include="Content\Image\Student\images\Test.png" />
+    <Content Include="Content\Library\jquery-modal\close.png" />
+    <Content Include="Content\Library\jquery-modal\jquery.modal.css" />
+    <Content Include="Content\Library\jquery-modal\jquery.modal.js" />
+    <Content Include="Content\Library\jquery-modal\jquery.modal.min.js" />
+    <Content Include="Content\Library\jquery-modal\spinner.gif" />
     <Content Include="Content\Library\jquery-ui\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
     <Content Include="Content\Library\jquery-ui\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
     <Content Include="Content\Library\jquery-ui\images\ui-bg_flat_10_000000_40x100.png" />
@@ -500,6 +505,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Install\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Student\Views\Test\Score.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Library\jquery-modal\bower.json" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -5,14 +5,31 @@
     }
     Layout = "~/Areas/Student/Views/Shared/_Layout.cshtml";
 }
-
+@section css
+{
+    <link rel="stylesheet" href="~/Content/Library/jquery-modal/jquery.modal.css" type="text/css"/>
+}
+@section script
+{
+    <script type="text/javascript" src="~/Content/Library/jquery-modal/jquery.modal.min.js"></script>
+}
 @model Senluo.Spellet.Models.AnswerSheet
+<script type="text/javascript">
+    $(function() {
+        $('#detail').on('click',function(event) {
+            event.preventDefault();
+            $.get('/student/test/score?examid='+@(Model.ExamID), function(html) {
+                $(html).appendTo('body').modal({zIndex:100});
+            })
+        })
+    })
+</script>
 <div class="cloud-area">
     <div class="infos">您已完成本次测试</div>
     <div class="infos">成绩： @(Model.TotalScore*100/Model.Exam.Count) 分</div>
 </div>
 <div class="cloud-area">
     <div class="cloud-tiny left-220">
-        <a href="javascript:void(0);" >查看详情</a>
+        <a href="javascript:void(0);" id="detail">查看详情</a>
     </div>
 </div>
