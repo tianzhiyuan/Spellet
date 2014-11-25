@@ -86,12 +86,9 @@ function submitAnswer() {
         data: { data: data },
         success: function (response) {
             if (response.success) {
-                $("#examPannel").html();
-                $(".cm_bg").hide();
-                $(".cm_dg").hide();
-                alert(response.msg);
+                window.location.reload();
             } else {
-                alert(response.msg);
+                $.error(response.msg);
             }
         }
     });

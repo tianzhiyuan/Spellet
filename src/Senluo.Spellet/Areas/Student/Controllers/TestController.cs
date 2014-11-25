@@ -49,9 +49,11 @@ namespace Senluo.Spellet.Areas.Student.Controllers
                 ExamID = exam.ID,
                 StudentID = UserID
             }).FirstOrDefault();
+
             if (asheet != null)
             {
-                return View("Joined");
+                asheet.Exam = exam;
+                return View("Joined", asheet);
             }
 
             return View(exam);
