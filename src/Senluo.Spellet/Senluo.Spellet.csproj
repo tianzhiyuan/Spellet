@@ -314,6 +314,18 @@
     <Content Include="Content\Library\webpopover\jquery.webui-popover.js" />
     <Content Include="Content\Library\webpopover\jquery.webui-popover.min.css" />
     <Content Include="Content\Library\webpopover\jquery.webui-popover.min.js" />
+    <Content Include="Content\My97DatePicker\calendar.js" />
+    <Content Include="Content\My97DatePicker\lang\en.js" />
+    <Content Include="Content\My97DatePicker\lang\zh-cn.js" />
+    <Content Include="Content\My97DatePicker\lang\zh-tw.js" />
+    <Content Include="Content\My97DatePicker\skin\datePicker.gif" />
+    <Content Include="Content\My97DatePicker\skin\default\datepicker.css" />
+    <Content Include="Content\My97DatePicker\skin\default\img.gif" />
+    <Content Include="Content\My97DatePicker\skin\WdatePicker.css" />
+    <Content Include="Content\My97DatePicker\skin\whyGreen\bg.jpg" />
+    <Content Include="Content\My97DatePicker\skin\whyGreen\datepicker.css" />
+    <Content Include="Content\My97DatePicker\skin\whyGreen\img.gif" />
+    <Content Include="Content\My97DatePicker\WdatePicker.js" />
     <Content Include="Content\Scripts\Admin\entry.js" />
     <Content Include="Content\Scripts\Admin\login.js" />
     <Content Include="Content\Scripts\Admin\master.js" />
@@ -511,6 +523,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Library\jquery-modal\bower.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Fonts\hkfont.TTF" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

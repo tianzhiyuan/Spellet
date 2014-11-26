@@ -82,15 +82,15 @@ namespace Senluo.Spellet.Areas.Student.Controllers
             {
                 OrderDirection = OrderDirection.DESC,
                 OrderField = "ID",
-                Skip = (id - 1) * 7,
-                Take = 8
+                Skip = (id - 1) * 8,
+                Take = 9
             };
             var courses = Service.Select(query);
 
-            if (courses.Count() == 8)
+            if (courses.Count() == 9)
             {
                 ViewBag.next = id + 1;
-                return View(courses.Take(7));
+                return View(courses.Take(8));
             }
             return View(courses);
         }

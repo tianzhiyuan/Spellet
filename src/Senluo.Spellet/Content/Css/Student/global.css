@@ -4,12 +4,20 @@ body, p, ul, ol, li, form, img, dl, dt, dd, table, th, td, blockquote, fieldset,
     border: 0 none;
     margin: 0;
     padding: 0;
-    font: 12px/1.5 tahoma,arial,'Hiragino Sans GB',\5FAE\8F6F\96C5\9ED1,\5b8b\4f53,sans-serif;
+    font: 12px/1.5 HuaKang,tahoma,arial,'Hiragino Sans GB',\5FAE\8F6F\96C5\9ED1,\5b8b\4f53,sans-serif;
     cursor: default;
 }
 
+@font-face {
+    font-family: 'HuaKang';
+    src: url(/Content/Fonts/hkfont.ttf);
+    /*src: url('../fonts/neues_bauen_demo-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/neues_bauen_demo-webfont.woff') format('woff'), url('../fonts/neues_bauen_demo-webfont.ttf') format('truetype'), url('../fonts/neues_bauen_demo-webfont.svg#NeuesBauenDemo') format('svg');*/
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
-    font-family: Arial,Helvetica,sans-serif,\5B8B\4F53;
+    font-family: HuaKang,Arial,Helvetica,sans-serif,\5B8B\4F53;
     font-size: 12px;
     margin: 0 auto;
     background: #F5F5F5;
@@ -83,6 +91,7 @@ ul li {
 
     .head img {
         cursor: pointer;
+        width: 102px;
     }
 
 .logo {
@@ -148,8 +157,8 @@ ul li {
     height: 128px;
     float: left;
     position: relative;
-    margin-left: 30px;
-    margin-top: 10px;
+    margin-left: 15px;
+    margin-top: 55px;
     z-index: 10;
     text-align: center;
     line-height: 128px;
@@ -157,9 +166,13 @@ ul li {
     font-size: 30px;
 }
 
-    .cloud-tiny a:hover {
-        cursor: pointer;
-    }
+.margin70 {
+    margin-left: 70px;
+}
+
+.cloud-tiny a:hover {
+    cursor: pointer;
+}
 
 .course-today {
     background: url(/Content/Image/Student/images/Course-Today.png) no-repeat center;
@@ -347,7 +360,6 @@ ul li {
 .words {
     font-size: 60px;
     margin-left: 120px;
-    font-family: "Microsoft YaHei";
     margin-top: 5px;
 }
 
@@ -494,6 +506,28 @@ ul li {
         cursor: pointer;
     }
 
+.search {
+    width: 900PX;
+    height: 50px;
+    line-height: 50px;
+    position: absolute;
+    bottom: 100px;
+    right:100px;
+    font-size: 2.0em;
+    color: #00B0EE;
+    text-align:right;
+    font-weight:500;
+    /*background-color: red;*/
+}
+
+    .search .go2 {
+        background-size: cover;
+    background: url(/Content/Image/Student/images/Decorate-Cloud-tiny.png) fixed center center no-repeat;
+    width: 50px;
+    font-size: 30px;
+    float:right;
+    }
+
 .preNext {
     width: 45px;
     height: 100px;
@@ -554,6 +588,7 @@ ul li {
     color: red;
     display: none;
 }
+
 /**/
 .cm_bg {
     width: 100%;

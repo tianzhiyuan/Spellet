@@ -13,14 +13,27 @@
     Layout = "~/Areas/Student/Views/Shared/_Layout.cshtml";
 }
 <script type="text/javascript" src="~/Content/Scripts/Student/history.js"></script>
+<script type="text/javascript" src="~/Content/My97DatePicker/WdatePicker.js"></script>
+
 
 @if (Model != null && Model.Any())
 {
     int count = Model.Count();
-    int real = Math.Min(count, 7);
+    int real = Math.Min(count, 8);
     for (int i = 0; i < count; i++)
     {
-        switch (i)
+        if (i % 4 == 0)
+        {
+    <a href="~/student/course/words/@Model.ToArray()[i].ID" class="cloud-tiny margin70">
+        @Model.ToArray()[i].Name
+    </a>}
+        else
+        {
+    <a href="~/student/course/words/@Model.ToArray()[i].ID" class="cloud-tiny ">
+        @Model.ToArray()[i].Name
+    </a>
+        }
+@*switch (i)
         {
             case 0:
     <a href="~/student/course/words/@Model.ToArray()[i].ID" class="cloud-tiny ">
@@ -59,7 +72,7 @@
                 break;
             default:
                 break;
-        }
+        }*@
     }
 }
 @if (preId > 0)
@@ -70,3 +83,14 @@
 {
     <a class="preNext next" style="opacity: 0.1;" href="~/@nextUrl"></a>
 }
+<div class="search">
+    课程搜索 
+    <span>From
+        <input type="text" class="Wdate" onclick="WdatePicker()" />
+    </span>
+    <span>To
+        <input type="text" class="Wdate" onclick="WdatePicker()" />
+    </span>
+    <div class="go2">Go
+    </div>
+</div>
