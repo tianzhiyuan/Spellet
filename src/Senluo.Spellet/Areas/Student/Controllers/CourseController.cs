@@ -58,7 +58,7 @@ namespace Senluo.Spellet.Areas.Student.Controllers
             var course =
                 Service.FirstOrDefault(new CourseQuery()
                     {
-                        StartTimeRange = new Range<DateTime>() 
+                        StartTimeRange = new Range<DateTime>()
                         {
                             Right = new DateTime(now.Year, now.Month, now.Day),
                             Left = DateTime.Now.AddMonths(-1)
@@ -67,7 +67,7 @@ namespace Senluo.Spellet.Areas.Student.Controllers
 
             if (course != null)
             {
-                return RedirectToAction("words", "course", new {id = course.ID });
+                return RedirectToAction("words", "course", new { id = course.ID });
             }
 
             return RedirectToAction("empty", "course");
@@ -93,6 +93,60 @@ namespace Senluo.Spellet.Areas.Student.Controllers
                 return View(courses.Take(8));
             }
             return View(courses);
+        }
+
+        public ActionResult HistoryBody(DateTime? start, DateTime? end, int index)
+        {
+            try
+            {
+                ViewBag.pre = index - 1;
+                ViewBag.next = 0;
+
+                var query = new CourseQuery();
+                query.OrderDirection = OrderDirection.DESC;
+                query.OrderField = "ID";
+                query.Skip = (index - 1) * 8;
+                query.Take = 9;
+                if (start != null && end != null)
+                {
+                    if (start <= end)
+                    {
+                        query.StartTimeRange = new Range<DateTime>();
+                        query.StartTimeRange.Left = start;
+                        query.StartTimeRange.Right = end;
+                    }
+                    else
+                    {
+                        query.StartTimeRange = new Range<DateTime>();
+                        query.StartTimeRange.Left = end;
+                        query.StartTimeRange.Right = start;
+                    }
+                }
+                else if (start != null)
+                {
+                    query.StartTimeRange = new Range<DateTime>();
+                    query.StartTimeRange.Left = start;
+                }
+                else if (end != null)
+                {
+                    query.StartTimeRange = new Range<DateTime>();
+                    query.StartTimeRange.Right = end;
+                }
+                var courses = Service.Select(query);
+
+                if (courses.Count() == 9)
+                {
+                    ViewBag.next = index + 1;
+                    return View(courses.Take(8));
+                }
+                return View(courses);
+            }
+            catch (Exception e)
+            {
+                String msg = e.Message;
+                int i = 0;
+            }
+            return View();
         }
 
         public ActionResult Empty()

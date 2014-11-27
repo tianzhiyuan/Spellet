@@ -78,11 +78,25 @@ ul li {
     width: 140px;
     position: fixed;
     top: 50%;
+    right:2%;
     margin-top: -217px;
-    height: 232px;
-    padding-top: 203px;
+    height: 335px;
+    padding-top: 97px;
     margin-left: 30px;
 }
+
+    .driver a {
+        color:#00B0EE;
+        display: block;
+        height: 91px;
+        font-size:25px;
+        text-align: center;
+    }
+
+        .driver a:hover {
+            text-decoration: none;
+            color: #32E58C;
+        }
 
 .head {
     float: right;
@@ -508,24 +522,28 @@ ul li {
 
 .search {
     width: 900PX;
-    height: 50px;
-    line-height: 50px;
+    height: 39px;
+    line-height: 39px;
     position: absolute;
     bottom: 100px;
-    right:100px;
+    right: 100px;
     font-size: 2.0em;
     color: #00B0EE;
-    text-align:right;
-    font-weight:500;
+    text-align: right;
+    font-weight: 500;
     /*background-color: red;*/
 }
 
     .search .go2 {
         background-size: cover;
-    background: url(/Content/Image/Student/images/Decorate-Cloud-tiny.png) fixed center center no-repeat;
-    width: 50px;
-    font-size: 30px;
-    float:right;
+        background: url(/Content/Image/Student/images/Decorate-Cloud-go.png) no-repeat;
+        width: 60px;
+        height: 39px;
+        line-height: 39px;
+        font-size: 30px;
+        float: right;
+        text-align: center;
+        color: #00B0EE;
     }
 
 .preNext {

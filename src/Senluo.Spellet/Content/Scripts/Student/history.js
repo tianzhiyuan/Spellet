@@ -6,18 +6,19 @@
     });
 });
 
-var oIndex = 0;
-var total = 0;
-function init(t) {
-    total = t;
-}
-function move(index) {
-    $(".cloud-area").hide().eq(index).show();
-}
-function next() {
-    oIndex++;
-    if (oIndex >= total) {
-        oIndex = 0;
-    }
-    move(oIndex);
+var curpage = 1;
+
+function ajaxQuery(index) {
+    var start = $("#txtStart").val();
+    var end = $("#txtEnd").val();
+    
+    $.ajax({
+        type: 'get',
+        url: '/student/course/historybody',
+        data: { start: start, end: end, index: index },
+        success: function (responsetext) {
+            $('body').unmask();
+            $("#historybody").html(responsetext);
+        }
+    });
 }
