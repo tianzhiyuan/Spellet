@@ -1,7 +1,7 @@
 ﻿@model Senluo.Spellet.Areas.Student.Models.AnswerSheetVM
 @{
 
-    ViewBag.Title = "";
+    ViewBag.Title = "查看成绩";
 }
 
 <html>
@@ -28,15 +28,17 @@
                     <li class="list">
                         @index . 
                 @Html.Raw(item.OriginSentense.Replace(item.Expect, "<u style=''>" + item.Filling + "</u>"))
-                        <span class="answer" style="display: block;">(@item.Expect)</span>
                         @if (item.IsRight)
                         {
-
+                            <span>√</span>
                         }
                         else
                         {
-
+                            <span>×</span>
+                            <span class="answer" style="display: block;">(@item.Expect)</span>
                         }
+                        
+                        
                     </li>
                 }
             </ul>
