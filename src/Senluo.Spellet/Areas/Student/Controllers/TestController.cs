@@ -272,7 +272,12 @@ namespace Senluo.Spellet.Areas.Student.Controllers
 
         public ActionResult Score(int examid)
         {
-            var exam = Service.FirstOrDefault(new ExamQuery() {ID = examid});
+            return View(BuildAnswerSheetVM(examid, UserID));
+        }
+
+        public AnswerSheetVM BuildAnswerSheetVM(int examid, int studentid)
+        {
+            var exam = Service.FirstOrDefault(new ExamQuery() { ID = examid });
             if (exam == null || !(exam.ID > 0))
             {
                 throw new RuleViolatedException("exam为空");
@@ -282,18 +287,18 @@ namespace Senluo.Spellet.Areas.Student.Controllers
                 ExamIDList = new[] { examid }
             });
             var examples =
-                Service.Select(new ExampleQuery() {IDList = questions.Select(o => o.ContentID).OfType<int>().ToArray()});
-            var answersheet = Service.FirstOrDefault(new AnswerSheetQuery() {ExamID = examid});
+                Service.Select(new ExampleQuery() { IDList = questions.Select(o => o.ContentID).OfType<int>().ToArray() });
+            var answersheet = Service.FirstOrDefault(new AnswerSheetQuery() { ExamID = examid, StudentID = studentid});
             if (answersheet == null || !(answersheet.ID > 0))
             {
                 throw new RuleViolatedException("答卷为空");
             }
-            var answers = Service.Select(new AnswerQuery() {SheetIDList = new int[] {answersheet.ID.Value}});
+            var answers = Service.Select(new AnswerQuery() { SheetIDList = new int[] { answersheet.ID.Value } });
             var viewModel = new AnswerSheetVM();
             viewModel.ID = answersheet.ID.Value;
             viewModel.Count = answers.Count();
             viewModel.ExamID = examid;
-            viewModel.TotalScore = (answersheet.TotalScore.Value)*100/answers.Count();
+            viewModel.TotalScore = (answersheet.TotalScore.Value) * 100 / answers.Count();
             var answerVMs = new List<AnswerVM>();
             foreach (var question in questions)
             {
@@ -316,7 +321,7 @@ namespace Senluo.Spellet.Areas.Student.Controllers
                 answerVMs.Add(vm);
             }
             viewModel.Answers = answerVMs;
-            return View(viewModel);
+            return viewModel;
         }
     }
 }

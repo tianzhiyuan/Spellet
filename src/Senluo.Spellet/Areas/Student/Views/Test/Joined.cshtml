@@ -16,12 +16,12 @@
 @model Senluo.Spellet.Models.AnswerSheet
 <script type="text/javascript">
     $(function() {
-        $('#detail').on('click',function(event) {
+        @*$('#detail').on('click',function(event) {
             event.preventDefault();
             $.get('/student/test/score?examid='+@(Model.ExamID), function(html) {
                 $(html).appendTo('body').modal({zIndex:100});
             })
-        })
+        })*@
     })
 </script>
 <div class="cloud-area">
@@ -30,6 +30,6 @@
 </div>
 <div class="cloud-area">
     <div class="cloud-tiny left-220">
-        <a href="javascript:void(0);" id="detail">查看详情</a>
+        <a href="/student/test/score?examid=@Model.ExamID"  target="blank" id="detail">查看详情</a>
     </div>
 </div>
