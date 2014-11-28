@@ -35,7 +35,7 @@ namespace Ors.Core.Security
         /// 如 "origin" ===> "327B5A9328F00E5C67B213E5A44A28A1"
         /// </summary>
         /// <param name="content">待哈希的字符串</param>
-        /// <param name="format">算法(默认MD5)</param>
+        /// <param name="format">算法(默认MD5)</param>x
         /// <returns></returns>
         public static string Hash(this string content, string format = null)
         {

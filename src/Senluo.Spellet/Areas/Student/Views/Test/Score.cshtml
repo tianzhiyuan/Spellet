@@ -12,8 +12,8 @@
             var item = Model.Answers.ElementAt(index);
             <li class="list">
                 @index . 
-                @item.OriginSentense.Replace(item.Expect, item.Filling)
-                <span class="answer">(@item.Expect)</span>
+                @Html.Raw(item.OriginSentense.Replace(item.Expect, "<span style=''>"+item.Filling + "</span>"))
+                <span class="answer" style="display: block;">(@item.Expect)</span>
                 @if (item.IsRight)
                 {
 
