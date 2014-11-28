@@ -4,17 +4,17 @@ body, p, ul, ol, li, form, img, dl, dt, dd, table, th, td, blockquote, fieldset,
     border: 0 none;
     margin: 0;
     padding: 0;
-    font: 12px/1.5 HuaKang,tahoma,arial,'Hiragino Sans GB',\5FAE\8F6F\96C5\9ED1,\5b8b\4f53,sans-serif;
+    font: 12px/1.5 tahoma,arial,'Hiragino Sans GB',\5FAE\8F6F\96C5\9ED1,\5b8b\4f53,sans-serif;
     cursor: default;
 }
 
 @font-face {
     font-family: 'HuaKang';
     src: url('/Content/Fonts/hkfont.eot'); /* IE9 Compat Modes */
-	src: url('/Content/Fonts/hkfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-             url('/Content/Fonts/hkfont.woff') format('woff'), /* Modern Browsers */
-             url('/Content/Fonts/hkfont.ttf')  format('truetype'), /* Safari, Android, iOS */
-             url('/Content/Fonts/hkfont.svg#YourWebFontName') format('svg'); /* Legacy iOS */
+    src: url('/Content/Fonts/hkfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('/Content/Fonts/hkfont.woff') format('woff'), /* Modern Browsers */
+    url('/Content/Fonts/hkfont.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('/Content/Fonts/hkfont.svg#YourWebFontName') format('svg'); /* Legacy iOS */
     /*src: url(/Content/Fonts/hkfont.ttf),
          url(/Content/Fonts/hkfont.eot),  
          url(/Content/Fonts/hkfont.eot?#iefix) format('embedded-opentype');*/
@@ -83,9 +83,10 @@ ul li {
     z-index: 999;
     background: url(/Content/Image/dh.png) no-repeat;
     width: 140px;
+    font-family: HuaKang;
     position: fixed;
     top: 50%;
-    right:2%;
+    right: 2%;
     margin-top: -217px;
     height: 335px;
     padding-top: 97px;
@@ -93,10 +94,10 @@ ul li {
 }
 
     .driver a {
-        color:#00B0EE;
+        color: #00B0EE;
         display: block;
         height: 91px;
-        font-size:25px;
+        font-size: 25px;
         text-align: center;
     }
 
@@ -189,6 +190,10 @@ ul li {
 
 .margin70 {
     margin-left: 70px;
+}
+
+#historybody {
+    font-family: HuaKang;
 }
 
 .cloud-tiny a:hover {
@@ -535,6 +540,7 @@ ul li {
     bottom: 100px;
     right: 100px;
     font-size: 2.0em;
+    font-family: HuaKang;
     color: #00B0EE;
     text-align: right;
     font-weight: 500;
@@ -595,6 +601,7 @@ ul li {
 }
 
 .error {
+    font-family: HuaKang;
     font-size: 5em;
     margin-top: 100px;
     margin-left: 190px;
@@ -602,6 +609,7 @@ ul li {
 }
 
 .error120 {
+    font-family: HuaKang;
     font-size: 5em;
     margin-top: 100px;
     margin-left: 120px;
