@@ -10,7 +10,14 @@ body, p, ul, ol, li, form, img, dl, dt, dd, table, th, td, blockquote, fieldset,
 
 @font-face {
     font-family: 'HuaKang';
-    src: url(/Content/Fonts/hkfont.ttf);
+    src: url('/Content/Fonts/hkfont.eot'); /* IE9 Compat Modes */
+	src: url('/Content/Fonts/hkfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+             url('/Content/Fonts/hkfont.woff') format('woff'), /* Modern Browsers */
+             url('/Content/Fonts/hkfont.ttf')  format('truetype'), /* Safari, Android, iOS */
+             url('/Content/Fonts/hkfont.svg#YourWebFontName') format('svg'); /* Legacy iOS */
+    /*src: url(/Content/Fonts/hkfont.ttf),
+         url(/Content/Fonts/hkfont.eot),  
+         url(/Content/Fonts/hkfont.eot?#iefix) format('embedded-opentype');*/
     /*src: url('../fonts/neues_bauen_demo-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/neues_bauen_demo-webfont.woff') format('woff'), url('../fonts/neues_bauen_demo-webfont.ttf') format('truetype'), url('../fonts/neues_bauen_demo-webfont.svg#NeuesBauenDemo') format('svg');*/
     font-weight: normal;
     font-style: normal;
