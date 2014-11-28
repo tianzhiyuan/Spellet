@@ -1,28 +1,47 @@
 ﻿@model Senluo.Spellet.Areas.Student.Models.AnswerSheetVM
+@{
 
+    ViewBag.Title = "";
+}
 
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="shortcut icon" href="/content/Image/student.ico">
+    <title>Spellet-@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/Content/Css/g.css" />
+    <link rel="stylesheet" href="~/Content/Css/Student/global.css" />
+    <link rel="stylesheet" href="~/Content/Library/webpopover/jquery.webui-popover.min.css" />
+    <script type="text/javascript" src="~/Content/Library/jquery/jquery-2.0.1.min.js"></script>
+    <script type="text/javascript" src="~/Content/Library/webpopover/jquery.webui-popover.js"></script>
+    <script type="text/javascript" src="~/Content/Scripts/common.js"></script>
+</head>
+<body>
+    <div class="modal" style="width: 70%;">
+        <div>
+            <ul>
 
-
-<div class="modal" style="width: 70%;">
-    <div >
-    <ul>
-    
-        @for (int index = 0; index < Model.Answers.Count();index++ )
-        {
-            var item = Model.Answers.ElementAt(index);
-            <li class="list">
-                @index . 
-                @Html.Raw(item.OriginSentense.Replace(item.Expect, "<span style=''>"+item.Filling + "</span>"))
-                <span class="answer" style="display: block;">(@item.Expect)</span>
-                @if (item.IsRight)
+                @for (int index = 0; index < Model.Answers.Count(); index++)
                 {
+                    var item = Model.Answers.ElementAt(index);
+                    <li class="list">
+                        @index . 
+                @Html.Raw(item.OriginSentense.Replace(item.Expect, "<u style=''>" + item.Filling + "</u>"))
+                        <span class="answer" style="display: block;">(@item.Expect)</span>
+                        @if (item.IsRight)
+                        {
 
+                        }
+                        else
+                        {
+
+                        }
+                    </li>
                 }
-                else
-                {
-                
-                }
-            </li>
-        }
-    </ul></div>
-</div>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
+
