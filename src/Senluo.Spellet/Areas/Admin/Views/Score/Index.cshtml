@@ -25,7 +25,7 @@
             { field: 'Exam.Count', caption: '试题总数', width: 50 },
             { field: 'TotalScore', caption: '总得分', width: 50 },
             {field:'Action',caption:'',width:150,renderer:function(tbl, record, td) {
-                var html = ['<a href="/admin/score/'+record.ID+'" class="button primary">详情</a>'];
+                var html = ['<a href="/admin/score/detail?examid='+record.Exam.ID+'&studentid='+record.Student.ID + '" class="button primary" target="blank">详情</a>'];
                 td.html(html.join());
             }}
             
