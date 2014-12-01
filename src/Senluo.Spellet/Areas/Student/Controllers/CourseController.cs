@@ -160,7 +160,7 @@ namespace Senluo.Spellet.Areas.Student.Controllers
                     Service.Select(new CourseContentQuery() { CourseIDList = new int[] { id } }).ToArray();
 
             if (Contents == null || !Contents.Any())
-                return View();
+                return View(new Entry[0]);
 
             IEnumerable<Entry> entries =
                 Service.Select(new EntryQuery()

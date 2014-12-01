@@ -33,5 +33,10 @@ namespace Senluo.Spellet.Areas.Admin.Controllers
             return View();
         }
 
+        public ActionResult Detail(int examid, int studentid)
+        {
+            var items = new Student.Controllers.TestController().BuildAnswerSheetVM(examid, studentid);
+            return View("~/Areas/Student/Views/Test/Score.cshtml", items);
+        }
     }
 }
