@@ -186,6 +186,7 @@ ul li {
     line-height: 128px;
     color: #32E58C;
     font-size: 30px;
+    font-family: HuaKang;
 }
 
 .margin70 {
@@ -370,6 +371,7 @@ ul li {
 .cloud-area {
     padding: 0 150px;
     overflow: hidden;
+    font-family: HuaKang;
 }
 
 .cloud-area2 {
@@ -484,6 +486,7 @@ ul li {
     font-size: 35px;
     letter-spacing: 0.5em;
     text-align: center;
+    font-family: HuaKang;
 }
 
 .last-main {
@@ -586,7 +589,7 @@ ul li {
     font-size: 20px;
     margin-left: 20px;
     margin-top: 20px;
-    color: #32E58C;
+    color: gray;
 }
 
 .sheet {
@@ -597,7 +600,7 @@ ul li {
     line-height: 20px;
     width: 150px;
     font-size: 20px;
-    color: #32E58C;
+    color: gray;
 }
 
 .error {
@@ -618,7 +621,7 @@ ul li {
 
 /**/
 .answer {
-    color: red;
+    color: #FF5151;
     display: none;
 }
 

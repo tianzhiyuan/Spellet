@@ -22,7 +22,7 @@
         {
             index++;
             <li class="list">
-                @index .
+                @(index) .
                 @item.first @item.word.Substring(0, 1)
                 <input type="text" class="sheet" id="e_@(item.id)" data-head="@item.word.Substring(0, 1)"/>
                 @item.second

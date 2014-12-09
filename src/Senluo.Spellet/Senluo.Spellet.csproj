@@ -190,6 +190,7 @@
     <Content Include="Content\Css\Student\login.css" />
     <Content Include="Content\Image\cry.gif" />
     <Content Include="Content\Image\dh.png" />
+    <Content Include="Content\Image\dh2.png" />
     <Content Include="Content\Image\head.png" />
     <Content Include="Content\Image\admin.ico" />
     <Content Include="Content\Image\loading.gif" />
@@ -528,10 +529,17 @@
     <Content Include="Content\Library\jquery-modal\bower.json" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Fonts\hkfont.TTF" />
+    <Content Include="Content\Fonts\hkfont.TTF">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Student\Views\Course\HistoryBody.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Fonts\hkfont.eot">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

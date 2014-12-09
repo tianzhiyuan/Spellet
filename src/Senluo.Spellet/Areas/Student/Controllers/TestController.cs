@@ -256,7 +256,7 @@ namespace Senluo.Spellet.Areas.Student.Controllers
                     break;
                 }
                 model.word = example.Keyword ?? entry.Word;
-                String sentence = example.Origin.ToLower().Replace(model.word.ToLower(), "__PLACEHOLDER__");
+                String sentence = example.Origin.Replace(model.word, "__PLACEHOLDER__");
                 if (sentence.IndexOf("__PLACEHOLDER__", StringComparison.InvariantCulture) >= 0)
                 {
                     String[] oList = sentence.Split(new string[] { "__PLACEHOLDER__" }, StringSplitOptions.None);
