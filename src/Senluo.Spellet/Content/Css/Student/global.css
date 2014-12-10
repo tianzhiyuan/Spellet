@@ -126,7 +126,7 @@ ul li {
 .bg-left {
     background: url(/Content/Image/Student/images/Decorate-Left.png) no-repeat;
     width: 827px;
-    height: 100px;
+    height: 140px;
     position: absolute;
     bottom: 0;
     left: 0;
@@ -547,6 +547,7 @@ ul li {
     color: #00B0EE;
     text-align: right;
     font-weight: 500;
+    z-index: 6;
     /*background-color: red;*/
 }
 
@@ -589,7 +590,7 @@ ul li {
     font-size: 20px;
     margin-left: 20px;
     margin-top: 20px;
-    color: gray;
+    color:  rgb(101,100,100);
 }
 
 .sheet {
@@ -600,7 +601,7 @@ ul li {
     line-height: 20px;
     width: 150px;
     font-size: 20px;
-    color: gray;
+    color: rgb(101,100,100);
 }
 
 .error {
