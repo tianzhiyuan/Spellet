@@ -74,11 +74,11 @@
             if (!opt.remote) return;
             if (opt.paging && !page) return;
             if (opt.paging && page == 0) return;
-            
+            //debugger
             var param = {};
             if (page) {
                 param.Take = opt.pageSize;
-                param.Skip = (me.currentPage - 1) * opt.pageSize;
+                param.Skip = (page - 1) * opt.pageSize;
                 if (param.Skip < 0) {
                     param.Skip = 0;
                 }
