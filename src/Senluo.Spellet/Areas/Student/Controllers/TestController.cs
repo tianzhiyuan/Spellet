@@ -246,14 +246,17 @@ namespace Senluo.Spellet.Areas.Student.Controllers
             });
             var examples = Service.Select(new ExampleQuery() { EntryIDList = entryIds });
             List<ExamContent> models = new List<ExamContent>();
-            foreach (var entry in entries)
+            //修改为按照entryIds排序
+            foreach (var entryId in entryIds)
             {
+                var entry = entries.FirstOrDefault(o => o.ID == entryId);
+                if (entry == null) continue;
                 ExamContent model = new ExamContent();
                 model.id = entry.ID.Value;
                 Example example = examples.FirstOrDefault(o => o.EntryID == entry.ID);
                 if (example == null)
                 {
-                    break;
+                    continue;
                 }
                 model.word = example.Keyword ?? entry.Word;
                 String sentence = example.Origin.Replace(model.word, "__PLACEHOLDER__");
@@ -265,7 +268,6 @@ namespace Senluo.Spellet.Areas.Student.Controllers
                 }
                 models.Add(model);
             }
-
             return models;
         }
 
