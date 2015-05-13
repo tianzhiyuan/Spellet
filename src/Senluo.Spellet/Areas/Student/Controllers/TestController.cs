@@ -189,9 +189,10 @@ namespace Senluo.Spellet.Areas.Student.Controllers
                         List<int> oids = new List<int>();//随机出的单词列表
                         int seed = wordCount;
                         int selectId = -1;
+                        var random = new Random();
                         for (int i = 0; i < total; i++)
                         {
-                            selectId = contentIds[new Random().Next(seed)];
+                            selectId = contentIds[random.Next(seed)];
                             oids.Add(selectId);
                             seed--;
                             contentIds.Remove(selectId);
