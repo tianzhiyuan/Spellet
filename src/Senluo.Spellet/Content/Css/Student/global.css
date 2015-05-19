@@ -88,12 +88,11 @@ ul li {
     top: 50%;
     right: 2%;
     margin-top: -217px;
-    height: 335px;
-    padding-top: 97px;
+    height: 427px;
     margin-left: 30px;
 }
 
-    .driver a {
+    .driver .nav-cloud {
         color: #00B0EE;
         display: block;
         height: 91px;
@@ -105,7 +104,35 @@ ul li {
             text-decoration: none;
             color: #32E58C;
         }
-
+.driver .whale {
+    cursor: pointer;
+    display: block;
+    display: block;
+        height: 91px;
+        font-size: 25px;
+}
+.driver-closed .whale {
+    cursor: pointer;
+    display: block;
+    display: block;
+        height: 91px;
+        font-size: 25px;
+}
+.driver-closed .nav-cloud {
+    display: none;
+}
+.driver-closed {
+     z-index: 999;
+    background: url(/Content/Image/head.png) no-repeat;
+    width: 140px;
+    font-family: HuaKang;
+    position: fixed;
+    right: 2%;
+    top: 60%;
+  margin-top: 100px;
+  height: 68px;
+  margin-left: 30px;
+}
 .head {
     float: right;
     margin-right: 118px;

@@ -37,15 +37,27 @@
         }
         else
         {
-        <div class="driver" style="display: block;">
-            <a href="~/student/course/today">今日课程</a>
-            <a href="~/student/course/history">历史课程</a>
-            <a href="~/student/test/self">自测</a>
-            <a href="~/student/test">考试</a>
-            <a href="javascript:;" class="top" style="height: 68px;"></a>
-        </div>
+            <div class="driver" id="__right_nav__">
+                <a class="whale" href="javascript:void(0);" title="打开/关闭"> </a>
+                <a href="~/student/course/today" class="nav-cloud">今日课程</a>
+                <a href="~/student/course/history" class="nav-cloud">历史课程</a>
+                <a href="~/student/test/self" class="nav-cloud">自测</a>
+                <a href="~/student/test" class="nav-cloud">考试</a>
+                <a href="javascript:;" class="top" style="height: 68px;"></a>
+            </div>
         }
     }
-
+<script type="text/javascript">
+    $(function() {
+        $('#__right_nav__').click(function() {
+            var obj = $('#__right_nav__');
+            if (obj.hasClass('driver')) {
+                obj.removeClass('driver').addClass('driver-closed');
+            } else {
+                obj.removeClass('driver-closed').addClass('driver');
+            }
+        })
+    })
+</script>
 </body>
 </html>
